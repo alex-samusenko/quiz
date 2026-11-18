@@ -24,6 +24,8 @@ public class MoodleQuestionSeed implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         try (var connection = dataSource.getConnection()) {
             ScriptUtils.executeSqlScript(connection, new ClassPathResource("db/moodle-question-seed.sql"));
+            ScriptUtils.executeSqlScript(connection,
+                    new ClassPathResource("db/moodle-erp-reports-certification.sql"));
         } catch (SQLException ex) {
             throw new IllegalStateException("Не удалось заполнить демонстрационный банк вопросов", ex);
         }
