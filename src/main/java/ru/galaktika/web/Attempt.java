@@ -23,13 +23,20 @@ public class Attempt {
     private AttemptResultView result;
 
     public Attempt(String id, Student student, List<Question> questions, AttemptMeta meta) {
+        this(id, student, questions, meta, null);
+    }
+
+    public Attempt(String id, Student student, List<Question> questions, AttemptMeta meta,
+                   List<Set<Integer>> restoredAnswers) {
         this.id = id;
         this.student = student;
         this.questions = List.copyOf(questions);
         this.meta = meta;
         this.selected = new ArrayList<>();
         for (var i = 0; i < this.questions.size(); i++) {
-            selected.add(Set.of());
+            var restored = restoredAnswers != null && i < restoredAnswers.size()
+                    ? restoredAnswers.get(i) : Set.<Integer>of();
+            selected.add(Set.copyOf(restored));
         }
     }
 

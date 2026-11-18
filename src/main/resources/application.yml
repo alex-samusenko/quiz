@@ -14,5 +14,5 @@ spring:
 
 test:
   passing-score: 80
-  time-limit-seconds: 600
+  time-limit-seconds: 10800
   locale: ru

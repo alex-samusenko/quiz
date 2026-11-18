@@ -83,6 +83,7 @@ public class AttemptService {
         var values = selected == null ? Set.<Integer>of() : Set.copyOf(selected);
         validateSelection(attempt.getQuestions().get(questionIndex), values);
         attempt.select(questionIndex, values);
+        attemptRepository.saveAnswers(attempt);
     }
 
     public AttemptResultView finish(String id) {
@@ -91,7 +92,7 @@ public class AttemptService {
             return attempt.getResult();
         }
         var graded = grade(attempt);
-        attemptRepository.insert(attempt, graded, Instant.now(clock).toEpochMilli());
+        attemptRepository.complete(attempt, graded, Instant.now(clock).toEpochMilli());
         attempt.complete(graded);
         activeAttempts.finish(attempt);
         return graded;
@@ -103,12 +104,18 @@ public class AttemptService {
         if (existingId != null) {
             return toSession(require(existingId));
         }
+        var persisted = attemptRepository.findActiveByAssignment(assignmentId);
+        if (persisted.isPresent()) {
+            activeAttempts.put(persisted.get());
+            return toSession(persisted.get());
+        }
         return remember(listener, assignment);
     }
 
     private AttemptSession remember(CurrentUser listener, AssignmentRow assignment) {
         var test = requireTest(assignment.testCode());
         var attempt = create(listener, assignment, test);
+        attemptRepository.create(attempt);
         activeAttempts.put(attempt);
         return toSession(attempt);
     }
@@ -179,6 +186,12 @@ public class AttemptService {
 
     private Attempt require(String id) {
         var attempt = activeAttempts.find(id);
+        if (attempt == null) {
+            attempt = attemptRepository.findActive(id).orElse(null);
+            if (attempt != null) {
+                activeAttempts.put(attempt);
+            }
+        }
         if (attempt == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Попытка не найдена");
         }

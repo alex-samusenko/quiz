@@ -48,5 +48,10 @@ CREATE TABLE IF NOT EXISTS attestation.attestation_attempt (
     score_percent INTEGER,
     passed BOOLEAN,
     right_answers INTEGER,
-    questions_count INTEGER
+    questions_count INTEGER,
+    questions_json TEXT,
+    answers_json TEXT
 );
+
+ALTER TABLE attestation.attestation_attempt ADD COLUMN IF NOT EXISTS questions_json TEXT;
+ALTER TABLE attestation.attestation_attempt ADD COLUMN IF NOT EXISTS answers_json TEXT;
