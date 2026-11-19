@@ -36,6 +36,18 @@ public class TestCatalog {
         return findAll().stream().filter(test -> test.code().equals(code)).findFirst();
     }
 
+    public Optional<AttestationTest> findAny(String code) {
+        var sql = """
+                SELECT quiz.idnumber, quiz.name, COALESCE(author.username, '')
+                FROM mdl_quiz quiz
+                LEFT JOIN mdl_user author ON author.id = quiz.created_by
+                WHERE quiz.idnumber = ?
+                """;
+        return jdbc.query(sql, (row, index) -> new AttestationTest(
+                row.getString(1), row.getString(2), row.getString(3), row.getString(1)), code)
+                .stream().findFirst();
+    }
+
     public List<Question> questions(AttestationTest test) {
         var sql = """
                 SELECT question.id, question.questiontext, question.difficulty,

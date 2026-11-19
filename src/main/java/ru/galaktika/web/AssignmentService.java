@@ -59,7 +59,8 @@ public class AssignmentService {
     }
 
     private AssignmentReportView toReport(AssignmentListRow row) {
-        var test = requireTest(row.testCode());
+        var test = catalog.findAny(row.testCode())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Тест не найден"));
         return new AssignmentReportView(row.id(), row.listenerName(), test.title(),
                 Instant.ofEpochMilli(row.assignedAt()), row.finished());
     }
