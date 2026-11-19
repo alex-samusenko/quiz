@@ -222,7 +222,7 @@ function ManagerCabinet() {
     const [listenerRows, testRows, assignmentRows, attemptRows] = await Promise.all([
       api("/api/listeners"),
       api("/api/tests"),
-      api("/api/assignments"),
+      api("/api/manager/assignments"),
       api("/api/reports/attempts"),
     ]);
     setListeners(listenerRows);
@@ -243,7 +243,7 @@ function ManagerCabinet() {
     setError("");
     setMessage("");
     try {
-      await api("/api/assignments", {
+      await api("/api/manager/assignments", {
         method: "POST",
         body: JSON.stringify({ username, testCode }),
       });

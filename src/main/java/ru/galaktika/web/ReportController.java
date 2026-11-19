@@ -3,7 +3,12 @@ package ru.galaktika.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import ru.galaktika.web.dto.AssignmentReportView;
+import ru.galaktika.web.dto.AssignmentRequest;
+import ru.galaktika.web.dto.AssignmentView;
 import ru.galaktika.web.dto.AttemptReportView;
 import ru.galaktika.web.dto.ListenerView;
 import ru.galaktika.web.dto.MentorTestView;
@@ -17,6 +22,18 @@ import java.util.List;
 public class ReportController {
 
     private final ReportService reportService;
+
+    private final AssignmentService assignmentService;
+
+    @PostMapping("/api/manager/assignments")
+    public AssignmentView createAssignment(@RequestBody AssignmentRequest request) {
+        return assignmentService.create(request.username(), request.testCode());
+    }
+
+    @GetMapping("/api/manager/assignments")
+    public List<AssignmentReportView> assignments() {
+        return assignmentService.all();
+    }
 
     @GetMapping("/api/reports/attempts")
     public List<AttemptReportView> attempts() {
