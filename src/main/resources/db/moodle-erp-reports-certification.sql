@@ -1,166 +1,166 @@
 -- Generated from the Moodle GIFT export; do not edit by hand.
 INSERT INTO mdl_question_categories (idnumber, name, sortorder)
-SELECT 'erp-reports-certification', 'ERP: Сертификация Отчёты', 50
+SELECT 'erp-reports-certification', 'ERP: РЎРµСЂС‚РёС„РёРєР°С†РёСЏ РћС‚С‡С‘С‚С‹', 50
 WHERE NOT EXISTS (SELECT 1 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification');
-UPDATE mdl_question_categories SET name = 'ERP: Сертификация Отчёты', sortorder = 50 WHERE idnumber = 'erp-reports-certification';
+UPDATE mdl_question_categories SET name = 'ERP: РЎРµСЂС‚РёС„РёРєР°С†РёСЏ РћС‚С‡С‘С‚С‹', sortorder = 50 WHERE idnumber = 'erp-reports-certification';
 
 INSERT INTO mdl_quiz (idnumber, name, created_by, timelimit, visible)
-SELECT 'erp-reports-certification', 'Сертификация: Отчёты ERP', id, 10800, TRUE
+SELECT 'erp-reports-certification', 'РЎРµСЂС‚РёС„РёРєР°С†РёСЏ: РћС‚С‡С‘С‚С‹ ERP', id, 10800, TRUE
 FROM mdl_user WHERE username = 'mentor' AND NOT EXISTS (SELECT 1 FROM mdl_quiz WHERE idnumber = 'erp-reports-certification');
-UPDATE mdl_quiz SET name = 'Сертификация: Отчёты ERP', timelimit = 10800, visible = TRUE WHERE idnumber = 'erp-reports-certification';
+UPDATE mdl_quiz SET name = 'РЎРµСЂС‚РёС„РёРєР°С†РёСЏ: РћС‚С‡С‘С‚С‹ ERP', timelimit = 10800, visible = TRUE WHERE idnumber = 'erp-reports-certification';
 
 UPDATE mdl_quiz SET visible = FALSE WHERE idnumber IN ('java', 'spring', 'galaxy', 'erp-autonomous-forms');
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q0', 'Раздел: Автономные формы, Легкий. Имя логической таблицы', 'Какое ограничение действует на имя логической таблицы автономной формы?', TRUE, 'EASY', 0 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q0');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Легкий. Имя логической таблицы', questiontext = 'Какое ограничение действует на имя логической таблицы автономной формы?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 0 WHERE idnumber = 'moodle-q0';
+SELECT id, 'moodle-q0', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РРјСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', 'РљР°РєРѕРµ РѕРіСЂР°РЅРёС‡РµРЅРёРµ РґРµР№СЃС‚РІСѓРµС‚ РЅР° РёРјСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјС‹?', TRUE, 'EASY', 0 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q0');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РРјСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', questiontext = 'РљР°РєРѕРµ РѕРіСЂР°РЅРёС‡РµРЅРёРµ РґРµР№СЃС‚РІСѓРµС‚ РЅР° РёРјСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјС‹?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 0 WHERE idnumber = 'moodle-q0';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q0');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Имя может повторяться в одном ресурсном файле, если таблицы в разных формах', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q0';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Имя — идентификатор или строка длиной до 100 символов; имена должны быть уникальными в пределах одного ресурсного файла', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q0';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Имя логической таблицы всегда совпадает с именем физической таблицы БД', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q0';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РРјСЏ РјРѕР¶РµС‚ РїРѕРІС‚РѕСЂСЏС‚СЊСЃСЏ РІ РѕРґРЅРѕРј СЂРµСЃСѓСЂСЃРЅРѕРј С„Р°Р№Р»Рµ, РµСЃР»Рё С‚Р°Р±Р»РёС†С‹ РІ СЂР°Р·РЅС‹С… С„РѕСЂРјР°С…', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q0';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РРјСЏ вЂ” РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РёР»Рё СЃС‚СЂРѕРєР° РґР»РёРЅРѕР№ РґРѕ 100 СЃРёРјРІРѕР»РѕРІ; РёРјРµРЅР° РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹РјРё РІ РїСЂРµРґРµР»Р°С… РѕРґРЅРѕРіРѕ СЂРµСЃСѓСЂСЃРЅРѕРіРѕ С„Р°Р№Р»Р°', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q0';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РРјСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ РІСЃРµРіРґР° СЃРѕРІРїР°РґР°РµС‚ СЃ РёРјРµРЅРµРј С„РёР·РёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ Р‘Р”', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q0';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21723', 'Раздел: Автономные формы, Легкий. Конвертация в RTF', 'Как в модуле «Редактор отчетов FCOM» выполнить конвертацию формы из формата бизнес-текст в RTF?', TRUE, 'EASY', 21723 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21723');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Легкий. Конвертация в RTF', questiontext = 'Как в модуле «Редактор отчетов FCOM» выполнить конвертацию формы из формата бизнес-текст в RTF?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21723 WHERE idnumber = 'moodle-q21723';
+SELECT id, 'moodle-q21723', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РљРѕРЅРІРµСЂС‚Р°С†РёСЏ РІ RTF', 'РљР°Рє РІ РјРѕРґСѓР»Рµ В«Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOMВ» РІС‹РїРѕР»РЅРёС‚СЊ РєРѕРЅРІРµСЂС‚Р°С†РёСЋ С„РѕСЂРјС‹ РёР· С„РѕСЂРјР°С‚Р° Р±РёР·РЅРµСЃ-С‚РµРєСЃС‚ РІ RTF?', TRUE, 'EASY', 21723 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21723');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РљРѕРЅРІРµСЂС‚Р°С†РёСЏ РІ RTF', questiontext = 'РљР°Рє РІ РјРѕРґСѓР»Рµ В«Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOMВ» РІС‹РїРѕР»РЅРёС‚СЊ РєРѕРЅРІРµСЂС‚Р°С†РёСЋ С„РѕСЂРјС‹ РёР· С„РѕСЂРјР°С‚Р° Р±РёР·РЅРµСЃ-С‚РµРєСЃС‚ РІ RTF?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21723 WHERE idnumber = 'moodle-q21723';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21723');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Нажать Ctrl+A и выбрать «Компиляция форм | Компиляция»', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21723';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Открыть файл на редактирование и нажать Shift+F8 (пункт «Компиляция форм | Конвертация»)', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21723';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Сохранить документ в MS EXCEL в формате SYLK (*.slk)', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21723';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќР°Р¶Р°С‚СЊ Ctrl+A Рё РІС‹Р±СЂР°С‚СЊ В«РљРѕРјРїРёР»СЏС†РёСЏ С„РѕСЂРј | РљРѕРјРїРёР»СЏС†РёСЏВ»', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21723';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РћС‚РєСЂС‹С‚СЊ С„Р°Р№Р» РЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Рё РЅР°Р¶Р°С‚СЊ Shift+F8 (РїСѓРЅРєС‚ В«РљРѕРјРїРёР»СЏС†РёСЏ С„РѕСЂРј | РљРѕРЅРІРµСЂС‚Р°С†РёСЏВ»)', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21723';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЎРѕС…СЂР°РЅРёС‚СЊ РґРѕРєСѓРјРµРЅС‚ РІ MS EXCEL РІ С„РѕСЂРјР°С‚Рµ SYLK (*.slk)', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21723';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21727', 'Раздел: Автономные формы, Легкий. Оператор .nameInList', 'Для чего в автономной форме используется оператор .nameInList?', TRUE, 'EASY', 21727 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21727');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Легкий. Оператор .nameInList', questiontext = 'Для чего в автономной форме используется оператор .nameInList?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21727 WHERE idnumber = 'moodle-q21727';
+SELECT id, 'moodle-q21727', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РћРїРµСЂР°С‚РѕСЂ .nameInList', 'Р”Р»СЏ С‡РµРіРѕ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РѕРїРµСЂР°С‚РѕСЂ .nameInList?', TRUE, 'EASY', 21727 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21727');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РћРїРµСЂР°С‚РѕСЂ .nameInList', questiontext = 'Р”Р»СЏ С‡РµРіРѕ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РѕРїРµСЂР°С‚РѕСЂ .nameInList?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21727 WHERE idnumber = 'moodle-q21727';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21727');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Чтобы сделать форму видимой в среде выполнения приложения', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21727';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Чтобы задать заголовок формы, который будет виден пользователю в списке отчетов', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21727';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Чтобы объявить логическую таблицу без SQL-элементов', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21727';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р§С‚РѕР±С‹ СЃРґРµР»Р°С‚СЊ С„РѕСЂРјСѓ РІРёРґРёРјРѕР№ РІ СЃСЂРµРґРµ РІС‹РїРѕР»РЅРµРЅРёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21727';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р§С‚РѕР±С‹ Р·Р°РґР°С‚СЊ Р·Р°РіРѕР»РѕРІРѕРє С„РѕСЂРјС‹, РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ РІРёРґРµРЅ РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ РІ СЃРїРёСЃРєРµ РѕС‚С‡РµС‚РѕРІ', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21727';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р§С‚РѕР±С‹ РѕР±СЉСЏРІРёС‚СЊ Р»РѕРіРёС‡РµСЃРєСѓСЋ С‚Р°Р±Р»РёС†Сѓ Р±РµР· SQL-СЌР»РµРјРµРЅС‚РѕРІ', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21727';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21724', 'Раздел: Автономные формы, Легкий. Опция .slkNumber', 'Для чего предназначена опция формы .slkNumber?', TRUE, 'EASY', 21724 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21724');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Легкий. Опция .slkNumber', questiontext = 'Для чего предназначена опция формы .slkNumber?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21724 WHERE idnumber = 'moodle-q21724';
+SELECT id, 'moodle-q21724', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РћРїС†РёСЏ .slkNumber', 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РѕРїС†РёСЏ С„РѕСЂРјС‹ .slkNumber?', TRUE, 'EASY', 21724 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21724');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РћРїС†РёСЏ .slkNumber', questiontext = 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РѕРїС†РёСЏ С„РѕСЂРјС‹ .slkNumber?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21724 WHERE idnumber = 'moodle-q21724';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21724');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Для конвертации бизнес-текста в RTF', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21724';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Только для отчетов в формате SLK: в поля с шаблоном «&» выводятся числа в понимании EXCEL, их можно форматировать как числа и использовать в расчетах', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21724';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Для подавления вывода нулевых значений в отчетах бизнес-текст', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21724';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р”Р»СЏ РєРѕРЅРІРµСЂС‚Р°С†РёРё Р±РёР·РЅРµСЃ-С‚РµРєСЃС‚Р° РІ RTF', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21724';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РўРѕР»СЊРєРѕ РґР»СЏ РѕС‚С‡РµС‚РѕРІ РІ С„РѕСЂРјР°С‚Рµ SLK: РІ РїРѕР»СЏ СЃ С€Р°Р±Р»РѕРЅРѕРј В«&В» РІС‹РІРѕРґСЏС‚СЃСЏ С‡РёСЃР»Р° РІ РїРѕРЅРёРјР°РЅРёРё EXCEL, РёС… РјРѕР¶РЅРѕ С„РѕСЂРјР°С‚РёСЂРѕРІР°С‚СЊ РєР°Рє С‡РёСЃР»Р° Рё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ СЂР°СЃС‡РµС‚Р°С…', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21724';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р”Р»СЏ РїРѕРґР°РІР»РµРЅРёСЏ РІС‹РІРѕРґР° РЅСѓР»РµРІС‹С… Р·РЅР°С‡РµРЅРёР№ РІ РѕС‚С‡РµС‚Р°С… Р±РёР·РЅРµСЃ-С‚РµРєСЃС‚', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21724';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21728', 'Раздел: Автономные формы, Легкий. Превышение размера шаблона', 'Что выводится в отчет, если размер числового поля превышает размер шаблона?', TRUE, 'EASY', 21728 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21728');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Легкий. Превышение размера шаблона', questiontext = 'Что выводится в отчет, если размер числового поля превышает размер шаблона?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21728 WHERE idnumber = 'moodle-q21728';
+SELECT id, 'moodle-q21728', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РџСЂРµРІС‹С€РµРЅРёРµ СЂР°Р·РјРµСЂР° С€Р°Р±Р»РѕРЅР°', 'Р§С‚Рѕ РІС‹РІРѕРґРёС‚СЃСЏ РІ РѕС‚С‡РµС‚, РµСЃР»Рё СЂР°Р·РјРµСЂ С‡РёСЃР»РѕРІРѕРіРѕ РїРѕР»СЏ РїСЂРµРІС‹С€Р°РµС‚ СЂР°Р·РјРµСЂ С€Р°Р±Р»РѕРЅР°?', TRUE, 'EASY', 21728 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21728');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РџСЂРµРІС‹С€РµРЅРёРµ СЂР°Р·РјРµСЂР° С€Р°Р±Р»РѕРЅР°', questiontext = 'Р§С‚Рѕ РІС‹РІРѕРґРёС‚СЃСЏ РІ РѕС‚С‡РµС‚, РµСЃР»Рё СЂР°Р·РјРµСЂ С‡РёСЃР»РѕРІРѕРіРѕ РїРѕР»СЏ РїСЂРµРІС‹С€Р°РµС‚ СЂР°Р·РјРµСЂ С€Р°Р±Р»РѕРЅР°?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21728 WHERE idnumber = 'moodle-q21728';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21728');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'В отчет выводятся символы ***', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21728';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Число автоматически переносится на следующую строку', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21728';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Значение обрезается без каких-либо признаков в отчете', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21728';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р’ РѕС‚С‡РµС‚ РІС‹РІРѕРґСЏС‚СЃСЏ СЃРёРјРІРѕР»С‹ ***', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21728';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р§РёСЃР»Рѕ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїРµСЂРµРЅРѕСЃРёС‚СЃСЏ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ СЃС‚СЂРѕРєСѓ', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21728';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р—РЅР°С‡РµРЅРёРµ РѕР±СЂРµР·Р°РµС‚СЃСЏ Р±РµР· РєР°РєРёС…-Р»РёР±Рѕ РїСЂРёР·РЅР°РєРѕРІ РІ РѕС‚С‡РµС‚Рµ', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21728';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21729', 'Раздел: Автономные формы, Легкий. Секция переменных', 'Что верно про объявление переменных и массивов в автономной форме (.var … .endvar)?', TRUE, 'EASY', 21729 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21729');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Легкий. Секция переменных', questiontext = 'Что верно про объявление переменных и массивов в автономной форме (.var … .endvar)?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21729 WHERE idnumber = 'moodle-q21729';
+SELECT id, 'moodle-q21729', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РЎРµРєС†РёСЏ РїРµСЂРµРјРµРЅРЅС‹С…', 'Р§С‚Рѕ РІРµСЂРЅРѕ РїСЂРѕ РѕР±СЉСЏРІР»РµРЅРёРµ РїРµСЂРµРјРµРЅРЅС‹С… Рё РјР°СЃСЃРёРІРѕРІ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ (.var вЂ¦ .endvar)?', TRUE, 'EASY', 21729 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21729');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РЎРµРєС†РёСЏ РїРµСЂРµРјРµРЅРЅС‹С…', questiontext = 'Р§С‚Рѕ РІРµСЂРЅРѕ РїСЂРѕ РѕР±СЉСЏРІР»РµРЅРёРµ РїРµСЂРµРјРµРЅРЅС‹С… Рё РјР°СЃСЃРёРІРѕРІ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ (.var вЂ¦ .endvar)?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21729 WHERE idnumber = 'moodle-q21729';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21729');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Ключевое слово .var может стоять в любой позиции строки, переменные инициализируются случайными значениями', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21729';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Ключевое слово .var стоит в первой позиции строки; при объявлении переменные и массивы инициализируются нулевыми значениями; область действия ограничивается формой', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21729';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Переменные, объявленные в форме, видны во всех формах одного ресурсного файла', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21729';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РљР»СЋС‡РµРІРѕРµ СЃР»РѕРІРѕ .var РјРѕР¶РµС‚ СЃС‚РѕСЏС‚СЊ РІ Р»СЋР±РѕР№ РїРѕР·РёС†РёРё СЃС‚СЂРѕРєРё, РїРµСЂРµРјРµРЅРЅС‹Рµ РёРЅРёС†РёР°Р»РёР·РёСЂСѓСЋС‚СЃСЏ СЃР»СѓС‡Р°Р№РЅС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21729';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РљР»СЋС‡РµРІРѕРµ СЃР»РѕРІРѕ .var СЃС‚РѕРёС‚ РІ РїРµСЂРІРѕР№ РїРѕР·РёС†РёРё СЃС‚СЂРѕРєРё; РїСЂРё РѕР±СЉСЏРІР»РµРЅРёРё РїРµСЂРµРјРµРЅРЅС‹Рµ Рё РјР°СЃСЃРёРІС‹ РёРЅРёС†РёР°Р»РёР·РёСЂСѓСЋС‚СЃСЏ РЅСѓР»РµРІС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё; РѕР±Р»Р°СЃС‚СЊ РґРµР№СЃС‚РІРёСЏ РѕРіСЂР°РЅРёС‡РёРІР°РµС‚СЃСЏ С„РѕСЂРјРѕР№', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21729';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРµСЂРµРјРµРЅРЅС‹Рµ, РѕР±СЉСЏРІР»РµРЅРЅС‹Рµ РІ С„РѕСЂРјРµ, РІРёРґРЅС‹ РІРѕ РІСЃРµС… С„РѕСЂРјР°С… РѕРґРЅРѕРіРѕ СЂРµСЃСѓСЂСЃРЅРѕРіРѕ С„Р°Р№Р»Р°', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21729';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21730', 'Раздел: Автономные формы, Легкий. Условный внутренний блок', 'Чем условный внутренний блок .{?internal отличается от цикла по SQL-таблице?', TRUE, 'EASY', 21730 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21730');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Легкий. Условный внутренний блок', questiontext = 'Чем условный внутренний блок .{?internal отличается от цикла по SQL-таблице?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21730 WHERE idnumber = 'moodle-q21730';
+SELECT id, 'moodle-q21730', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РЈСЃР»РѕРІРЅС‹Р№ РІРЅСѓС‚СЂРµРЅРЅРёР№ Р±Р»РѕРє', 'Р§РµРј СѓСЃР»РѕРІРЅС‹Р№ РІРЅСѓС‚СЂРµРЅРЅРёР№ Р±Р»РѕРє .{?internal РѕС‚Р»РёС‡Р°РµС‚СЃСЏ РѕС‚ С†РёРєР»Р° РїРѕ SQL-С‚Р°Р±Р»РёС†Рµ?', TRUE, 'EASY', 21730 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21730');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. РЈСЃР»РѕРІРЅС‹Р№ РІРЅСѓС‚СЂРµРЅРЅРёР№ Р±Р»РѕРє', questiontext = 'Р§РµРј СѓСЃР»РѕРІРЅС‹Р№ РІРЅСѓС‚СЂРµРЅРЅРёР№ Р±Р»РѕРє .{?internal РѕС‚Р»РёС‡Р°РµС‚СЃСЏ РѕС‚ С†РёРєР»Р° РїРѕ SQL-С‚Р°Р±Р»РёС†Рµ?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21730 WHERE idnumber = 'moodle-q21730';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21730');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Он выполняется столько раз, сколько записей в узле логической таблицы', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21730';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Он не является циклом: выполняется только один раз и только при истинности условия исполнения', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21730';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Он всегда выполняется, даже если условие ложно', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21730';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РћРЅ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ СЃС‚РѕР»СЊРєРѕ СЂР°Р·, СЃРєРѕР»СЊРєРѕ Р·Р°РїРёСЃРµР№ РІ СѓР·Р»Рµ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21730';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РћРЅ РЅРµ СЏРІР»СЏРµС‚СЃСЏ С†РёРєР»РѕРј: РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЂР°Р· Рё С‚РѕР»СЊРєРѕ РїСЂРё РёСЃС‚РёРЅРЅРѕСЃС‚Рё СѓСЃР»РѕРІРёСЏ РёСЃРїРѕР»РЅРµРЅРёСЏ', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21730';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РћРЅ РІСЃРµРіРґР° РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ, РґР°Р¶Рµ РµСЃР»Рё СѓСЃР»РѕРІРёРµ Р»РѕР¶РЅРѕ', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21730';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21725', 'Раздел: Автономные формы, Легкий. Цикл WHILE', 'В чем основное отличие цикла WHILE от цикла по SQL-таблице в автономной форме?', TRUE, 'EASY', 21725 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21725');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Легкий. Цикл WHILE', questiontext = 'В чем основное отличие цикла WHILE от цикла по SQL-таблице в автономной форме?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21725 WHERE idnumber = 'moodle-q21725';
+SELECT id, 'moodle-q21725', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. Р¦РёРєР» WHILE', 'Р’ С‡РµРј РѕСЃРЅРѕРІРЅРѕРµ РѕС‚Р»РёС‡РёРµ С†РёРєР»Р° WHILE РѕС‚ С†РёРєР»Р° РїРѕ SQL-С‚Р°Р±Р»РёС†Рµ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ?', TRUE, 'EASY', 21725 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21725');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, Р›РµРіРєРёР№. Р¦РёРєР» WHILE', questiontext = 'Р’ С‡РµРј РѕСЃРЅРѕРІРЅРѕРµ РѕС‚Р»РёС‡РёРµ С†РёРєР»Р° WHILE РѕС‚ С†РёРєР»Р° РїРѕ SQL-С‚Р°Р±Р»РёС†Рµ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21725 WHERE idnumber = 'moodle-q21725';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21725');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'В цикле WHILE нельзя использовать программные блоки .begin', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21725';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Условие выхода из цикла WHILE задается явно и не определяется наличием записей в узле логической таблицы', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21725';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Цикл WHILE можно использовать только в формах формата SLK', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21725';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р’ С†РёРєР»Рµ WHILE РЅРµР»СЊР·СЏ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РїСЂРѕРіСЂР°РјРјРЅС‹Рµ Р±Р»РѕРєРё .begin', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21725';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЈСЃР»РѕРІРёРµ РІС‹С…РѕРґР° РёР· С†РёРєР»Р° WHILE Р·Р°РґР°РµС‚СЃСЏ СЏРІРЅРѕ Рё РЅРµ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ РЅР°Р»РёС‡РёРµРј Р·Р°РїРёСЃРµР№ РІ СѓР·Р»Рµ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21725';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р¦РёРєР» WHILE РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚РѕР»СЊРєРѕ РІ С„РѕСЂРјР°С… С„РѕСЂРјР°С‚Р° SLK', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21725';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21636', 'Раздел: Автономные формы, Сложный. Вычисляемое поле', 'Выберите элементы, из которых может состоять вычисляемое поле автономной формы:', FALSE, 'HARD', 21636 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21636');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Сложный. Вычисляемое поле', questiontext = 'Выберите элементы, из которых может состоять вычисляемое поле автономной формы:', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21636 WHERE idnumber = 'moodle-q21636';
+SELECT id, 'moodle-q21636', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. Р’С‹С‡РёСЃР»СЏРµРјРѕРµ РїРѕР»Рµ', 'Р’С‹Р±РµСЂРёС‚Рµ СЌР»РµРјРµРЅС‚С‹, РёР· РєРѕС‚РѕСЂС‹С… РјРѕР¶РµС‚ СЃРѕСЃС‚РѕСЏС‚СЊ РІС‹С‡РёСЃР»СЏРµРјРѕРµ РїРѕР»Рµ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјС‹:', FALSE, 'HARD', 21636 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21636');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. Р’С‹С‡РёСЃР»СЏРµРјРѕРµ РїРѕР»Рµ', questiontext = 'Р’С‹Р±РµСЂРёС‚Рµ СЌР»РµРјРµРЅС‚С‹, РёР· РєРѕС‚РѕСЂС‹С… РјРѕР¶РµС‚ СЃРѕСЃС‚РѕСЏС‚СЊ РІС‹С‡РёСЃР»СЏРµРјРѕРµ РїРѕР»Рµ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјС‹:', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21636 WHERE idnumber = 'moodle-q21636';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21636');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'элемент массива данной формы', 0.2000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21636';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'параметр данной формы', 0.2000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21636';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'переменная данной формы', 0.2000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21636';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'переменная формы, вызывающей данную', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21636';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'поле таблицы БД, доступ к которому возможен через логические таблицы, созданные или объявленные в данной форме', 0.2000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21636';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'поле таблицы БД, доступ к которому возможен через логические таблицы, созданные или объявленные в форме, вызывающей данную форму', -1.0000000, 7 FROM mdl_question WHERE idnumber = 'moodle-q21636';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'арифметическое выражение, содержащее функции дат, строковые, математические функции и др.', 0.2000000, 8 FROM mdl_question WHERE idnumber = 'moodle-q21636';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР° РґР°РЅРЅРѕР№ С„РѕСЂРјС‹', 0.2000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21636';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РїР°СЂР°РјРµС‚СЂ РґР°РЅРЅРѕР№ С„РѕСЂРјС‹', 0.2000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21636';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РїРµСЂРµРјРµРЅРЅР°СЏ РґР°РЅРЅРѕР№ С„РѕСЂРјС‹', 0.2000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21636';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РїРµСЂРµРјРµРЅРЅР°СЏ С„РѕСЂРјС‹, РІС‹Р·С‹РІР°СЋС‰РµР№ РґР°РЅРЅСѓСЋ', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21636';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РїРѕР»Рµ С‚Р°Р±Р»РёС†С‹ Р‘Р”, РґРѕСЃС‚СѓРї Рє РєРѕС‚РѕСЂРѕРјСѓ РІРѕР·РјРѕР¶РµРЅ С‡РµСЂРµР· Р»РѕРіРёС‡РµСЃРєРёРµ С‚Р°Р±Р»РёС†С‹, СЃРѕР·РґР°РЅРЅС‹Рµ РёР»Рё РѕР±СЉСЏРІР»РµРЅРЅС‹Рµ РІ РґР°РЅРЅРѕР№ С„РѕСЂРјРµ', 0.2000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21636';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РїРѕР»Рµ С‚Р°Р±Р»РёС†С‹ Р‘Р”, РґРѕСЃС‚СѓРї Рє РєРѕС‚РѕСЂРѕРјСѓ РІРѕР·РјРѕР¶РµРЅ С‡РµСЂРµР· Р»РѕРіРёС‡РµСЃРєРёРµ С‚Р°Р±Р»РёС†С‹, СЃРѕР·РґР°РЅРЅС‹Рµ РёР»Рё РѕР±СЉСЏРІР»РµРЅРЅС‹Рµ РІ С„РѕСЂРјРµ, РІС‹Р·С‹РІР°СЋС‰РµР№ РґР°РЅРЅСѓСЋ С„РѕСЂРјСѓ', -1.0000000, 7 FROM mdl_question WHERE idnumber = 'moodle-q21636';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ, СЃРѕРґРµСЂР¶Р°С‰РµРµ С„СѓРЅРєС†РёРё РґР°С‚, СЃС‚СЂРѕРєРѕРІС‹Рµ, РјР°С‚РµРјР°С‚РёС‡РµСЃРєРёРµ С„СѓРЅРєС†РёРё Рё РґСЂ.', 0.2000000, 8 FROM mdl_question WHERE idnumber = 'moodle-q21636';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21740', 'Раздел: Автономные формы, Сложный. Корень выборки в цикле', 'По какой таблице работает цикл, если в шапке указано только имя логической таблицы (можно без кавычек), без ключевого слова table и без имени узла?', TRUE, 'HARD', 21740 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21740');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Сложный. Корень выборки в цикле', questiontext = 'По какой таблице работает цикл, если в шапке указано только имя логической таблицы (можно без кавычек), без ключевого слова table и без имени узла?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21740 WHERE idnumber = 'moodle-q21740';
+SELECT id, 'moodle-q21740', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. РљРѕСЂРµРЅСЊ РІС‹Р±РѕСЂРєРё РІ С†РёРєР»Рµ', 'РџРѕ РєР°РєРѕР№ С‚Р°Р±Р»РёС†Рµ СЂР°Р±РѕС‚Р°РµС‚ С†РёРєР», РµСЃР»Рё РІ С€Р°РїРєРµ СѓРєР°Р·Р°РЅРѕ С‚РѕР»СЊРєРѕ РёРјСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ (РјРѕР¶РЅРѕ Р±РµР· РєР°РІС‹С‡РµРє), Р±РµР· РєР»СЋС‡РµРІРѕРіРѕ СЃР»РѕРІР° table Рё Р±РµР· РёРјРµРЅРё СѓР·Р»Р°?', TRUE, 'HARD', 21740 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21740');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. РљРѕСЂРµРЅСЊ РІС‹Р±РѕСЂРєРё РІ С†РёРєР»Рµ', questiontext = 'РџРѕ РєР°РєРѕР№ С‚Р°Р±Р»РёС†Рµ СЂР°Р±РѕС‚Р°РµС‚ С†РёРєР», РµСЃР»Рё РІ С€Р°РїРєРµ СѓРєР°Р·Р°РЅРѕ С‚РѕР»СЊРєРѕ РёРјСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ (РјРѕР¶РЅРѕ Р±РµР· РєР°РІС‹С‡РµРє), Р±РµР· РєР»СЋС‡РµРІРѕРіРѕ СЃР»РѕРІР° table Рё Р±РµР· РёРјРµРЅРё СѓР·Р»Р°?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21740 WHERE idnumber = 'moodle-q21740';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21740');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'По всем узлам выборки одновременно', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21740';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'По корневой таблице выборки', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21740';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Цикл в этом случае не выполняется и форма завершается с ошибкой компиляции', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21740';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРѕ РІСЃРµРј СѓР·Р»Р°Рј РІС‹Р±РѕСЂРєРё РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21740';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРѕ РєРѕСЂРЅРµРІРѕР№ С‚Р°Р±Р»РёС†Рµ РІС‹Р±РѕСЂРєРё', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21740';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р¦РёРєР» РІ СЌС‚РѕРј СЃР»СѓС‡Р°Рµ РЅРµ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ Рё С„РѕСЂРјР° Р·Р°РІРµСЂС€Р°РµС‚СЃСЏ СЃ РѕС€РёР±РєРѕР№ РєРѕРјРїРёР»СЏС†РёРё', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21740';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21741', 'Раздел: Автономные формы, Сложный. Область видимости в .begin', 'Какие данные можно использовать в программном блоке .begin … end. автономной формы?', FALSE, 'HARD', 21741 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21741');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Сложный. Область видимости в .begin', questiontext = 'Какие данные можно использовать в программном блоке .begin … end. автономной формы?', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21741 WHERE idnumber = 'moodle-q21741';
+SELECT id, 'moodle-q21741', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. РћР±Р»Р°СЃС‚СЊ РІРёРґРёРјРѕСЃС‚Рё РІ .begin', 'РљР°РєРёРµ РґР°РЅРЅС‹Рµ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ РїСЂРѕРіСЂР°РјРјРЅРѕРј Р±Р»РѕРєРµ .begin вЂ¦ end. Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјС‹?', FALSE, 'HARD', 21741 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21741');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. РћР±Р»Р°СЃС‚СЊ РІРёРґРёРјРѕСЃС‚Рё РІ .begin', questiontext = 'РљР°РєРёРµ РґР°РЅРЅС‹Рµ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ РїСЂРѕРіСЂР°РјРјРЅРѕРј Р±Р»РѕРєРµ .begin вЂ¦ end. Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјС‹?', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21741 WHERE idnumber = 'moodle-q21741';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21741');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Переменные и массивы, объявленные в форме (область видимости — эта форма)', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21741';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Переменные и массивы, объявленные в данном блоке .begin: они видны в своем блоке и во всех вложенных блоках', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21741';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Поля таблиц базы данных и вызовы стандартных процедур и функций', 0.3333333, 4 FROM mdl_question WHERE idnumber = 'moodle-q21741';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Операторы VIP исполняются в произвольном порядке, независимо от текста блока', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21741';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРµСЂРµРјРµРЅРЅС‹Рµ Рё РјР°СЃСЃРёРІС‹, РѕР±СЉСЏРІР»РµРЅРЅС‹Рµ РІ С„РѕСЂРјРµ (РѕР±Р»Р°СЃС‚СЊ РІРёРґРёРјРѕСЃС‚Рё вЂ” СЌС‚Р° С„РѕСЂРјР°)', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21741';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРµСЂРµРјРµРЅРЅС‹Рµ Рё РјР°СЃСЃРёРІС‹, РѕР±СЉСЏРІР»РµРЅРЅС‹Рµ РІ РґР°РЅРЅРѕРј Р±Р»РѕРєРµ .begin: РѕРЅРё РІРёРґРЅС‹ РІ СЃРІРѕРµРј Р±Р»РѕРєРµ Рё РІРѕ РІСЃРµС… РІР»РѕР¶РµРЅРЅС‹С… Р±Р»РѕРєР°С…', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21741';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРѕР»СЏ С‚Р°Р±Р»РёС† Р±Р°Р·С‹ РґР°РЅРЅС‹С… Рё РІС‹Р·РѕРІС‹ СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РїСЂРѕС†РµРґСѓСЂ Рё С„СѓРЅРєС†РёР№', 0.3333333, 4 FROM mdl_question WHERE idnumber = 'moodle-q21741';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РћРїРµСЂР°С‚РѕСЂС‹ VIP РёСЃРїРѕР»РЅСЏСЋС‚СЃСЏ РІ РїСЂРѕРёР·РІРѕР»СЊРЅРѕРј РїРѕСЂСЏРґРєРµ, РЅРµР·Р°РІРёСЃРёРјРѕ РѕС‚ С‚РµРєСЃС‚Р° Р±Р»РѕРєР°', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21741';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21742', 'Раздел: Автономные формы, Сложный. Позиционирование getfirst', 'Почему при выводе одиночных полей логической таблицы без цикла данные могут не попасть в отчет и что требуется сделать?', FALSE, 'HARD', 21742 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21742');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Сложный. Позиционирование getfirst', questiontext = 'Почему при выводе одиночных полей логической таблицы без цикла данные могут не попасть в отчет и что требуется сделать?', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21742 WHERE idnumber = 'moodle-q21742';
+SELECT id, 'moodle-q21742', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. РџРѕР·РёС†РёРѕРЅРёСЂРѕРІР°РЅРёРµ getfirst', 'РџРѕС‡РµРјСѓ РїСЂРё РІС‹РІРѕРґРµ РѕРґРёРЅРѕС‡РЅС‹С… РїРѕР»РµР№ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ Р±РµР· С†РёРєР»Р° РґР°РЅРЅС‹Рµ РјРѕРіСѓС‚ РЅРµ РїРѕРїР°СЃС‚СЊ РІ РѕС‚С‡РµС‚ Рё С‡С‚Рѕ С‚СЂРµР±СѓРµС‚СЃСЏ СЃРґРµР»Р°С‚СЊ?', FALSE, 'HARD', 21742 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21742');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. РџРѕР·РёС†РёРѕРЅРёСЂРѕРІР°РЅРёРµ getfirst', questiontext = 'РџРѕС‡РµРјСѓ РїСЂРё РІС‹РІРѕРґРµ РѕРґРёРЅРѕС‡РЅС‹С… РїРѕР»РµР№ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ Р±РµР· С†РёРєР»Р° РґР°РЅРЅС‹Рµ РјРѕРіСѓС‚ РЅРµ РїРѕРїР°СЃС‚СЊ РІ РѕС‚С‡РµС‚ Рё С‡С‚Рѕ С‚СЂРµР±СѓРµС‚СЃСЏ СЃРґРµР»Р°С‚СЊ?', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21742 WHERE idnumber = 'moodle-q21742';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21742');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Компилятор всегда пропускает секцию .fields, пока не вызван AbortForm', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21742';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Из-за встроенной оптимизации логической таблицы нужно выполнить ручное позиционирование, например <имя_логической_таблицы>.getfirst
- <имя_узла>=tsOk в программном блоке', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21742';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РљРѕРјРїРёР»СЏС‚РѕСЂ РІСЃРµРіРґР° РїСЂРѕРїСѓСЃРєР°РµС‚ СЃРµРєС†РёСЋ .fields, РїРѕРєР° РЅРµ РІС‹Р·РІР°РЅ AbortForm', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21742';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РР·-Р·Р° РІСЃС‚СЂРѕРµРЅРЅРѕР№ РѕРїС‚РёРјРёР·Р°С†РёРё Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ РЅСѓР¶РЅРѕ РІС‹РїРѕР»РЅРёС‚СЊ СЂСѓС‡РЅРѕРµ РїРѕР·РёС†РёРѕРЅРёСЂРѕРІР°РЅРёРµ, РЅР°РїСЂРёРјРµСЂ <РёРјСЏ_Р»РѕРіРёС‡РµСЃРєРѕР№_С‚Р°Р±Р»РёС†С‹>.getfirst
+ <РёРјСЏ_СѓР·Р»Р°>=tsOk РІ РїСЂРѕРіСЂР°РјРјРЅРѕРј Р±Р»РѕРєРµ', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21742';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21742';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Одиночные поля выводятся только в формах формата SLK при опции .slkNumber', 0.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21742';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РћРґРёРЅРѕС‡РЅС‹Рµ РїРѕР»СЏ РІС‹РІРѕРґСЏС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ С„РѕСЂРјР°С… С„РѕСЂРјР°С‚Р° SLK РїСЂРё РѕРїС†РёРё .slkNumber', 0.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21742';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21743', 'Раздел: Автономные формы, Сложный. Служебные строки', 'Когда строка автономной формы считается служебной и не выводится в отчет?', TRUE, 'HARD', 21743 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21743');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Сложный. Служебные строки', questiontext = 'Когда строка автономной формы считается служебной и не выводится в отчет?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21743 WHERE idnumber = 'moodle-q21743';
+SELECT id, 'moodle-q21743', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. РЎР»СѓР¶РµР±РЅС‹Рµ СЃС‚СЂРѕРєРё', 'РљРѕРіРґР° СЃС‚СЂРѕРєР° Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјС‹ СЃС‡РёС‚Р°РµС‚СЃСЏ СЃР»СѓР¶РµР±РЅРѕР№ Рё РЅРµ РІС‹РІРѕРґРёС‚СЃСЏ РІ РѕС‚С‡РµС‚?', TRUE, 'HARD', 21743 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21743');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎР»РѕР¶РЅС‹Р№. РЎР»СѓР¶РµР±РЅС‹Рµ СЃС‚СЂРѕРєРё', questiontext = 'РљРѕРіРґР° СЃС‚СЂРѕРєР° Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјС‹ СЃС‡РёС‚Р°РµС‚СЃСЏ СЃР»СѓР¶РµР±РЅРѕР№ Рё РЅРµ РІС‹РІРѕРґРёС‚СЃСЏ РІ РѕС‚С‡РµС‚?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21743 WHERE idnumber = 'moodle-q21743';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21743');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Если в любой позиции строки встречается символ «!»', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21743';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Если компилятор встречает «.» в первом символе строки (исключение — завершающие элементы некоторых секций и горизонтальные циклы, где «.» может быть в любой позиции)', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21743';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Если строка содержит только шаблоны ^, & или @', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21743';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р•СЃР»Рё РІ Р»СЋР±РѕР№ РїРѕР·РёС†РёРё СЃС‚СЂРѕРєРё РІСЃС‚СЂРµС‡Р°РµС‚СЃСЏ СЃРёРјРІРѕР» В«!В»', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21743';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р•СЃР»Рё РєРѕРјРїРёР»СЏС‚РѕСЂ РІСЃС‚СЂРµС‡Р°РµС‚ В«.В» РІ РїРµСЂРІРѕРј СЃРёРјРІРѕР»Рµ СЃС‚СЂРѕРєРё (РёСЃРєР»СЋС‡РµРЅРёРµ вЂ” Р·Р°РІРµСЂС€Р°СЋС‰РёРµ СЌР»РµРјРµРЅС‚С‹ РЅРµРєРѕС‚РѕСЂС‹С… СЃРµРєС†РёР№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ С†РёРєР»С‹, РіРґРµ В«.В» РјРѕР¶РµС‚ Р±С‹С‚СЊ РІ Р»СЋР±РѕР№ РїРѕР·РёС†РёРё)', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21743';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р•СЃР»Рё СЃС‚СЂРѕРєР° СЃРѕРґРµСЂР¶РёС‚ С‚РѕР»СЊРєРѕ С€Р°Р±Р»РѕРЅС‹ ^, & РёР»Рё @', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21743';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21637', 'Раздел: Автономные формы, Средний. Конструкция If и Fexit', 'Выберите правильное пояснение к следующей конструкции if, используемой в автономной форме:
+SELECT id, 'moodle-q21637', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РљРѕРЅСЃС‚СЂСѓРєС†РёСЏ If Рё Fexit', 'Р’С‹Р±РµСЂРёС‚Рµ РїСЂР°РІРёР»СЊРЅРѕРµ РїРѕСЏСЃРЅРµРЅРёРµ Рє СЃР»РµРґСѓСЋС‰РµР№ РєРѕРЅСЃС‚СЂСѓРєС†РёРё if, РёСЃРїРѕР»СЊР·СѓРµРјРѕР№ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ:
 
-if runinterface (''GetState'', nState) = cmCancel then <имя_формы>.fexit', TRUE, 'MEDIUM', 21637 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21637');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Средний. Конструкция If и Fexit', questiontext = 'Выберите правильное пояснение к следующей конструкции if, используемой в автономной форме:
+if runinterface (''GetState'', nState) = cmCancel then <РёРјСЏ_С„РѕСЂРјС‹>.fexit', TRUE, 'MEDIUM', 21637 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21637');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РљРѕРЅСЃС‚СЂСѓРєС†РёСЏ If Рё Fexit', questiontext = 'Р’С‹Р±РµСЂРёС‚Рµ РїСЂР°РІРёР»СЊРЅРѕРµ РїРѕСЏСЃРЅРµРЅРёРµ Рє СЃР»РµРґСѓСЋС‰РµР№ РєРѕРЅСЃС‚СЂСѓРєС†РёРё if, РёСЃРїРѕР»СЊР·СѓРµРјРѕР№ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ:
 
-if runinterface (''GetState'', nState) = cmCancel then <имя_формы>.fexit', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21637 WHERE idnumber = 'moodle-q21637';
+if runinterface (''GetState'', nState) = cmCancel then <РёРјСЏ_С„РѕСЂРјС‹>.fexit', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21637 WHERE idnumber = 'moodle-q21637';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21637');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'При нажатии пользователем кнопки [Cancel] открытого интерфейса GetState применяется метод немедленного выхода из формы (для интерфейса, не имеющих подобных кнопок, конструкция не подходит)', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21637';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'При закрытии пользователем открытого интерфейса GetState клавишами ESC или Alt+F3 применяется метод немедленного выхода из формы', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21637';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'При запуске пользователем интерфейса GetState интерфейс принудительно закрывается и продолжается выполнение формы', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21637';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'При выборе государства клавишей Enter интерфейс принудительно закрывается и применяется метод немедленного выхода из формы', 0.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21637';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџСЂРё РЅР°Р¶Р°С‚РёРё РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РєРЅРѕРїРєРё [Cancel] РѕС‚РєСЂС‹С‚РѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° GetState РїСЂРёРјРµРЅСЏРµС‚СЃСЏ РјРµС‚РѕРґ РЅРµРјРµРґР»РµРЅРЅРѕРіРѕ РІС‹С…РѕРґР° РёР· С„РѕСЂРјС‹ (РґР»СЏ РёРЅС‚РµСЂС„РµР№СЃР°, РЅРµ РёРјРµСЋС‰РёС… РїРѕРґРѕР±РЅС‹С… РєРЅРѕРїРѕРє, РєРѕРЅСЃС‚СЂСѓРєС†РёСЏ РЅРµ РїРѕРґС…РѕРґРёС‚)', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21637';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџСЂРё Р·Р°РєСЂС‹С‚РёРё РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РѕС‚РєСЂС‹С‚РѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° GetState РєР»Р°РІРёС€Р°РјРё ESC РёР»Рё Alt+F3 РїСЂРёРјРµРЅСЏРµС‚СЃСЏ РјРµС‚РѕРґ РЅРµРјРµРґР»РµРЅРЅРѕРіРѕ РІС‹С…РѕРґР° РёР· С„РѕСЂРјС‹', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21637';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџСЂРё Р·Р°РїСѓСЃРєРµ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РёРЅС‚РµСЂС„РµР№СЃР° GetState РёРЅС‚РµСЂС„РµР№СЃ РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ Р·Р°РєСЂС‹РІР°РµС‚СЃСЏ Рё РїСЂРѕРґРѕР»Р¶Р°РµС‚СЃСЏ РІС‹РїРѕР»РЅРµРЅРёРµ С„РѕСЂРјС‹', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21637';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџСЂРё РІС‹Р±РѕСЂРµ РіРѕСЃСѓРґР°СЂСЃС‚РІР° РєР»Р°РІРёС€РµР№ Enter РёРЅС‚РµСЂС„РµР№СЃ РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ Р·Р°РєСЂС‹РІР°РµС‚СЃСЏ Рё РїСЂРёРјРµРЅСЏРµС‚СЃСЏ РјРµС‚РѕРґ РЅРµРјРµРґР»РµРЅРЅРѕРіРѕ РІС‹С…РѕРґР° РёР· С„РѕСЂРјС‹', 0.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21637';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21744', 'Раздел: Автономные формы, Средний. Перенос строкового шаблона', 'Что происходит, если размер строкового значения превышает размер шаблона?', TRUE, 'MEDIUM', 21744 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21744');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Средний. Перенос строкового шаблона', questiontext = 'Что происходит, если размер строкового значения превышает размер шаблона?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21744 WHERE idnumber = 'moodle-q21744';
+SELECT id, 'moodle-q21744', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РџРµСЂРµРЅРѕСЃ СЃС‚СЂРѕРєРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР°', 'Р§С‚Рѕ РїСЂРѕРёСЃС…РѕРґРёС‚, РµСЃР»Рё СЂР°Р·РјРµСЂ СЃС‚СЂРѕРєРѕРІРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РїСЂРµРІС‹С€Р°РµС‚ СЂР°Р·РјРµСЂ С€Р°Р±Р»РѕРЅР°?', TRUE, 'MEDIUM', 21744 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21744');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РџРµСЂРµРЅРѕСЃ СЃС‚СЂРѕРєРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР°', questiontext = 'Р§С‚Рѕ РїСЂРѕРёСЃС…РѕРґРёС‚, РµСЃР»Рё СЂР°Р·РјРµСЂ СЃС‚СЂРѕРєРѕРІРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РїСЂРµРІС‹С€Р°РµС‚ СЂР°Р·РјРµСЂ С€Р°Р±Р»РѕРЅР°?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21744 WHERE idnumber = 'moodle-q21744';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21744');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'В отчет выводятся символы ***, как для числового поля', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21744';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Текст переносится на следующую строку начиная с позиции первого символа шаблона', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21744';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Лишние символы отбрасываются, перенос строк не выполняется', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21744';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р’ РѕС‚С‡РµС‚ РІС‹РІРѕРґСЏС‚СЃСЏ СЃРёРјРІРѕР»С‹ ***, РєР°Рє РґР»СЏ С‡РёСЃР»РѕРІРѕРіРѕ РїРѕР»СЏ', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21744';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РўРµРєСЃС‚ РїРµСЂРµРЅРѕСЃРёС‚СЃСЏ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ СЃС‚СЂРѕРєСѓ РЅР°С‡РёРЅР°СЏ СЃ РїРѕР·РёС†РёРё РїРµСЂРІРѕРіРѕ СЃРёРјРІРѕР»Р° С€Р°Р±Р»РѕРЅР°', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21744';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р›РёС€РЅРёРµ СЃРёРјРІРѕР»С‹ РѕС‚Р±СЂР°СЃС‹РІР°СЋС‚СЃСЏ, РїРµСЂРµРЅРѕСЃ СЃС‚СЂРѕРє РЅРµ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21744';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21745', 'Раздел: Автономные формы, Средний. Поля логической таблицы', 'Как связан список полей в секции полей логической таблицы (перед select) с секцией выборки (после select)?', TRUE, 'MEDIUM', 21745 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21745');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Средний. Поля логической таблицы', questiontext = 'Как связан список полей в секции полей логической таблицы (перед select) с секцией выборки (после select)?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21745 WHERE idnumber = 'moodle-q21745';
+SELECT id, 'moodle-q21745', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РџРѕР»СЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', 'РљР°Рє СЃРІСЏР·Р°РЅ СЃРїРёСЃРѕРє РїРѕР»РµР№ РІ СЃРµРєС†РёРё РїРѕР»РµР№ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ (РїРµСЂРµРґ select) СЃ СЃРµРєС†РёРµР№ РІС‹Р±РѕСЂРєРё (РїРѕСЃР»РµВ select)?', TRUE, 'MEDIUM', 21745 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21745');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РџРѕР»СЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', questiontext = 'РљР°Рє СЃРІСЏР·Р°РЅ СЃРїРёСЃРѕРє РїРѕР»РµР№ РІ СЃРµРєС†РёРё РїРѕР»РµР№ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ (РїРµСЂРµРґ select) СЃ СЃРµРєС†РёРµР№ РІС‹Р±РѕСЂРєРё (РїРѕСЃР»РµВ select)?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21745 WHERE idnumber = 'moodle-q21745';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21745');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Поля можно перечислять в любом порядке, независимо от SELECT', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21745';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Список полей должен совпадать с началом списка полей секции описания выборки: первое поле секции именует первое поле выборки и т. д.', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21745';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'В секции полей логической таблицы допускаются только константы, но не поля SELECT', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21745';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРѕР»СЏ РјРѕР¶РЅРѕ РїРµСЂРµС‡РёСЃР»СЏС‚СЊ РІ Р»СЋР±РѕРј РїРѕСЂСЏРґРєРµ, РЅРµР·Р°РІРёСЃРёРјРѕ РѕС‚ SELECT', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21745';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЎРїРёСЃРѕРє РїРѕР»РµР№ РґРѕР»Р¶РµРЅ СЃРѕРІРїР°РґР°С‚СЊ СЃ РЅР°С‡Р°Р»РѕРј СЃРїРёСЃРєР° РїРѕР»РµР№ СЃРµРєС†РёРё РѕРїРёСЃР°РЅРёСЏ РІС‹Р±РѕСЂРєРё: РїРµСЂРІРѕРµ РїРѕР»Рµ СЃРµРєС†РёРё РёРјРµРЅСѓРµС‚ РїРµСЂРІРѕРµ РїРѕР»Рµ РІС‹Р±РѕСЂРєРё Рё С‚. Рґ.', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21745';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р’ СЃРµРєС†РёРё РїРѕР»РµР№ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ РґРѕРїСѓСЃРєР°СЋС‚СЃСЏ С‚РѕР»СЊРєРѕ РєРѕРЅСЃС‚Р°РЅС‚С‹, РЅРѕ РЅРµ РїРѕР»СЏ SELECT', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21745';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21746', 'Раздел: Автономные формы, Средний. Порядок объявления переменных', 'Где в автономной форме должны быть объявлены переменные и массивы секции .var?', TRUE, 'MEDIUM', 21746 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21746');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Средний. Порядок объявления переменных', questiontext = 'Где в автономной форме должны быть объявлены переменные и массивы секции .var?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21746 WHERE idnumber = 'moodle-q21746';
+SELECT id, 'moodle-q21746', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РџРѕСЂСЏРґРѕРє РѕР±СЉСЏРІР»РµРЅРёСЏ РїРµСЂРµРјРµРЅРЅС‹С…', 'Р“РґРµ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РѕР±СЉСЏРІР»РµРЅС‹ РїРµСЂРµРјРµРЅРЅС‹Рµ Рё РјР°СЃСЃРёРІС‹ СЃРµРєС†РёРё .var?', TRUE, 'MEDIUM', 21746 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21746');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РџРѕСЂСЏРґРѕРє РѕР±СЉСЏРІР»РµРЅРёСЏ РїРµСЂРµРјРµРЅРЅС‹С…', questiontext = 'Р“РґРµ РІ Р°РІС‚РѕРЅРѕРјРЅРѕР№ С„РѕСЂРјРµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РѕР±СЉСЏРІР»РµРЅС‹ РїРµСЂРµРјРµРЅРЅС‹Рµ Рё РјР°СЃСЃРёРІС‹ СЃРµРєС†РёРё .var?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21746 WHERE idnumber = 'moodle-q21746';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21746');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'После первого шаблона вывода, непосредственно перед .endform', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21746';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'До описания полей, процедур, программных блоков, а также до первого шаблона', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21746';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Только внутри цикла по SQL-таблице', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21746';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРѕСЃР»Рµ РїРµСЂРІРѕРіРѕ С€Р°Р±Р»РѕРЅР° РІС‹РІРѕРґР°, РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РїРµСЂРµРґ .endform', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21746';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р”Рѕ РѕРїРёСЃР°РЅРёСЏ РїРѕР»РµР№, РїСЂРѕС†РµРґСѓСЂ, РїСЂРѕРіСЂР°РјРјРЅС‹С… Р±Р»РѕРєРѕРІ, Р° С‚Р°РєР¶Рµ РґРѕ РїРµСЂРІРѕРіРѕ С€Р°Р±Р»РѕРЅР°', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21746';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РўРѕР»СЊРєРѕ РІРЅСѓС‚СЂРё С†РёРєР»Р° РїРѕ SQL-С‚Р°Р±Р»РёС†Рµ', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21746';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21640', 'Раздел: Автономные формы, Средний. Синтаксические ошибки', 'Найдите синтаксические ошибки в форме и укажите их:
+SELECT id, 'moodle-q21640', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РЎРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС€РёР±РєРё', 'РќР°Р№РґРёС‚Рµ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС€РёР±РєРё РІ С„РѕСЂРјРµ Рё СѓРєР°Р¶РёС‚Рµ РёС…:
 
 .form ''bdoc''
 .ard
@@ -170,22 +170,22 @@ where ((basedoc.cval==klval.nrec and basedoc.corg==katorg.nrec));
 .fields basedoc.nodoc basedoc.name:''p:1'' basedoc.summa:''p:r''
 klval.simvolv katorg.name vids t .endfields
 .begin datetostr(tl.basedoc.dform,''''); end.
-Номер Наименование Сумма Валюта Контрагент
+РќРѕРјРµСЂ РќР°РёРјРµРЅРѕРІР°РЅРёРµ РЎСѓРјРјР° Р’Р°Р»СЋС‚Р° РљРѕРЅС‚СЂР°РіРµРЅС‚
 .{
 &&&&&&& @@@@@@@@@@@@ &&&&& ^ ^
 .begin
-vids:=''Счет'';
-if basedoc.viddoc=201 then vids:=''счет - фактура'';
-if basedoc.viddoc=501 then vids:=''заявка'';
+vids:=''РЎС‡РµС‚'';
+if basedoc.viddoc=201 then vids:=''СЃС‡РµС‚ - С„Р°РєС‚СѓСЂР°'';
+if basedoc.viddoc=501 then vids:=''Р·Р°СЏРІРєР°'';
 t:=datetostr(basedoc.dform,'''');
 end.
-Вид документа: ^
+Р’РёРґ РґРѕРєСѓРјРµРЅС‚Р°: ^
 .{?internal;t<>'''');
-Дата формирования: ^
+Р”Р°С‚Р° С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ: ^
 .}
 .}
 .endform', FALSE, 'MEDIUM', 21640 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21640');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Средний. Синтаксические ошибки', questiontext = 'Найдите синтаксические ошибки в форме и укажите их:
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РЎРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС€РёР±РєРё', questiontext = 'РќР°Р№РґРёС‚Рµ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС€РёР±РєРё РІ С„РѕСЂРјРµ Рё СѓРєР°Р¶РёС‚Рµ РёС…:
 
 .form ''bdoc''
 .ard
@@ -195,55 +195,55 @@ where ((basedoc.cval==klval.nrec and basedoc.corg==katorg.nrec));
 .fields basedoc.nodoc basedoc.name:''p:1'' basedoc.summa:''p:r''
 klval.simvolv katorg.name vids t .endfields
 .begin datetostr(tl.basedoc.dform,''''); end.
-Номер Наименование Сумма Валюта Контрагент
+РќРѕРјРµСЂ РќР°РёРјРµРЅРѕРІР°РЅРёРµ РЎСѓРјРјР° Р’Р°Р»СЋС‚Р° РљРѕРЅС‚СЂР°РіРµРЅС‚
 .{
 &&&&&&& @@@@@@@@@@@@ &&&&& ^ ^
 .begin
-vids:=''Счет'';
-if basedoc.viddoc=201 then vids:=''счет - фактура'';
-if basedoc.viddoc=501 then vids:=''заявка'';
+vids:=''РЎС‡РµС‚'';
+if basedoc.viddoc=201 then vids:=''СЃС‡РµС‚ - С„Р°РєС‚СѓСЂР°'';
+if basedoc.viddoc=501 then vids:=''Р·Р°СЏРІРєР°'';
 t:=datetostr(basedoc.dform,'''');
 end.
-Вид документа: ^
+Р’РёРґ РґРѕРєСѓРјРµРЅС‚Р°: ^
 .{?internal;t<>'''');
-Дата формирования: ^
+Р”Р°С‚Р° С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ: ^
 .}
 .}
 .endform', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21640 WHERE idnumber = 'moodle-q21640';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21640');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Не хватает точки в одном из ключевых слов', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21640';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Не указано имя логической таблицы', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21640';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Неверное использование вложенного цикла', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21640';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Неверный синтаксис оператора IF', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21640';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Неверен синтаксис цикла по логической таблице', 0.3333333, 6 FROM mdl_question WHERE idnumber = 'moodle-q21640';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Синтаксически неверная запись секции var... endVar', -1.0000000, 7 FROM mdl_question WHERE idnumber = 'moodle-q21640';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Синтаксически неверная запись одной из секций begin... end', -1.0000000, 8 FROM mdl_question WHERE idnumber = 'moodle-q21640';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµ С…РІР°С‚Р°РµС‚ С‚РѕС‡РєРё РІ РѕРґРЅРѕРј РёР· РєР»СЋС‡РµРІС‹С… СЃР»РѕРІ', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21640';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµ СѓРєР°Р·Р°РЅРѕ РёРјСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21640';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµРІРµСЂРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РІР»РѕР¶РµРЅРЅРѕРіРѕ С†РёРєР»Р°', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21640';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµРІРµСЂРЅС‹Р№ СЃРёРЅС‚Р°РєСЃРёСЃ РѕРїРµСЂР°С‚РѕСЂР° IF', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21640';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµРІРµСЂРµРЅ СЃРёРЅС‚Р°РєСЃРёСЃ С†РёРєР»Р° РїРѕ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†Рµ', 0.3333333, 6 FROM mdl_question WHERE idnumber = 'moodle-q21640';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЎРёРЅС‚Р°РєСЃРёС‡РµСЃРєРё РЅРµРІРµСЂРЅР°СЏ Р·Р°РїРёСЃСЊ СЃРµРєС†РёРё var... endVar', -1.0000000, 7 FROM mdl_question WHERE idnumber = 'moodle-q21640';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЎРёРЅС‚Р°РєСЃРёС‡РµСЃРєРё РЅРµРІРµСЂРЅР°СЏ Р·Р°РїРёСЃСЊ РѕРґРЅРѕР№ РёР· СЃРµРєС†РёР№ begin... end', -1.0000000, 8 FROM mdl_question WHERE idnumber = 'moodle-q21640';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21747', 'Раздел: Автономные формы, Средний. Состав секции .fields', 'Что, кроме полей логической таблицы, допускается указывать в секции .fields?', TRUE, 'MEDIUM', 21747 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21747');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Средний. Состав секции .fields', questiontext = 'Что, кроме полей логической таблицы, допускается указывать в секции .fields?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21747 WHERE idnumber = 'moodle-q21747';
+SELECT id, 'moodle-q21747', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РЎРѕСЃС‚Р°РІ СЃРµРєС†РёРё .fields', 'Р§С‚Рѕ, РєСЂРѕРјРµ РїРѕР»РµР№ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹, РґРѕРїСѓСЃРєР°РµС‚СЃСЏ СѓРєР°Р·С‹РІР°С‚СЊ РІ СЃРµРєС†РёРё .fields?', TRUE, 'MEDIUM', 21747 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21747');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. РЎРѕСЃС‚Р°РІ СЃРµРєС†РёРё .fields', questiontext = 'Р§С‚Рѕ, РєСЂРѕРјРµ РїРѕР»РµР№ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹, РґРѕРїСѓСЃРєР°РµС‚СЃСЏ СѓРєР°Р·С‹РІР°С‚СЊ РІ СЃРµРєС†РёРё .fields?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21747 WHERE idnumber = 'moodle-q21747';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21747');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Только имена полей таблиц словаря БД', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21747';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Имена полей таблиц словаря БД, переменные, константы или вычисляемые выражения', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21747';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Только обработчики событий FastReport', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21747';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РўРѕР»СЊРєРѕ РёРјРµРЅР° РїРѕР»РµР№ С‚Р°Р±Р»РёС† СЃР»РѕРІР°СЂСЏ Р‘Р”', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21747';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РРјРµРЅР° РїРѕР»РµР№ С‚Р°Р±Р»РёС† СЃР»РѕРІР°СЂСЏ Р‘Р”, РїРµСЂРµРјРµРЅРЅС‹Рµ, РєРѕРЅСЃС‚Р°РЅС‚С‹ РёР»Рё РІС‹С‡РёСЃР»СЏРµРјС‹Рµ РІС‹СЂР°Р¶РµРЅРёСЏ', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21747';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РўРѕР»СЊРєРѕ РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕР±С‹С‚РёР№ FastReport', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21747';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21748', 'Раздел: Автономные формы, Средний. Форматирование шаблонов', 'Какие символы форматирования шаблонов соответствуют описанию курса (отчеты в формате бизнес-текст)?', FALSE, 'MEDIUM', 21748 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21748');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Средний. Форматирование шаблонов', questiontext = 'Какие символы форматирования шаблонов соответствуют описанию курса (отчеты в формате бизнес-текст)?', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21748 WHERE idnumber = 'moodle-q21748';
+SELECT id, 'moodle-q21748', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. Р¤РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ С€Р°Р±Р»РѕРЅРѕРІ', 'РљР°РєРёРµ СЃРёРјРІРѕР»С‹ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ С€Р°Р±Р»РѕРЅРѕРІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‚ РѕРїРёСЃР°РЅРёСЋ РєСѓСЂСЃР° (РѕС‚С‡РµС‚С‹ РІ С„РѕСЂРјР°С‚Рµ Р±РёР·РЅРµСЃ-С‚РµРєСЃС‚)?', FALSE, 'MEDIUM', 21748 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21748');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. Р¤РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ С€Р°Р±Р»РѕРЅРѕРІ', questiontext = 'РљР°РєРёРµ СЃРёРјРІРѕР»С‹ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ С€Р°Р±Р»РѕРЅРѕРІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‚ РѕРїРёСЃР°РЅРёСЋ РєСѓСЂСЃР° (РѕС‚С‡РµС‚С‹ РІ С„РѕСЂРјР°С‚Рµ Р±РёР·РЅРµСЃ-С‚РµРєСЃС‚)?', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21748 WHERE idnumber = 'moodle-q21748';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21748');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '&&&&&&.&& — задает количество знаков дробной части', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21748';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '&''&&&&&&& — задает деление числа по разрядам', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21748';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '@#@@@@@@@ — задает центрирование значения внутри шаблона', 0.3333333, 4 FROM mdl_question WHERE idnumber = 'moodle-q21748';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '&&&&&&.&& вЂ” Р·Р°РґР°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ Р·РЅР°РєРѕРІ РґСЂРѕР±РЅРѕР№ С‡Р°СЃС‚Рё', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21748';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '&''&&&&&&& вЂ” Р·Р°РґР°РµС‚ РґРµР»РµРЅРёРµ С‡РёСЃР»Р° РїРѕ СЂР°Р·СЂСЏРґР°Рј', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21748';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '@#@@@@@@@ вЂ” Р·Р°РґР°РµС‚ С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РІРЅСѓС‚СЂРё С€Р°Р±Р»РѕРЅР°', 0.3333333, 4 FROM mdl_question WHERE idnumber = 'moodle-q21748';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '', 0.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21748';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Те же символы форматирования обязательны для RTF и SLK вместо встроенных средств редакторов', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21748';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РўРµ Р¶Рµ СЃРёРјРІРѕР»С‹ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹ РґР»СЏ RTF Рё SLK РІРјРµСЃС‚Рѕ РІСЃС‚СЂРѕРµРЅРЅС‹С… СЃСЂРµРґСЃС‚РІ СЂРµРґР°РєС‚РѕСЂРѕРІ', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21748';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21681', 'Раздел: Автономные формы, Средний. Циклы с группировкой', 'Какие из перечисленных условий являются необходимыми для организации корректной работы циклов по логической таблице с группировкой данных в общем случае? Один из примеров формы — см. ниже.
+SELECT id, 'moodle-q21681', 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. Р¦РёРєР»С‹ СЃ РіСЂСѓРїРїРёСЂРѕРІРєРѕР№', 'РљР°РєРёРµ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… СѓСЃР»РѕРІРёР№ СЏРІР»СЏСЋС‚СЃСЏ РЅРµРѕР±С…РѕРґРёРјС‹РјРё РґР»СЏ РѕСЂРіР°РЅРёР·Р°С†РёРё РєРѕСЂСЂРµРєС‚РЅРѕР№ СЂР°Р±РѕС‚С‹ С†РёРєР»РѕРІ РїРѕ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†Рµ СЃ РіСЂСѓРїРїРёСЂРѕРІРєРѕР№ РґР°РЅРЅС‹С… РІ РѕР±С‰РµРј СЃР»СѓС‡Р°Рµ? РћРґРёРЅ РёР· РїСЂРёРјРµСЂРѕРІ С„РѕСЂРјС‹ вЂ” СЃРј. РЅРёР¶Рµ.
 
 .autoform ''primer''
 .ard
 .var
- state: comp;
+В state: comp;
 .endvar
 .create view sv as
 select KatState.Name, KatCity.Name, Katorg.Name Where
@@ -251,28 +251,28 @@ select KatState.Name, KatCity.Name, Katorg.Name Where
 And KatCity.nrec /== KatOrg.cCity (noindex) ))
 and KatState.nrec=state order by KatCity.Name;
 .begin
- runinterface(''L_KATORG::GETSTATE'', state)
+В runinterface(''L_KATORG::GETSTATE'', state)
 end.
 .fields
- KatState.Name KatCity.Name KatOrg.Name
+В KatState.Name KatCity.Name KatOrg.Name
 .endfields
 .{table ''sv.KatState''
-СПИСОК ОРГАНИЗАЦИЙ ПО СТРАНЕ: ^
-НАИМЕНОВАНИЕ ОРГАНИЗАЦИИ
+РЎРџРРЎРћРљ РћР Р“РђРќРР—РђР¦РР™ РџРћ РЎРўР РђРќР•: ^
+РќРђРРњР•РќРћР’РђРќРР• РћР Р“РђРќРР—РђР¦РР
 .{table ''sv.KatCity''
-Город: @@@@@@@@@@@@@@@@@@@@@@@@@
+Р“РѕСЂРѕРґ: @@@@@@@@@@@@@@@@@@@@@@@@@
 .{table ''sv.KatOrg''
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 .}
 .}
 .}
 .endform', FALSE, 'MEDIUM', 21681 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21681');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Автономные формы, Средний. Циклы с группировкой', questiontext = 'Какие из перечисленных условий являются необходимыми для организации корректной работы циклов по логической таблице с группировкой данных в общем случае? Один из примеров формы — см. ниже.
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђРІС‚РѕРЅРѕРјРЅС‹Рµ С„РѕСЂРјС‹, РЎСЂРµРґРЅРёР№. Р¦РёРєР»С‹ СЃ РіСЂСѓРїРїРёСЂРѕРІРєРѕР№', questiontext = 'РљР°РєРёРµ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… СѓСЃР»РѕРІРёР№ СЏРІР»СЏСЋС‚СЃСЏ РЅРµРѕР±С…РѕРґРёРјС‹РјРё РґР»СЏ РѕСЂРіР°РЅРёР·Р°С†РёРё РєРѕСЂСЂРµРєС‚РЅРѕР№ СЂР°Р±РѕС‚С‹ С†РёРєР»РѕРІ РїРѕ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†Рµ СЃ РіСЂСѓРїРїРёСЂРѕРІРєРѕР№ РґР°РЅРЅС‹С… РІ РѕР±С‰РµРј СЃР»СѓС‡Р°Рµ? РћРґРёРЅ РёР· РїСЂРёРјРµСЂРѕРІ С„РѕСЂРјС‹ вЂ” СЃРј. РЅРёР¶Рµ.
 
 .autoform ''primer''
 .ard
 .var
- state: comp;
+В state: comp;
 .endvar
 .create view sv as
 select KatState.Name, KatCity.Name, Katorg.Name Where
@@ -280,16 +280,16 @@ select KatState.Name, KatCity.Name, Katorg.Name Where
 And KatCity.nrec /== KatOrg.cCity (noindex) ))
 and KatState.nrec=state order by KatCity.Name;
 .begin
- runinterface(''L_KATORG::GETSTATE'', state)
+В runinterface(''L_KATORG::GETSTATE'', state)
 end.
 .fields
- KatState.Name KatCity.Name KatOrg.Name
+В KatState.Name KatCity.Name KatOrg.Name
 .endfields
 .{table ''sv.KatState''
-СПИСОК ОРГАНИЗАЦИЙ ПО СТРАНЕ: ^
-НАИМЕНОВАНИЕ ОРГАНИЗАЦИИ
+РЎРџРРЎРћРљ РћР Р“РђРќРР—РђР¦РР™ РџРћ РЎРўР РђРќР•: ^
+РќРђРРњР•РќРћР’РђРќРР• РћР Р“РђРќРР—РђР¦РР
 .{table ''sv.KatCity''
-Город: @@@@@@@@@@@@@@@@@@@@@@@@@
+Р“РѕСЂРѕРґ: @@@@@@@@@@@@@@@@@@@@@@@@@
 .{table ''sv.KatOrg''
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 .}
@@ -297,15 +297,15 @@ end.
 .}
 .endform', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21681 WHERE idnumber = 'moodle-q21681';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21681');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'отсутствие переменных в перечне выводимых в циклах полей', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21681';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'указание имен узлов в циклах по логической таблице', 0.5000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21681';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'вызов интерфейса с участием физической таблицы, по которой организован внешний цикл', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21681';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'физическая таблица, по которой организован вышестоящий цикл, должна быть родительской для таблицы, по которой организован вложенный цикл', 0.5000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21681';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'в перечне выводимых полей внутри каждого цикла должны быть поля только той физической таблицы, по которой он организован', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21681';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РѕС‚СЃСѓС‚СЃС‚РІРёРµ РїРµСЂРµРјРµРЅРЅС‹С… РІ РїРµСЂРµС‡РЅРµ РІС‹РІРѕРґРёРјС‹С… РІ С†РёРєР»Р°С… РїРѕР»РµР№', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21681';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СѓРєР°Р·Р°РЅРёРµ РёРјРµРЅ СѓР·Р»РѕРІ РІ С†РёРєР»Р°С… РїРѕ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†Рµ', 0.5000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21681';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІС‹Р·РѕРІ РёРЅС‚РµСЂС„РµР№СЃР° СЃ СѓС‡Р°СЃС‚РёРµРј С„РёР·РёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹, РїРѕ РєРѕС‚РѕСЂРѕР№ РѕСЂРіР°РЅРёР·РѕРІР°РЅ РІРЅРµС€РЅРёР№ С†РёРєР»', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21681';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'С„РёР·РёС‡РµСЃРєР°СЏ С‚Р°Р±Р»РёС†Р°, РїРѕ РєРѕС‚РѕСЂРѕР№ РѕСЂРіР°РЅРёР·РѕРІР°РЅ РІС‹С€РµСЃС‚РѕСЏС‰РёР№ С†РёРєР», РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂРѕРґРёС‚РµР»СЊСЃРєРѕР№ РґР»СЏ С‚Р°Р±Р»РёС†С‹, РїРѕ РєРѕС‚РѕСЂРѕР№ РѕСЂРіР°РЅРёР·РѕРІР°РЅ РІР»РѕР¶РµРЅРЅС‹Р№ С†РёРєР»', 0.5000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21681';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІ РїРµСЂРµС‡РЅРµ РІС‹РІРѕРґРёРјС‹С… РїРѕР»РµР№ РІРЅСѓС‚СЂРё РєР°Р¶РґРѕРіРѕ С†РёРєР»Р° РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РїРѕР»СЏ С‚РѕР»СЊРєРѕ С‚РѕР№ С„РёР·РёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹, РїРѕ РєРѕС‚РѕСЂРѕР№ РѕРЅ РѕСЂРіР°РЅРёР·РѕРІР°РЅ', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21681';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21695', 'Раздел: Атлантис-SQL, Легкий. Начало SQL-предложения', 'С каких операторов может начинаться SQL-предложение в «Атлантис-SQL»?', FALSE, 'EASY', 21695 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21695');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Легкий. Начало SQL-предложения', questiontext = 'С каких операторов может начинаться SQL-предложение в «Атлантис-SQL»?', single_answer = FALSE, difficulty = 'EASY', source_question_id = 21695 WHERE idnumber = 'moodle-q21695';
+SELECT id, 'moodle-q21695', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, Р›РµРіРєРёР№. РќР°С‡Р°Р»Рѕ SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ', 'РЎ РєР°РєРёС… РѕРїРµСЂР°С‚РѕСЂРѕРІ РјРѕР¶РµС‚ РЅР°С‡РёРЅР°С‚СЊСЃСЏ SQL-РїСЂРµРґР»РѕР¶РµРЅРёРµ РІ В«РђС‚Р»Р°РЅС‚РёСЃ-SQLВ»?', FALSE, 'EASY', 21695 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21695');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, Р›РµРіРєРёР№. РќР°С‡Р°Р»Рѕ SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ', questiontext = 'РЎ РєР°РєРёС… РѕРїРµСЂР°С‚РѕСЂРѕРІ РјРѕР¶РµС‚ РЅР°С‡РёРЅР°С‚СЊСЃСЏ SQL-РїСЂРµРґР»РѕР¶РµРЅРёРµ РІ В«РђС‚Р»Р°РЅС‚РёСЃ-SQLВ»?', single_answer = FALSE, difficulty = 'EASY', source_question_id = 21695 WHERE idnumber = 'moodle-q21695';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21695');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'CREATE', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21695';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'IMPORT', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21695';
@@ -313,8 +313,8 @@ INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELE
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'DEL', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21695';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21696', 'Раздел: Атлантис-SQL, Легкий. Операторы реляционных отношений', 'Какие из перечисленных выражений являются операторами реляционных отношений?', FALSE, 'EASY', 21696 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21696');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Легкий. Операторы реляционных отношений', questiontext = 'Какие из перечисленных выражений являются операторами реляционных отношений?', single_answer = FALSE, difficulty = 'EASY', source_question_id = 21696 WHERE idnumber = 'moodle-q21696';
+SELECT id, 'moodle-q21696', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, Р›РµРіРєРёР№. РћРїРµСЂР°С‚РѕСЂС‹ СЂРµР»СЏС†РёРѕРЅРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№', 'РљР°РєРёРµ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… РІС‹СЂР°Р¶РµРЅРёР№ СЏРІР»СЏСЋС‚СЃСЏ РѕРїРµСЂР°С‚РѕСЂР°РјРё СЂРµР»СЏС†РёРѕРЅРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№?', FALSE, 'EASY', 21696 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21696');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, Р›РµРіРєРёР№. РћРїРµСЂР°С‚РѕСЂС‹ СЂРµР»СЏС†РёРѕРЅРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№', questiontext = 'РљР°РєРёРµ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… РІС‹СЂР°Р¶РµРЅРёР№ СЏРІР»СЏСЋС‚СЃСЏ РѕРїРµСЂР°С‚РѕСЂР°РјРё СЂРµР»СЏС†РёРѕРЅРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№?', single_answer = FALSE, difficulty = 'EASY', source_question_id = 21696 WHERE idnumber = 'moodle-q21696';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21696');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '/==', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21696';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '==', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21696';
@@ -323,16 +323,16 @@ INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELE
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, '>>==', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21696';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21701', 'Раздел: Атлантис-SQL, Легкий. Результат в окне OUTPUT', 'Какое из SQL-предложений вернет результат в виде набора записей в окне «OUTPUT» модуля «SQL. Доступ к БД» утилит Support?', TRUE, 'EASY', 21701 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21701');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Легкий. Результат в окне OUTPUT', questiontext = 'Какое из SQL-предложений вернет результат в виде набора записей в окне «OUTPUT» модуля «SQL. Доступ к БД» утилит Support?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21701 WHERE idnumber = 'moodle-q21701';
+SELECT id, 'moodle-q21701', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, Р›РµРіРєРёР№. Р РµР·СѓР»СЊС‚Р°С‚ РІ РѕРєРЅРµ OUTPUT', 'РљР°РєРѕРµ РёР· SQL-РїСЂРµРґР»РѕР¶РµРЅРёР№ РІРµСЂРЅРµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РІ РІРёРґРµ РЅР°Р±РѕСЂР° Р·Р°РїРёСЃРµР№ РІ РѕРєРЅРµ В«OUTPUTВ» РјРѕРґСѓР»СЏ В«SQL. Р”РѕСЃС‚СѓРї Рє Р‘Р”В» СѓС‚РёР»РёС‚ Support?', TRUE, 'EASY', 21701 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21701');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, Р›РµРіРєРёР№. Р РµР·СѓР»СЊС‚Р°С‚ РІ РѕРєРЅРµ OUTPUT', questiontext = 'РљР°РєРѕРµ РёР· SQL-РїСЂРµРґР»РѕР¶РµРЅРёР№ РІРµСЂРЅРµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РІ РІРёРґРµ РЅР°Р±РѕСЂР° Р·Р°РїРёСЃРµР№ РІ РѕРєРЅРµ В«OUTPUTВ» РјРѕРґСѓР»СЏ В«SQL. Р”РѕСЃС‚СѓРї Рє Р‘Р”В» СѓС‚РёР»РёС‚ Support?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21701 WHERE idnumber = 'moodle-q21701';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21701');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'create view LogTable аз select * from katmc;', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21701';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'create view LogTable Р°Р· select * from katmc;', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21701';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'select * from katorg to txt katorg.txt;', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21701';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'select katmc.*;', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21701';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'update katmc where kgroupmc = ''4301'' set massa = massa * 2;', 0.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21701';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21700', 'Раздел: Атлантис-SQL, Легкий. Сортировка на внешней выгрузке', 'В каких случаях, для указанного ниже запроса, сортировка будет выполняться на внешней выгрузке?
+SELECT id, 'moodle-q21700', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, Р›РµРіРєРёР№. РЎРѕСЂС‚РёСЂРѕРІРєР° РЅР° РІРЅРµС€РЅРµР№ РІС‹РіСЂСѓР·РєРµ', 'Р’ РєР°РєРёС… СЃР»СѓС‡Р°СЏС…, РґР»СЏ СѓРєР°Р·Р°РЅРЅРѕРіРѕ РЅРёР¶Рµ Р·Р°РїСЂРѕСЃР°, СЃРѕСЂС‚РёСЂРѕРІРєР° Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ РЅР° РІРЅРµС€РЅРµР№ РІС‹РіСЂСѓР·РєРµ?
 
 select KatOrg.Name, BaseDoc.Nodoc, BaseDoc.dDoc, BaseDoc.Total
 From KatOrg, BaseDoc
@@ -340,7 +340,7 @@ Where ((
 KatOrg.Nrec == BaseDoc.cOrg
 and 101 == BaseDoc.vidDoc
 ))', FALSE, 'EASY', 21700 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21700');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Легкий. Сортировка на внешней выгрузке', questiontext = 'В каких случаях, для указанного ниже запроса, сортировка будет выполняться на внешней выгрузке?
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, Р›РµРіРєРёР№. РЎРѕСЂС‚РёСЂРѕРІРєР° РЅР° РІРЅРµС€РЅРµР№ РІС‹РіСЂСѓР·РєРµ', questiontext = 'Р’ РєР°РєРёС… СЃР»СѓС‡Р°СЏС…, РґР»СЏ СѓРєР°Р·Р°РЅРЅРѕРіРѕ РЅРёР¶Рµ Р·Р°РїСЂРѕСЃР°, СЃРѕСЂС‚РёСЂРѕРІРєР° Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ РЅР° РІРЅРµС€РЅРµР№ РІС‹РіСЂСѓР·РєРµ?
 
 select KatOrg.Name, BaseDoc.Nodoc, BaseDoc.dDoc, BaseDoc.Total
 From KatOrg, BaseDoc
@@ -355,29 +355,29 @@ INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELE
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'order by BaseDoc.Nodoc', 0.5000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21700';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21702', 'Раздел: Атлантис-SQL, Сложный. Параметры set impex', 'Какие параметры (в том числе и по умолчанию) будут установлены оператором
+SELECT id, 'moodle-q21702', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎР»РѕР¶РЅС‹Р№. РџР°СЂР°РјРµС‚СЂС‹ set impex', 'РљР°РєРёРµ РїР°СЂР°РјРµС‚СЂС‹ (РІ С‚РѕРј С‡РёСЃР»Рµ Рё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ) Р±СѓРґСѓС‚ СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹ РѕРїРµСЂР°С‚РѕСЂРѕРј
 
 set impex txt justify=on quotas="*";', FALSE, 'HARD', 21702 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21702');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Сложный. Параметры set impex', questiontext = 'Какие параметры (в том числе и по умолчанию) будут установлены оператором
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎР»РѕР¶РЅС‹Р№. РџР°СЂР°РјРµС‚СЂС‹ set impex', questiontext = 'РљР°РєРёРµ РїР°СЂР°РјРµС‚СЂС‹ (РІ С‚РѕРј С‡РёСЃР»Рµ Рё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ) Р±СѓРґСѓС‚ СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹ РѕРїРµСЂР°С‚РѕСЂРѕРј
 
 set impex txt justify=on quotas="*";', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21702 WHERE idnumber = 'moodle-q21702';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21702');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'разделитель полей - *', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21702';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'выравнивание полей по столбцам', 0.5000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21702';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'вывод заголовков полей', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21702';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'формат даты DD/MM/YYYY', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21702';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'значения строковых полей будут заключены в символы - *', 0.5000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21702';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЂР°Р·РґРµР»РёС‚РµР»СЊ РїРѕР»РµР№ - *', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21702';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІС‹СЂР°РІРЅРёРІР°РЅРёРµ РїРѕР»РµР№ РїРѕ СЃС‚РѕР»Р±С†Р°Рј', 0.5000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21702';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІС‹РІРѕРґ Р·Р°РіРѕР»РѕРІРєРѕРІ РїРѕР»РµР№', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21702';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'С„РѕСЂРјР°С‚ РґР°С‚С‹ DD/MM/YYYY', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21702';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р·РЅР°С‡РµРЅРёСЏ СЃС‚СЂРѕРєРѕРІС‹С… РїРѕР»РµР№ Р±СѓРґСѓС‚ Р·Р°РєР»СЋС‡РµРЅС‹ РІ СЃРёРјРІРѕР»С‹ - *', 0.5000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21702';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21703', 'Раздел: Атлантис-SQL, Средний. Атрибут noIndex', 'Где происходит выборка при использовании атрибута NoIndex в описании реляционных отношений?', TRUE, 'MEDIUM', 21703 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21703');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Средний. Атрибут noIndex', questiontext = 'Где происходит выборка при использовании атрибута NoIndex в описании реляционных отношений?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21703 WHERE idnumber = 'moodle-q21703';
+SELECT id, 'moodle-q21703', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РђС‚СЂРёР±СѓС‚ noIndex', 'Р“РґРµ РїСЂРѕРёСЃС…РѕРґРёС‚ РІС‹Р±РѕСЂРєР° РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё Р°С‚СЂРёР±СѓС‚Р° NoIndex РІ РѕРїРёСЃР°РЅРёРё СЂРµР»СЏС†РёРѕРЅРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№?', TRUE, 'MEDIUM', 21703 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21703');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РђС‚СЂРёР±СѓС‚ noIndex', questiontext = 'Р“РґРµ РїСЂРѕРёСЃС…РѕРґРёС‚ РІС‹Р±РѕСЂРєР° РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё Р°С‚СЂРёР±СѓС‚Р° NoIndex РІ РѕРїРёСЃР°РЅРёРё СЂРµР»СЏС†РёРѕРЅРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21703 WHERE idnumber = 'moodle-q21703';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21703');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'на сервере', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21703';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'на клиенте', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21703';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЅР° СЃРµСЂРІРµСЂРµ', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21703';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЅР° РєР»РёРµРЅС‚Рµ', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21703';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21704', 'Раздел: Атлантис-SQL, Средний. Атрибуты открытия таблиц', 'Укажите верные атрибуты открытия таблиц (для SQL-предложения)?', FALSE, 'MEDIUM', 21704 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21704');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Средний. Атрибуты открытия таблиц', questiontext = 'Укажите верные атрибуты открытия таблиц (для SQL-предложения)?', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21704 WHERE idnumber = 'moodle-q21704';
+SELECT id, 'moodle-q21704', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РђС‚СЂРёР±СѓС‚С‹ РѕС‚РєСЂС‹С‚РёСЏ С‚Р°Р±Р»РёС†', 'РЈРєР°Р¶РёС‚Рµ РІРµСЂРЅС‹Рµ Р°С‚СЂРёР±СѓС‚С‹ РѕС‚РєСЂС‹С‚РёСЏ С‚Р°Р±Р»РёС† (РґР»СЏ SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ)?', FALSE, 'MEDIUM', 21704 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21704');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РђС‚СЂРёР±СѓС‚С‹ РѕС‚РєСЂС‹С‚РёСЏ С‚Р°Р±Р»РёС†', questiontext = 'РЈРєР°Р¶РёС‚Рµ РІРµСЂРЅС‹Рµ Р°С‚СЂРёР±СѓС‚С‹ РѕС‚РєСЂС‹С‚РёСЏ С‚Р°Р±Р»РёС† (РґР»СЏ SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ)?', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21704 WHERE idnumber = 'moodle-q21704';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21704');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'ReadOnly', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21704';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'DropIndex', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21704';
@@ -385,8 +385,8 @@ INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELE
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Build', 0.3333333, 5 FROM mdl_question WHERE idnumber = 'moodle-q21704';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21706', 'Раздел: Атлантис-SQL, Средний. Группы операторов', 'Какие из перечисленных ниже групп операторов языка SQL присутствуют в «Атлантис-SQL»?', FALSE, 'MEDIUM', 21706 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21706');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Средний. Группы операторов', questiontext = 'Какие из перечисленных ниже групп операторов языка SQL присутствуют в «Атлантис-SQL»?', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21706 WHERE idnumber = 'moodle-q21706';
+SELECT id, 'moodle-q21706', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. Р“СЂСѓРїРїС‹ РѕРїРµСЂР°С‚РѕСЂРѕРІ', 'РљР°РєРёРµ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… РЅРёР¶Рµ РіСЂСѓРїРї РѕРїРµСЂР°С‚РѕСЂРѕРІ СЏР·С‹РєР° SQL РїСЂРёСЃСѓС‚СЃС‚РІСѓСЋС‚ РІ В«РђС‚Р»Р°РЅС‚РёСЃ-SQLВ»?', FALSE, 'MEDIUM', 21706 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21706');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. Р“СЂСѓРїРїС‹ РѕРїРµСЂР°С‚РѕСЂРѕРІ', questiontext = 'РљР°РєРёРµ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… РЅРёР¶Рµ РіСЂСѓРїРї РѕРїРµСЂР°С‚РѕСЂРѕРІ СЏР·С‹РєР° SQL РїСЂРёСЃСѓС‚СЃС‚РІСѓСЋС‚ РІ В«РђС‚Р»Р°РЅС‚РёСЃ-SQLВ»?', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21706 WHERE idnumber = 'moodle-q21706';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21706');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Data Definition Language', 0.5000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21706';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Data Control Language', -1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21706';
@@ -394,37 +394,37 @@ INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELE
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Cursor Control Language', -1.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21706';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21707', 'Раздел: Атлантис-SQL, Средний. Ошибки SQL-предложения', 'Какие ошибки допустил автор приведенного ниже SQL-предложения:
+SELECT id, 'moodle-q21707', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РћС€РёР±РєРё SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ', 'РљР°РєРёРµ РѕС€РёР±РєРё РґРѕРїСѓСЃС‚РёР» Р°РІС‚РѕСЂ РїСЂРёРІРµРґРµРЅРЅРѕРіРѕ РЅРёР¶Рµ SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ:
 
 select katmc.*, kated.* order by name where ((katmc.ced == kated.nrec or 0 == katmc.ced (noindex) ));', FALSE, 'MEDIUM', 21707 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21707');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Средний. Ошибки SQL-предложения', questiontext = 'Какие ошибки допустил автор приведенного ниже SQL-предложения:
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РћС€РёР±РєРё SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ', questiontext = 'РљР°РєРёРµ РѕС€РёР±РєРё РґРѕРїСѓСЃС‚РёР» Р°РІС‚РѕСЂ РїСЂРёРІРµРґРµРЅРЅРѕРіРѕ РЅРёР¶Рµ SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ:
 
 select katmc.*, kated.* order by name where ((katmc.ced == kated.nrec or 0 == katmc.ced (noindex) ));', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21707 WHERE idnumber = 'moodle-q21707';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21707');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Пропущена секция FROM.', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21707';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Используется ключевое слово OR в описании реляционных отношений.', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21707';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Нарушен порядок следования секций.', 0.3333333, 4 FROM mdl_question WHERE idnumber = 'moodle-q21707';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Некорректно определен порядок сортировки.', 0.3333333, 5 FROM mdl_question WHERE idnumber = 'moodle-q21707';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Неверно задана последовательность подцепок в секции WHERE', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21707';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Неверно задана константа во втором условии подцепки в WHERE', -1.0000000, 7 FROM mdl_question WHERE idnumber = 'moodle-q21707';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџСЂРѕРїСѓС‰РµРЅР° СЃРµРєС†РёСЏ FROM.', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21707';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РєР»СЋС‡РµРІРѕРµ СЃР»РѕРІРѕ OR РІ РѕРїРёСЃР°РЅРёРё СЂРµР»СЏС†РёРѕРЅРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№.', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21707';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќР°СЂСѓС€РµРЅ РїРѕСЂСЏРґРѕРє СЃР»РµРґРѕРІР°РЅРёСЏ СЃРµРєС†РёР№.', 0.3333333, 4 FROM mdl_question WHERE idnumber = 'moodle-q21707';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµРєРѕСЂСЂРµРєС‚РЅРѕ РѕРїСЂРµРґРµР»РµРЅ РїРѕСЂСЏРґРѕРє СЃРѕСЂС‚РёСЂРѕРІРєРё.', 0.3333333, 5 FROM mdl_question WHERE idnumber = 'moodle-q21707';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµРІРµСЂРЅРѕ Р·Р°РґР°РЅР° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ РїРѕРґС†РµРїРѕРє РІ СЃРµРєС†РёРё WHERE', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21707';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµРІРµСЂРЅРѕ Р·Р°РґР°РЅР° РєРѕРЅСЃС‚Р°РЅС‚Р° РІРѕ РІС‚РѕСЂРѕРј СѓСЃР»РѕРІРёРё РїРѕРґС†РµРїРєРё РІ WHERE', -1.0000000, 7 FROM mdl_question WHERE idnumber = 'moodle-q21707';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21708', 'Раздел: Атлантис-SQL, Средний. Параметры импорта', 'Выберите предложения, соответствующие параметрам указанной операции импорта:
+SELECT id, 'moodle-q21708', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РџР°СЂР°РјРµС‚СЂС‹ РёРјРїРѕСЂС‚Р°', 'Р’С‹Р±РµСЂРёС‚Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ РїР°СЂР°РјРµС‚СЂР°Рј СѓРєР°Р·Р°РЅРЅРѕР№ РѕРїРµСЂР°С†РёРё РёРјРїРѕСЂС‚Р°:
 
 import kated from dbf edizm.dbf arrangeByType arrangeByName fullInfo skipOverflow rewriteForNRec;', FALSE, 'MEDIUM', 21708 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21708');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Средний. Параметры импорта', questiontext = 'Выберите предложения, соответствующие параметрам указанной операции импорта:
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РџР°СЂР°РјРµС‚СЂС‹ РёРјРїРѕСЂС‚Р°', questiontext = 'Р’С‹Р±РµСЂРёС‚Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ РїР°СЂР°РјРµС‚СЂР°Рј СѓРєР°Р·Р°РЅРЅРѕР№ РѕРїРµСЂР°С†РёРё РёРјРїРѕСЂС‚Р°:
 
 import kated from dbf edizm.dbf arrangeByType arrangeByName fullInfo skipOverflow rewriteForNRec;', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21708 WHERE idnumber = 'moodle-q21708';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21708');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'игнорирование лишних полей источника', 0.2000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21708';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'удаление файла-импортера', -1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21708';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'создание журнального файла', 0.2000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21708';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'сравнение полей по именам', 0.2000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21708';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'сравнение полей по типам', 0.2000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21708';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'обновление записей с существующим первичным ключом', 0.2000000, 7 FROM mdl_question WHERE idnumber = 'moodle-q21708';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РёРіРЅРѕСЂРёСЂРѕРІР°РЅРёРµ Р»РёС€РЅРёС… РїРѕР»РµР№ РёСЃС‚РѕС‡РЅРёРєР°', 0.2000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21708';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СѓРґР°Р»РµРЅРёРµ С„Р°Р№Р»Р°-РёРјРїРѕСЂС‚РµСЂР°', -1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21708';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРѕР·РґР°РЅРёРµ Р¶СѓСЂРЅР°Р»СЊРЅРѕРіРѕ С„Р°Р№Р»Р°', 0.2000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21708';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃСЂР°РІРЅРµРЅРёРµ РїРѕР»РµР№ РїРѕ РёРјРµРЅР°Рј', 0.2000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21708';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃСЂР°РІРЅРµРЅРёРµ РїРѕР»РµР№ РїРѕ С‚РёРїР°Рј', 0.2000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21708';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РѕР±РЅРѕРІР»РµРЅРёРµ Р·Р°РїРёСЃРµР№ СЃ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј РїРµСЂРІРёС‡РЅС‹Рј РєР»СЋС‡РѕРј', 0.2000000, 7 FROM mdl_question WHERE idnumber = 'moodle-q21708';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21689', 'Раздел: Атлантис-SQL, Средний. Синтаксические ошибки выборки', 'Какие синтаксические ошибки допустил автор SQL-предложения при условии использования словаря, входящего в стандартную поставку системы «Галактика ERP»?
+SELECT id, 'moodle-q21689', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РЎРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС€РёР±РєРё РІС‹Р±РѕСЂРєРё', 'РљР°РєРёРµ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС€РёР±РєРё РґРѕРїСѓСЃС‚РёР» Р°РІС‚РѕСЂ SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ РїСЂРё СѓСЃР»РѕРІРёРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЃР»РѕРІР°СЂСЏ, РІС…РѕРґСЏС‰РµРіРѕ РІ СЃС‚Р°РЅРґР°СЂС‚РЅСѓСЋ РїРѕСЃС‚Р°РІРєСѓ СЃРёСЃС‚РµРјС‹ В«Р“Р°Р»Р°РєС‚РёРєР° ERPВ»?
 
 Select Groupmc.Name, Groupmc.Kod, Katmc.Name, +.Barkod, Kated.Name
 From Groupmc Gmc
@@ -432,7 +432,7 @@ Where ((Katmc.Ced==Kated.Nrec and Groupmc.Nrec/==Katmc.Cgroupmc))
 and Katmc.Cgroupmc==Gmc.Nrec
 order D11_1 by Groupmc.Name
 order Dl1_2 by Groupmc.Kod;', FALSE, 'MEDIUM', 21689 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21689');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Средний. Синтаксические ошибки выборки', questiontext = 'Какие синтаксические ошибки допустил автор SQL-предложения при условии использования словаря, входящего в стандартную поставку системы «Галактика ERP»?
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. РЎРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС€РёР±РєРё РІС‹Р±РѕСЂРєРё', questiontext = 'РљР°РєРёРµ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС€РёР±РєРё РґРѕРїСѓСЃС‚РёР» Р°РІС‚РѕСЂ SQL-РїСЂРµРґР»РѕР¶РµРЅРёСЏ РїСЂРё СѓСЃР»РѕРІРёРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЃР»РѕРІР°СЂСЏ, РІС…РѕРґСЏС‰РµРіРѕ РІ СЃС‚Р°РЅРґР°СЂС‚РЅСѓСЋ РїРѕСЃС‚Р°РІРєСѓ СЃРёСЃС‚РµРјС‹ В«Р“Р°Р»Р°РєС‚РёРєР° ERPВ»?
 
 Select Groupmc.Name, Groupmc.Kod, Katmc.Name, +.Barkod, Kated.Name
 From Groupmc Gmc
@@ -441,212 +441,212 @@ and Katmc.Cgroupmc==Gmc.Nrec
 order D11_1 by Groupmc.Name
 order Dl1_2 by Groupmc.Kod;', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21689 WHERE idnumber = 'moodle-q21689';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21689');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'неверный синтаксис порядка сортировки', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21689';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'неверный синтаксис секции From', -1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21689';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'ошибка в перечислении', 0.5000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21689';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'неверный синтаксис ограничения на результат выборки', 0.5000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21689';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'используется таблица Gmc, которой нет в словаре', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21689';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЅРµРІРµСЂРЅС‹Р№ СЃРёРЅС‚Р°РєСЃРёСЃ РїРѕСЂСЏРґРєР° СЃРѕСЂС‚РёСЂРѕРІРєРё', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21689';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЅРµРІРµСЂРЅС‹Р№ СЃРёРЅС‚Р°РєСЃРёСЃ СЃРµРєС†РёРё From', -1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21689';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РѕС€РёР±РєР° РІ РїРµСЂРµС‡РёСЃР»РµРЅРёРё', 0.5000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21689';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЅРµРІРµСЂРЅС‹Р№ СЃРёРЅС‚Р°РєСЃРёСЃ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РЅР° СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹Р±РѕСЂРєРё', 0.5000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21689';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚Р°Р±Р»РёС†Р° Gmc, РєРѕС‚РѕСЂРѕР№ РЅРµС‚ РІ СЃР»РѕРІР°СЂРµ', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21689';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21709', 'Раздел: Атлантис-SQL, Средний. Элементы Atlantis-SQL', 'Какие из перечисленных элементов используются в «Atlantis-SQL»?', FALSE, 'MEDIUM', 21709 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21709');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Атлантис-SQL, Средний. Элементы Atlantis-SQL', questiontext = 'Какие из перечисленных элементов используются в «Atlantis-SQL»?', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21709 WHERE idnumber = 'moodle-q21709';
+SELECT id, 'moodle-q21709', 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. Р­Р»РµРјРµРЅС‚С‹ Atlantis-SQL', 'РљР°РєРёРµ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РІ В«Atlantis-SQLВ»?', FALSE, 'MEDIUM', 21709 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21709');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РђС‚Р»Р°РЅС‚РёСЃ-SQL, РЎСЂРµРґРЅРёР№. Р­Р»РµРјРµРЅС‚С‹ Atlantis-SQL', questiontext = 'РљР°РєРёРµ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РІ В«Atlantis-SQLВ»?', single_answer = FALSE, difficulty = 'MEDIUM', source_question_id = 21709 WHERE idnumber = 'moodle-q21709';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21709');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Переключаемые поля', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21709';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Переключаемые порядки сортировки', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21709';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Переключаемые реляционные отношения', 0.3333333, 4 FROM mdl_question WHERE idnumber = 'moodle-q21709';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Переключаемые ограничения', 0.3333333, 5 FROM mdl_question WHERE idnumber = 'moodle-q21709';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Переключаемые порядки группировки', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21709';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРµСЂРµРєР»СЋС‡Р°РµРјС‹Рµ РїРѕР»СЏ', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21709';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРµСЂРµРєР»СЋС‡Р°РµРјС‹Рµ РїРѕСЂСЏРґРєРё СЃРѕСЂС‚РёСЂРѕРІРєРё', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21709';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРµСЂРµРєР»СЋС‡Р°РµРјС‹Рµ СЂРµР»СЏС†РёРѕРЅРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ', 0.3333333, 4 FROM mdl_question WHERE idnumber = 'moodle-q21709';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРµСЂРµРєР»СЋС‡Р°РµРјС‹Рµ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ', 0.3333333, 5 FROM mdl_question WHERE idnumber = 'moodle-q21709';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РџРµСЂРµРєР»СЋС‡Р°РµРјС‹Рµ РїРѕСЂСЏРґРєРё РіСЂСѓРїРїРёСЂРѕРІРєРё', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21709';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21646', 'Раздел: Отчеты FastReport, Легкий. Добавление шаблона в ресурс', 'Как добавить шаблон FastReport-отчета в необходимый ресурс Галактика ERP?', TRUE, 'EASY', 21646 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21646');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Легкий. Добавление шаблона в ресурс', questiontext = 'Как добавить шаблон FastReport-отчета в необходимый ресурс Галактика ERP?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21646 WHERE idnumber = 'moodle-q21646';
+SELECT id, 'moodle-q21646', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. Р”РѕР±Р°РІР»РµРЅРёРµ С€Р°Р±Р»РѕРЅР° РІ СЂРµСЃСѓСЂСЃ', 'РљР°Рє РґРѕР±Р°РІРёС‚СЊ С€Р°Р±Р»РѕРЅ FastReport-РѕС‚С‡РµС‚Р° РІ РЅРµРѕР±С…РѕРґРёРјС‹Р№ СЂРµСЃСѓСЂСЃ Р“Р°Р»Р°РєС‚РёРєР° ERP?', TRUE, 'EASY', 21646 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21646');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. Р”РѕР±Р°РІР»РµРЅРёРµ С€Р°Р±Р»РѕРЅР° РІ СЂРµСЃСѓСЂСЃ', questiontext = 'РљР°Рє РґРѕР±Р°РІРёС‚СЊ С€Р°Р±Р»РѕРЅ FastReport-РѕС‚С‡РµС‚Р° РІ РЅРµРѕР±С…РѕРґРёРјС‹Р№ СЂРµСЃСѓСЂСЃ Р“Р°Р»Р°РєС‚РёРєР° ERP?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21646 WHERE idnumber = 'moodle-q21646';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21646');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'скомпилировать в определенный res-файл утилитой FRRes.exe', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21646';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'скомпилировать в определенный res-файл утилитой FREasyEdit.exe', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21646';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'добавить имя FastReport-шаблона в файл проекта', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21646';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РІ РѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ res-С„Р°Р№Р» СѓС‚РёР»РёС‚РѕР№ FRRes.exe', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21646';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РІ РѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ res-С„Р°Р№Р» СѓС‚РёР»РёС‚РѕР№ FREasyEdit.exe', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21646';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РґРѕР±Р°РІРёС‚СЊ РёРјСЏ FastReport-С€Р°Р±Р»РѕРЅР° РІ С„Р°Р№Р» РїСЂРѕРµРєС‚Р°', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21646';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21663', 'Раздел: Отчеты FastReport, Легкий. Назначение FastReport', 'Для чего предназначен FastReport?', TRUE, 'EASY', 21663 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21663');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Легкий. Назначение FastReport', questiontext = 'Для чего предназначен FastReport?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21663 WHERE idnumber = 'moodle-q21663';
+SELECT id, 'moodle-q21663', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. РќР°Р·РЅР°С‡РµРЅРёРµ FastReport', 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅ FastReport?', TRUE, 'EASY', 21663 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21663');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. РќР°Р·РЅР°С‡РµРЅРёРµ FastReport', questiontext = 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅ FastReport?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21663 WHERE idnumber = 'moodle-q21663';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21663');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'отправка отчета об ошибках на диагностику', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21663';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'создание отчетности', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21663';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'автоматическое заполнение полей ввода данными', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21663';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РѕС‚РїСЂР°РІРєР° РѕС‚С‡РµС‚Р° РѕР± РѕС€РёР±РєР°С… РЅР° РґРёР°РіРЅРѕСЃС‚РёРєСѓ', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21663';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРѕР·РґР°РЅРёРµ РѕС‚С‡РµС‚РЅРѕСЃС‚Рё', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21663';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РїРѕР»РµР№ РІРІРѕРґР° РґР°РЅРЅС‹РјРё', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21663';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21664', 'Раздел: Отчеты FastReport, Легкий. Параметр дизайнера', 'Какой параметр блокирует доступ к FastReport-дизайнеру из Галактики ERP?', TRUE, 'EASY', 21664 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21664');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Легкий. Параметр дизайнера', questiontext = 'Какой параметр блокирует доступ к FastReport-дизайнеру из Галактики ERP?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21664 WHERE idnumber = 'moodle-q21664';
+SELECT id, 'moodle-q21664', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. РџР°СЂР°РјРµС‚СЂ РґРёР·Р°Р№РЅРµСЂР°', 'РљР°РєРѕР№ РїР°СЂР°РјРµС‚СЂ Р±Р»РѕРєРёСЂСѓРµС‚ РґРѕСЃС‚СѓРї Рє FastReport-РґРёР·Р°Р№РЅРµСЂСѓ РёР· Р“Р°Р»Р°РєС‚РёРєРё ERP?', TRUE, 'EASY', 21664 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21664');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. РџР°СЂР°РјРµС‚СЂ РґРёР·Р°Р№РЅРµСЂР°', questiontext = 'РљР°РєРѕР№ РїР°СЂР°РјРµС‚СЂ Р±Р»РѕРєРёСЂСѓРµС‚ РґРѕСЃС‚СѓРї Рє FastReport-РґРёР·Р°Р№РЅРµСЂСѓ РёР· Р“Р°Р»Р°РєС‚РёРєРё ERP?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21664 WHERE idnumber = 'moodle-q21664';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21664');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Fcenv', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21664';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'EnableVipDebuger', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21664';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'FROneReportMode', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21664';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21665', 'Раздел: Отчеты FastReport, Легкий. Режим дизайнера', 'Что необходимо для использования режима дизайнера FastReport в Галактике ERP?', FALSE, 'EASY', 21665 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21665');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Легкий. Режим дизайнера', questiontext = 'Что необходимо для использования режима дизайнера FastReport в Галактике ERP?', single_answer = FALSE, difficulty = 'EASY', source_question_id = 21665 WHERE idnumber = 'moodle-q21665';
+SELECT id, 'moodle-q21665', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. Р РµР¶РёРј РґРёР·Р°Р№РЅРµСЂР°', 'Р§С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ РґР»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЂРµР¶РёРјР° РґРёР·Р°Р№РЅРµСЂР° FastReport РІ Р“Р°Р»Р°РєС‚РёРєРµ ERP?', FALSE, 'EASY', 21665 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21665');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. Р РµР¶РёРј РґРёР·Р°Р№РЅРµСЂР°', questiontext = 'Р§С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ РґР»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЂРµР¶РёРјР° РґРёР·Р°Р№РЅРµСЂР° FastReport РІ Р“Р°Р»Р°РєС‚РёРєРµ ERP?', single_answer = FALSE, difficulty = 'EASY', source_question_id = 21665 WHERE idnumber = 'moodle-q21665';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21665');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'параметр Forms.Fcenv должен иметь значение True', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21665';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'наличие лицензии на FastReport', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21665';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'использовать утилиту FREasyEdit.exe из комплекта поставки Атлантис', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21665';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'вызвать функцию «[F4] Изменить» (при ее наличии) в списке отчетов FastReport', 0.3333333, 5 FROM mdl_question WHERE idnumber = 'moodle-q21665';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РїР°СЂР°РјРµС‚СЂ Forms.Fcenv РґРѕР»Р¶РµРЅ РёРјРµС‚СЊ Р·РЅР°С‡РµРЅРёРµ True', 0.3333333, 2 FROM mdl_question WHERE idnumber = 'moodle-q21665';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РЅР°Р»РёС‡РёРµ Р»РёС†РµРЅР·РёРё РЅР° FastReport', 0.3333333, 3 FROM mdl_question WHERE idnumber = 'moodle-q21665';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СѓС‚РёР»РёС‚Сѓ FREasyEdit.exe РёР· РєРѕРјРїР»РµРєС‚Р° РїРѕСЃС‚Р°РІРєРё РђС‚Р»Р°РЅС‚РёСЃ', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21665';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІС‹Р·РІР°С‚СЊ С„СѓРЅРєС†РёСЋ В«[F4] РР·РјРµРЅРёС‚СЊВ» (РїСЂРё РµРµ РЅР°Р»РёС‡РёРё) РІ СЃРїРёСЃРєРµ РѕС‚С‡РµС‚РѕРІ FastReport', 0.3333333, 5 FROM mdl_question WHERE idnumber = 'moodle-q21665';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21666', 'Раздел: Отчеты FastReport, Легкий. Рекомендации по шаблону', 'Какие пункты рекомендуется учитывать при разработке FastReport-шаблона отчета?', FALSE, 'EASY', 21666 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21666');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Легкий. Рекомендации по шаблону', questiontext = 'Какие пункты рекомендуется учитывать при разработке FastReport-шаблона отчета?', single_answer = FALSE, difficulty = 'EASY', source_question_id = 21666 WHERE idnumber = 'moodle-q21666';
+SELECT id, 'moodle-q21666', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. Р РµРєРѕРјРµРЅРґР°С†РёРё РїРѕ С€Р°Р±Р»РѕРЅСѓ', 'РљР°РєРёРµ РїСѓРЅРєС‚С‹ СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ СѓС‡РёС‚С‹РІР°С‚СЊ РїСЂРё СЂР°Р·СЂР°Р±РѕС‚РєРµ FastReport-С€Р°Р±Р»РѕРЅР° РѕС‚С‡РµС‚Р°?', FALSE, 'EASY', 21666 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21666');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. Р РµРєРѕРјРµРЅРґР°С†РёРё РїРѕ С€Р°Р±Р»РѕРЅСѓ', questiontext = 'РљР°РєРёРµ РїСѓРЅРєС‚С‹ СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ СѓС‡РёС‚С‹РІР°С‚СЊ РїСЂРё СЂР°Р·СЂР°Р±РѕС‚РєРµ FastReport-С€Р°Р±Р»РѕРЅР° РѕС‚С‡РµС‚Р°?', single_answer = FALSE, difficulty = 'EASY', source_question_id = 21666 WHERE idnumber = 'moodle-q21666';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21666');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Исключить наложение объектов друг на друга', 0.5000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21666';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Использовать выносные линии', 0.5000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21666';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Использовать объект Линия для обрамления', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21666';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РСЃРєР»СЋС‡РёС‚СЊ РЅР°Р»РѕР¶РµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ РґСЂСѓРі РЅР° РґСЂСѓРіР°', 0.5000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21666';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІС‹РЅРѕСЃРЅС‹Рµ Р»РёРЅРёРё', 0.5000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21666';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РѕР±СЉРµРєС‚ Р›РёРЅРёСЏ РґР»СЏ РѕР±СЂР°РјР»РµРЅРёСЏ', -1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21666';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21667', 'Раздел: Отчеты FastReport, Легкий. Сохранение шаблона', 'Куда сохраняется шаблон FastReport-отчета, открытый из Галактики ERP, при нажатии в дизайнере кнопки «Сохранить»?', TRUE, 'EASY', 21667 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21667');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Легкий. Сохранение шаблона', questiontext = 'Куда сохраняется шаблон FastReport-отчета, открытый из Галактики ERP, при нажатии в дизайнере кнопки «Сохранить»?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21667 WHERE idnumber = 'moodle-q21667';
+SELECT id, 'moodle-q21667', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. РЎРѕС…СЂР°РЅРµРЅРёРµ С€Р°Р±Р»РѕРЅР°', 'РљСѓРґР° СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ С€Р°Р±Р»РѕРЅ FastReport-РѕС‚С‡РµС‚Р°, РѕС‚РєСЂС‹С‚С‹Р№ РёР· Р“Р°Р»Р°РєС‚РёРєРё ERP, РїСЂРё РЅР°Р¶Р°С‚РёРё РІ РґРёР·Р°Р№РЅРµСЂРµ РєРЅРѕРїРєРё В«РЎРѕС…СЂР°РЅРёС‚СЊВ»?', TRUE, 'EASY', 21667 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21667');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, Р›РµРіРєРёР№. РЎРѕС…СЂР°РЅРµРЅРёРµ С€Р°Р±Р»РѕРЅР°', questiontext = 'РљСѓРґР° СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ С€Р°Р±Р»РѕРЅ FastReport-РѕС‚С‡РµС‚Р°, РѕС‚РєСЂС‹С‚С‹Р№ РёР· Р“Р°Р»Р°РєС‚РёРєРё ERP, РїСЂРё РЅР°Р¶Р°С‚РёРё РІ РґРёР·Р°Р№РЅРµСЂРµ РєРЅРѕРїРєРё В«РЎРѕС…СЂР°РЅРёС‚СЊВ»?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21667 WHERE idnumber = 'moodle-q21667';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21667');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'в оперативную память', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21667';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'в пользовательский ресурс компиляции', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21667';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'в каталог исполняемых файлов Галактики ERP', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21667';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21667';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ СЂРµСЃСѓСЂСЃ РєРѕРјРїРёР»СЏС†РёРё', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21667';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІ РєР°С‚Р°Р»РѕРі РёСЃРїРѕР»РЅСЏРµРјС‹С… С„Р°Р№Р»РѕРІ Р“Р°Р»Р°РєС‚РёРєРё ERP', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21667';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21668', 'Раздел: Отчеты FastReport, Сложный. ContinueDataset', 'Для чего предназначена функция ContinueDataset?', TRUE, 'HARD', 21668 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21668');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Сложный. ContinueDataset', questiontext = 'Для чего предназначена функция ContinueDataset?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21668 WHERE idnumber = 'moodle-q21668';
+SELECT id, 'moodle-q21668', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. ContinueDataset', 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° С„СѓРЅРєС†РёСЏ ContinueDataset?', TRUE, 'HARD', 21668 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21668');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. ContinueDataset', questiontext = 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° С„СѓРЅРєС†РёСЏ ContinueDataset?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21668 WHERE idnumber = 'moodle-q21668';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21668');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'сигнализирует генератору отчета о том, что необходимо выполнить проход следующего потока данных', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21668';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'сигнализирует генератору о том, что текущий элемент потока существует', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21668';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'для построения следующего FastReport-отчета', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21668';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРёРіРЅР°Р»РёР·РёСЂСѓРµС‚ РіРµРЅРµСЂР°С‚РѕСЂСѓ РѕС‚С‡РµС‚Р° Рѕ С‚РѕРј, С‡С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ РІС‹РїРѕР»РЅРёС‚СЊ РїСЂРѕС…РѕРґ СЃР»РµРґСѓСЋС‰РµРіРѕ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С…', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21668';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРёРіРЅР°Р»РёР·РёСЂСѓРµС‚ РіРµРЅРµСЂР°С‚РѕСЂСѓ Рѕ С‚РѕРј, С‡С‚Рѕ С‚РµРєСѓС‰РёР№ СЌР»РµРјРµРЅС‚ РїРѕС‚РѕРєР° СЃСѓС‰РµСЃС‚РІСѓРµС‚', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21668';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ СЃР»РµРґСѓСЋС‰РµРіРѕ FastReport-РѕС‚С‡РµС‚Р°', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21668';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21669', 'Раздел: Отчеты FastReport, Сложный. VIP-выражение', 'С помощью какой функции из FastReport-отчета можно выполнить VIP-выражение?', TRUE, 'HARD', 21669 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21669');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Сложный. VIP-выражение', questiontext = 'С помощью какой функции из FastReport-отчета можно выполнить VIP-выражение?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21669 WHERE idnumber = 'moodle-q21669';
+SELECT id, 'moodle-q21669', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. VIP-РІС‹СЂР°Р¶РµРЅРёРµ', 'РЎ РїРѕРјРѕС‰СЊСЋ РєР°РєРѕР№ С„СѓРЅРєС†РёРё РёР· FastReport-РѕС‚С‡РµС‚Р° РјРѕР¶РЅРѕ РІС‹РїРѕР»РЅРёС‚СЊ VIP-РІС‹СЂР°Р¶РµРЅРёРµ?', TRUE, 'HARD', 21669 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21669');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. VIP-РІС‹СЂР°Р¶РµРЅРёРµ', questiontext = 'РЎ РїРѕРјРѕС‰СЊСЋ РєР°РєРѕР№ С„СѓРЅРєС†РёРё РёР· FastReport-РѕС‚С‡РµС‚Р° РјРѕР¶РЅРѕ РІС‹РїРѕР»РЅРёС‚СЊ VIP-РІС‹СЂР°Р¶РµРЅРёРµ?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21669 WHERE idnumber = 'moodle-q21669';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21669');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'GalaxyOnClick', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21669';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'BlobToString', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21669';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'CompileVipExpression', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21669';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21670', 'Раздел: Отчеты FastReport, Сложный. Конструкция DataSet', 'Для чего предназначена конструкция DataSet?', TRUE, 'HARD', 21670 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21670');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Сложный. Конструкция DataSet', questiontext = 'Для чего предназначена конструкция DataSet?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21670 WHERE idnumber = 'moodle-q21670';
+SELECT id, 'moodle-q21670', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. РљРѕРЅСЃС‚СЂСѓРєС†РёСЏ DataSet', 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РєРѕРЅСЃС‚СЂСѓРєС†РёСЏ DataSet?', TRUE, 'HARD', 21670 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21670');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. РљРѕРЅСЃС‚СЂСѓРєС†РёСЏ DataSet', questiontext = 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РєРѕРЅСЃС‚СЂСѓРєС†РёСЏ DataSet?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21670 WHERE idnumber = 'moodle-q21670';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21670');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Для передачи данных из узлов логической таблицы интерфейса, при этом количество и порядок следования записей определяется логической таблицей', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21670';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'создает связь между XLT-шаблонами и логической таблицей', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21670';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'создает поток данных, алгоритм выборки которого задается программистом', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21670';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р”Р»СЏ РїРµСЂРµРґР°С‡Рё РґР°РЅРЅС‹С… РёР· СѓР·Р»РѕРІ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ РёРЅС‚РµСЂС„РµР№СЃР°, РїСЂРё СЌС‚РѕРј РєРѕР»РёС‡РµСЃС‚РІРѕ Рё РїРѕСЂСЏРґРѕРє СЃР»РµРґРѕРІР°РЅРёСЏ Р·Р°РїРёСЃРµР№ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†РµР№', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21670';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРѕР·РґР°РµС‚ СЃРІСЏР·СЊ РјРµР¶РґСѓ XLT-С€Р°Р±Р»РѕРЅР°РјРё Рё Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†РµР№', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21670';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРѕР·РґР°РµС‚ РїРѕС‚РѕРє РґР°РЅРЅС‹С…, Р°Р»РіРѕСЂРёС‚Рј РІС‹Р±РѕСЂРєРё РєРѕС‚РѕСЂРѕРіРѕ Р·Р°РґР°РµС‚СЃСЏ РїСЂРѕРіСЂР°РјРјРёСЃС‚РѕРј', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21670';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21671', 'Раздел: Отчеты FastReport, Сложный. Событие перед формированием отчета', 'Какое событие обработчика потока вызывается перед формированием отчета?', TRUE, 'HARD', 21671 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21671');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Сложный. Событие перед формированием отчета', questiontext = 'Какое событие обработчика потока вызывается перед формированием отчета?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21671 WHERE idnumber = 'moodle-q21671';
+SELECT id, 'moodle-q21671', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. РЎРѕР±С‹С‚РёРµ РїРµСЂРµРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёРµРј РѕС‚С‡РµС‚Р°', 'РљР°РєРѕРµ СЃРѕР±С‹С‚РёРµ РѕР±СЂР°Р±РѕС‚С‡РёРєР° РїРѕС‚РѕРєР° РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРµСЂРµРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёРµРј РѕС‚С‡РµС‚Р°?', TRUE, 'HARD', 21671 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21671');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. РЎРѕР±С‹С‚РёРµ РїРµСЂРµРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёРµРј РѕС‚С‡РµС‚Р°', questiontext = 'РљР°РєРѕРµ СЃРѕР±С‹С‚РёРµ РѕР±СЂР°Р±РѕС‚С‡РёРєР° РїРѕС‚РѕРєР° РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРµСЂРµРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёРµРј РѕС‚С‡РµС‚Р°?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21671 WHERE idnumber = 'moodle-q21671';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21671');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'cmOnProcess', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21671';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'cmPostProcess', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21671';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'cmPreProcess', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21671';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21672', 'Раздел: Отчеты FastReport, Сложный. Экспорт из VIP', 'С помощью какой функции выполняется экспорт FastReport-отчета из VIP-кода?', TRUE, 'HARD', 21672 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21672');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Сложный. Экспорт из VIP', questiontext = 'С помощью какой функции выполняется экспорт FastReport-отчета из VIP-кода?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21672 WHERE idnumber = 'moodle-q21672';
+SELECT id, 'moodle-q21672', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. Р­РєСЃРїРѕСЂС‚ РёР· VIP', 'РЎ РїРѕРјРѕС‰СЊСЋ РєР°РєРѕР№ С„СѓРЅРєС†РёРё РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ СЌРєСЃРїРѕСЂС‚ FastReport-РѕС‚С‡РµС‚Р° РёР· VIP-РєРѕРґР°?', TRUE, 'HARD', 21672 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21672');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎР»РѕР¶РЅС‹Р№. Р­РєСЃРїРѕСЂС‚ РёР· VIP', questiontext = 'РЎ РїРѕРјРѕС‰СЊСЋ РєР°РєРѕР№ С„СѓРЅРєС†РёРё РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ СЌРєСЃРїРѕСЂС‚ FastReport-РѕС‚С‡РµС‚Р° РёР· VIP-РєРѕРґР°?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21672 WHERE idnumber = 'moodle-q21672';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21672');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'FRPrepareReport', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21672';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'FRExportReport', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21672';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'FROpenReport', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21672';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21673', 'Раздел: Отчеты FastReport, Средний. Агрегатные функции', 'Поддерживает ли FastReport агрегатные функции?', TRUE, 'MEDIUM', 21673 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21673');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Средний. Агрегатные функции', questiontext = 'Поддерживает ли FastReport агрегатные функции?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21673 WHERE idnumber = 'moodle-q21673';
+SELECT id, 'moodle-q21673', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РђРіСЂРµРіР°С‚РЅС‹Рµ С„СѓРЅРєС†РёРё', 'РџРѕРґРґРµСЂР¶РёРІР°РµС‚ Р»Рё FastReport Р°РіСЂРµРіР°С‚РЅС‹Рµ С„СѓРЅРєС†РёРё?', TRUE, 'MEDIUM', 21673 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21673');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РђРіСЂРµРіР°С‚РЅС‹Рµ С„СѓРЅРєС†РёРё', questiontext = 'РџРѕРґРґРµСЂР¶РёРІР°РµС‚ Р»Рё FastReport Р°РіСЂРµРіР°С‚РЅС‹Рµ С„СѓРЅРєС†РёРё?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21673 WHERE idnumber = 'moodle-q21673';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21673');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Да', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21673';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Нет', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21673';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р”Р°', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21673';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµС‚', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21673';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21675', 'Раздел: Отчеты FastReport, Средний. Конструкция потока данных', 'Какая конструкция предназначена для создания потока данных?', TRUE, 'MEDIUM', 21675 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21675');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Средний. Конструкция потока данных', questiontext = 'Какая конструкция предназначена для создания потока данных?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21675 WHERE idnumber = 'moodle-q21675';
+SELECT id, 'moodle-q21675', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РљРѕРЅСЃС‚СЂСѓРєС†РёСЏ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С…', 'РљР°РєР°СЏ РєРѕРЅСЃС‚СЂСѓРєС†РёСЏ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С…?', TRUE, 'MEDIUM', 21675 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21675');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РљРѕРЅСЃС‚СЂСѓРєС†РёСЏ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С…', questiontext = 'РљР°РєР°СЏ РєРѕРЅСЃС‚СЂСѓРєС†РёСЏ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С…?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21675 WHERE idnumber = 'moodle-q21675';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21675');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'DataStream', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21675';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'VipInterface', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21675';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'FRCreate', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21675';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21676', 'Раздел: Отчеты FastReport, Средний. Объект управления построением', 'Какой объект FastReport-шаблона управляет построением отчета?', TRUE, 'MEDIUM', 21676 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21676');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Средний. Объект управления построением', questiontext = 'Какой объект FastReport-шаблона управляет построением отчета?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21676 WHERE idnumber = 'moodle-q21676';
+SELECT id, 'moodle-q21676', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РћР±СЉРµРєС‚ СѓРїСЂР°РІР»РµРЅРёСЏ РїРѕСЃС‚СЂРѕРµРЅРёРµРј', 'РљР°РєРѕР№ РѕР±СЉРµРєС‚ FastReport-С€Р°Р±Р»РѕРЅР° СѓРїСЂР°РІР»СЏРµС‚ РїРѕСЃС‚СЂРѕРµРЅРёРµРј РѕС‚С‡РµС‚Р°?', TRUE, 'MEDIUM', 21676 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21676');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РћР±СЉРµРєС‚ СѓРїСЂР°РІР»РµРЅРёСЏ РїРѕСЃС‚СЂРѕРµРЅРёРµРј', questiontext = 'РљР°РєРѕР№ РѕР±СЉРµРєС‚ FastReport-С€Р°Р±Р»РѕРЅР° СѓРїСЂР°РІР»СЏРµС‚ РїРѕСЃС‚СЂРѕРµРЅРёРµРј РѕС‚С‡РµС‚Р°?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21676 WHERE idnumber = 'moodle-q21676';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21676');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Report', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21676';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Engine', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21676';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'MemoView', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21676';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21677', 'Раздел: Отчеты FastReport, Средний. Передача данных логической таблицы', 'Как передать в FastReport-отчет данные логической таблицы?', TRUE, 'MEDIUM', 21677 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21677');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Средний. Передача данных логической таблицы', questiontext = 'Как передать в FastReport-отчет данные логической таблицы?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21677 WHERE idnumber = 'moodle-q21677';
+SELECT id, 'moodle-q21677', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РџРµСЂРµРґР°С‡Р° РґР°РЅРЅС‹С… Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', 'РљР°Рє РїРµСЂРµРґР°С‚СЊ РІ FastReport-РѕС‚С‡РµС‚ РґР°РЅРЅС‹Рµ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹?', TRUE, 'MEDIUM', 21677 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21677');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РџРµСЂРµРґР°С‡Р° РґР°РЅРЅС‹С… Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹', questiontext = 'РљР°Рє РїРµСЂРµРґР°С‚СЊ РІ FastReport-РѕС‚С‡РµС‚ РґР°РЅРЅС‹Рµ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21677 WHERE idnumber = 'moodle-q21677';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21677');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'через sql-запрос', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21677';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'путем связывания логической таблицы и потока данных', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21677';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'с помощью компиляции данных в шаблон', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21677';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'С‡РµСЂРµР· sql-Р·Р°РїСЂРѕСЃ', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21677';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РїСѓС‚РµРј СЃРІСЏР·С‹РІР°РЅРёСЏ Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ Рё РїРѕС‚РѕРєР° РґР°РЅРЅС‹С…', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21677';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃ РїРѕРјРѕС‰СЊСЋ РєРѕРјРїРёР»СЏС†РёРё РґР°РЅРЅС‹С… РІ С€Р°Р±Р»РѕРЅ', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21677';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21678', 'Раздел: Отчеты FastReport, Средний. Поддержка unicode', 'Поддерживает ли FastReport unicode-строки?', TRUE, 'MEDIUM', 21678 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21678');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Средний. Поддержка unicode', questiontext = 'Поддерживает ли FastReport unicode-строки?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21678 WHERE idnumber = 'moodle-q21678';
+SELECT id, 'moodle-q21678', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РџРѕРґРґРµСЂР¶РєР° unicode', 'РџРѕРґРґРµСЂР¶РёРІР°РµС‚ Р»Рё FastReport unicode-СЃС‚СЂРѕРєРё?', TRUE, 'MEDIUM', 21678 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21678');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РџРѕРґРґРµСЂР¶РєР° unicode', questiontext = 'РџРѕРґРґРµСЂР¶РёРІР°РµС‚ Р»Рё FastReport unicode-СЃС‚СЂРѕРєРё?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21678 WHERE idnumber = 'moodle-q21678';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21678');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Нет', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21678';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Да', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21678';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµС‚', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21678';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р”Р°', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21678';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21679', 'Раздел: Отчеты FastReport, Средний. Событийный механизм', 'Поддерживает ли FastReport событийный механизм?', TRUE, 'MEDIUM', 21679 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21679');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Средний. Событийный механизм', questiontext = 'Поддерживает ли FastReport событийный механизм?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21679 WHERE idnumber = 'moodle-q21679';
+SELECT id, 'moodle-q21679', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РЎРѕР±С‹С‚РёР№РЅС‹Р№ РјРµС…Р°РЅРёР·Рј', 'РџРѕРґРґРµСЂР¶РёРІР°РµС‚ Р»Рё FastReport СЃРѕР±С‹С‚РёР№РЅС‹Р№ РјРµС…Р°РЅРёР·Рј?', TRUE, 'MEDIUM', 21679 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21679');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. РЎРѕР±С‹С‚РёР№РЅС‹Р№ РјРµС…Р°РЅРёР·Рј', questiontext = 'РџРѕРґРґРµСЂР¶РёРІР°РµС‚ Р»Рё FastReport СЃРѕР±С‹С‚РёР№РЅС‹Р№ РјРµС…Р°РЅРёР·Рј?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21679 WHERE idnumber = 'moodle-q21679';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21679');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Да', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21679';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Нет', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21679';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р”Р°', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21679';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРµС‚', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21679';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21680', 'Раздел: Отчеты FastReport, Средний. Что необходимо для создания отчетности', 'Что необходимо для создания FastReport-отчетности?', TRUE, 'MEDIUM', 21680 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21680');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Отчеты FastReport, Средний. Что необходимо для создания отчетности', questiontext = 'Что необходимо для создания FastReport-отчетности?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21680 WHERE idnumber = 'moodle-q21680';
+SELECT id, 'moodle-q21680', 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. Р§С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РѕС‚С‡РµС‚РЅРѕСЃС‚Рё', 'Р§С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ FastReport-РѕС‚С‡РµС‚РЅРѕСЃС‚Рё?', TRUE, 'MEDIUM', 21680 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21680');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: РћС‚С‡РµС‚С‹ FastReport, РЎСЂРµРґРЅРёР№. Р§С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РѕС‚С‡РµС‚РЅРѕСЃС‚Рё', questiontext = 'Р§С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ FastReport-РѕС‚С‡РµС‚РЅРѕСЃС‚Рё?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21680 WHERE idnumber = 'moodle-q21680';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21680');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'таблица в памяти, PAT-форма, утилита frf_to_fr3.exe', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21680';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'данные, форма-прототип, присоединенные формы', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21680';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'логическая таблица, поток данных, шаблон отчета', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21680';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'С‚Р°Р±Р»РёС†Р° РІ РїР°РјСЏС‚Рё, PAT-С„РѕСЂРјР°, СѓС‚РёР»РёС‚Р° frf_to_fr3.exe', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21680';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РґР°РЅРЅС‹Рµ, С„РѕСЂРјР°-РїСЂРѕС‚РѕС‚РёРї, РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅС‹Рµ С„РѕСЂРјС‹', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21680';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р»РѕРіРёС‡РµСЃРєР°СЏ С‚Р°Р±Р»РёС†Р°, РїРѕС‚РѕРє РґР°РЅРЅС‹С…, С€Р°Р±Р»РѕРЅ РѕС‚С‡РµС‚Р°', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21680';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21631', 'Раздел: Редактор отчетов FCOM, Легкий.  Завершение формирования отчета', 'С помощью какой функции из VIP можно аварийно завершить формирования отчета с последующим очищением файла отчета?', TRUE, 'EASY', 21631 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21631');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Редактор отчетов FCOM, Легкий.  Завершение формирования отчета', questiontext = 'С помощью какой функции из VIP можно аварийно завершить формирования отчета с последующим очищением файла отчета?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21631 WHERE idnumber = 'moodle-q21631';
+SELECT id, 'moodle-q21631', 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, Р›РµРіРєРёР№.  Р—Р°РІРµСЂС€РµРЅРёРµ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РѕС‚С‡РµС‚Р°', 'РЎ РїРѕРјРѕС‰СЊСЋ РєР°РєРѕР№ С„СѓРЅРєС†РёРё РёР· VIP РјРѕР¶РЅРѕ Р°РІР°СЂРёР№РЅРѕ Р·Р°РІРµСЂС€РёС‚СЊ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РѕС‚С‡РµС‚Р° СЃ РїРѕСЃР»РµРґСѓСЋС‰РёРј РѕС‡РёС‰РµРЅРёРµРј С„Р°Р№Р»Р° РѕС‚С‡РµС‚Р°?', TRUE, 'EASY', 21631 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21631');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, Р›РµРіРєРёР№.  Р—Р°РІРµСЂС€РµРЅРёРµ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РѕС‚С‡РµС‚Р°', questiontext = 'РЎ РїРѕРјРѕС‰СЊСЋ РєР°РєРѕР№ С„СѓРЅРєС†РёРё РёР· VIP РјРѕР¶РЅРѕ Р°РІР°СЂРёР№РЅРѕ Р·Р°РІРµСЂС€РёС‚СЊ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РѕС‚С‡РµС‚Р° СЃ РїРѕСЃР»РµРґСѓСЋС‰РёРј РѕС‡РёС‰РµРЅРёРµРј С„Р°Р№Р»Р° РѕС‚С‡РµС‚Р°?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21631 WHERE idnumber = 'moodle-q21631';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21631');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Exit', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21631';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'AbortForm', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21631';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Еrrоr', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21631';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р•rrРѕr', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21631';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21626', 'Раздел: Редактор отчетов FCOM, Легкий. Наличие формы-прототипа', 'В какой технологии формирования отчетности обязательно требуется наличие формы-прототипа?', TRUE, 'EASY', 21626 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21626');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Редактор отчетов FCOM, Легкий. Наличие формы-прототипа', questiontext = 'В какой технологии формирования отчетности обязательно требуется наличие формы-прототипа?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21626 WHERE idnumber = 'moodle-q21626';
+SELECT id, 'moodle-q21626', 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, Р›РµРіРєРёР№. РќР°Р»РёС‡РёРµ С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР°', 'Р’ РєР°РєРѕР№ С‚РµС…РЅРѕР»РѕРіРёРё С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РѕС‚С‡РµС‚РЅРѕСЃС‚Рё РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ С‚СЂРµР±СѓРµС‚СЃСЏ РЅР°Р»РёС‡РёРµ С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР°?', TRUE, 'EASY', 21626 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21626');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, Р›РµРіРєРёР№. РќР°Р»РёС‡РёРµ С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР°', questiontext = 'Р’ РєР°РєРѕР№ С‚РµС…РЅРѕР»РѕРіРёРё С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РѕС‚С‡РµС‚РЅРѕСЃС‚Рё РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ С‚СЂРµР±СѓРµС‚СЃСЏ РЅР°Р»РёС‡РёРµ С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР°?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21626 WHERE idnumber = 'moodle-q21626';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21626');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'OLAP', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21626';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'FastReport', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21626';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'FCOM', 1.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21626';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21625', 'Раздел: Редактор отчетов FCOM, Легкий. Ссылка на прототип', 'В какой конструкции шаблона отчета указывается ссылка на имя формы-прототипа для FCOM-технологии отчетности?', TRUE, 'EASY', 21625 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21625');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Редактор отчетов FCOM, Легкий. Ссылка на прототип', questiontext = 'В какой конструкции шаблона отчета указывается ссылка на имя формы-прототипа для FCOM-технологии отчетности?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21625 WHERE idnumber = 'moodle-q21625';
+SELECT id, 'moodle-q21625', 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, Р›РµРіРєРёР№. РЎСЃС‹Р»РєР° РЅР° РїСЂРѕС‚РѕС‚РёРї', 'Р’ РєР°РєРѕР№ РєРѕРЅСЃС‚СЂСѓРєС†РёРё С€Р°Р±Р»РѕРЅР° РѕС‚С‡РµС‚Р° СѓРєР°Р·С‹РІР°РµС‚СЃСЏ СЃСЃС‹Р»РєР° РЅР° РёРјСЏ С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР° РґР»СЏ FCOM-С‚РµС…РЅРѕР»РѕРіРёРё РѕС‚С‡РµС‚РЅРѕСЃС‚Рё?', TRUE, 'EASY', 21625 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21625');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, Р›РµРіРєРёР№. РЎСЃС‹Р»РєР° РЅР° РїСЂРѕС‚РѕС‚РёРї', questiontext = 'Р’ РєР°РєРѕР№ РєРѕРЅСЃС‚СЂСѓРєС†РёРё С€Р°Р±Р»РѕРЅР° РѕС‚С‡РµС‚Р° СѓРєР°Р·С‹РІР°РµС‚СЃСЏ СЃСЃС‹Р»РєР° РЅР° РёРјСЏ С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР° РґР»СЏ FCOM-С‚РµС…РЅРѕР»РѕРіРёРё РѕС‚С‡РµС‚РЅРѕСЃС‚Рё?', single_answer = TRUE, difficulty = 'EASY', source_question_id = 21625 WHERE idnumber = 'moodle-q21625';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21625');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'prototype is', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21625';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'loadRepFromDB', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21625';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'name is', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21625';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21628', 'Раздел: Редактор отчетов FCOM, Сложный.  Как в присоединенную форму поступают данные', 'Как в FCOM-технологии отчетности в присоединенную форму поступает поток данных?', TRUE, 'HARD', 21628 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21628');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Редактор отчетов FCOM, Сложный.  Как в присоединенную форму поступают данные', questiontext = 'Как в FCOM-технологии отчетности в присоединенную форму поступает поток данных?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21628 WHERE idnumber = 'moodle-q21628';
+SELECT id, 'moodle-q21628', 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎР»РѕР¶РЅС‹Р№.  РљР°Рє РІ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅСѓСЋ С„РѕСЂРјСѓ РїРѕСЃС‚СѓРїР°СЋС‚ РґР°РЅРЅС‹Рµ', 'РљР°Рє РІ FCOM-С‚РµС…РЅРѕР»РѕРіРёРё РѕС‚С‡РµС‚РЅРѕСЃС‚Рё РІ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅСѓСЋ С„РѕСЂРјСѓ РїРѕСЃС‚СѓРїР°РµС‚ РїРѕС‚РѕРє РґР°РЅРЅС‹С…?', TRUE, 'HARD', 21628 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21628');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎР»РѕР¶РЅС‹Р№.  РљР°Рє РІ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅСѓСЋ С„РѕСЂРјСѓ РїРѕСЃС‚СѓРїР°СЋС‚ РґР°РЅРЅС‹Рµ', questiontext = 'РљР°Рє РІ FCOM-С‚РµС…РЅРѕР»РѕРіРёРё РѕС‚С‡РµС‚РЅРѕСЃС‚Рё РІ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅСѓСЋ С„РѕСЂРјСѓ РїРѕСЃС‚СѓРїР°РµС‚ РїРѕС‚РѕРє РґР°РЅРЅС‹С…?', single_answer = TRUE, difficulty = 'HARD', source_question_id = 21628 WHERE idnumber = 'moodle-q21628';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21628');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'посредством конструкции DataStream', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21628';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'из формы-прототипа', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21628';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'из логической таблицы интерфейса', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21628';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РїРѕСЃСЂРµРґСЃС‚РІРѕРј РєРѕРЅСЃС‚СЂСѓРєС†РёРё DataStream', 0.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21628';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РёР· С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР°', 1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21628';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РёР· Р»РѕРіРёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹ РёРЅС‚РµСЂС„РµР№СЃР°', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21628';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21623', 'Раздел: Редактор отчетов FCOM, Сложный. Сообщение компилятора', 'Что означает сообщение, полученное на этапе компиляции формы:
+SELECT id, 'moodle-q21623', 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎР»РѕР¶РЅС‹Р№. РЎРѕРѕР±С‰РµРЅРёРµ РєРѕРјРїРёР»СЏС‚РѕСЂР°', 'Р§С‚Рѕ РѕР·РЅР°С‡Р°РµС‚ СЃРѕРѕР±С‰РµРЅРёРµ, РїРѕР»СѓС‡РµРЅРЅРѕРµ РЅР° СЌС‚Р°РїРµ РєРѕРјРїРёР»СЏС†РёРё С„РѕСЂРјС‹:
 
-"Использование неинициализированного поля X из формы-прототипа FP в вычисляемом поле Y присоединенной формы FL"?', FALSE, 'HARD', 21623 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21623');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Редактор отчетов FCOM, Сложный. Сообщение компилятора', questiontext = 'Что означает сообщение, полученное на этапе компиляции формы:
+"РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РЅРµРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅРѕРіРѕ РїРѕР»СЏ X РёР· С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР° FP РІ РІС‹С‡РёСЃР»СЏРµРјРѕРј РїРѕР»Рµ Y РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅРѕР№ С„РѕСЂРјС‹ FL"?', FALSE, 'HARD', 21623 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21623');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎР»РѕР¶РЅС‹Р№. РЎРѕРѕР±С‰РµРЅРёРµ РєРѕРјРїРёР»СЏС‚РѕСЂР°', questiontext = 'Р§С‚Рѕ РѕР·РЅР°С‡Р°РµС‚ СЃРѕРѕР±С‰РµРЅРёРµ, РїРѕР»СѓС‡РµРЅРЅРѕРµ РЅР° СЌС‚Р°РїРµ РєРѕРјРїРёР»СЏС†РёРё С„РѕСЂРјС‹:
 
-"Использование неинициализированного поля X из формы-прототипа FP в вычисляемом поле Y присоединенной формы FL"?', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21623 WHERE idnumber = 'moodle-q21623';
+"РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РЅРµРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅРѕРіРѕ РїРѕР»СЏ X РёР· С„РѕСЂРјС‹-РїСЂРѕС‚РѕС‚РёРїР° FP РІ РІС‹С‡РёСЃР»СЏРµРјРѕРј РїРѕР»Рµ Y РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅРѕР№ С„РѕСЂРјС‹ FL"?', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21623 WHERE idnumber = 'moodle-q21623';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21623');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'количество полей в форме прототипе не соответствует количеству полей в присоединенной форме', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21623';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'разработчик формы прототипа FP явно не проинициализировал поле X', -1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21623';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'в момент вычисления поля Y в присоединенной форме поле X ещё не поступило в форму прототипа', 0.5000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21623';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'выполнение этой формы приведет к некорректным данным в отчёте', 0.5000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21623';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕР»РµР№ РІ С„РѕСЂРјРµ РїСЂРѕС‚РѕС‚РёРїРµ РЅРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ РєРѕР»РёС‡РµСЃС‚РІСѓ РїРѕР»РµР№ РІ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅРѕР№ С„РѕСЂРјРµ', -1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21623';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЂР°Р·СЂР°Р±РѕС‚С‡РёРє С„РѕСЂРјС‹ РїСЂРѕС‚РѕС‚РёРїР° FP СЏРІРЅРѕ РЅРµ РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°Р» РїРѕР»Рµ X', -1.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21623';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІ РјРѕРјРµРЅС‚ РІС‹С‡РёСЃР»РµРЅРёСЏ РїРѕР»СЏ Y РІ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅРѕР№ С„РѕСЂРјРµ РїРѕР»Рµ X РµС‰С‘ РЅРµ РїРѕСЃС‚СѓРїРёР»Рѕ РІ С„РѕСЂРјСѓ РїСЂРѕС‚РѕС‚РёРїР°', 0.5000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21623';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РІС‹РїРѕР»РЅРµРЅРёРµ СЌС‚РѕР№ С„РѕСЂРјС‹ РїСЂРёРІРµРґРµС‚ Рє РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј РґР°РЅРЅС‹Рј РІ РѕС‚С‡С‘С‚Рµ', 0.5000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21623';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21629', 'Раздел: Редактор отчетов FCOM, Сложный. Фильтр видимости форм', 'С помощью какой функции из VIP можно управлять фильтром видимости форм?', FALSE, 'HARD', 21629 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21629');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Редактор отчетов FCOM, Сложный. Фильтр видимости форм', questiontext = 'С помощью какой функции из VIP можно управлять фильтром видимости форм?', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21629 WHERE idnumber = 'moodle-q21629';
+SELECT id, 'moodle-q21629', 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎР»РѕР¶РЅС‹Р№. Р¤РёР»СЊС‚СЂ РІРёРґРёРјРѕСЃС‚Рё С„РѕСЂРј', 'РЎ РїРѕРјРѕС‰СЊСЋ РєР°РєРѕР№ С„СѓРЅРєС†РёРё РёР· VIP РјРѕР¶РЅРѕ СѓРїСЂР°РІР»СЏС‚СЊ С„РёР»СЊС‚СЂРѕРј РІРёРґРёРјРѕСЃС‚Рё С„РѕСЂРј?', FALSE, 'HARD', 21629 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21629');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎР»РѕР¶РЅС‹Р№. Р¤РёР»СЊС‚СЂ РІРёРґРёРјРѕСЃС‚Рё С„РѕСЂРј', questiontext = 'РЎ РїРѕРјРѕС‰СЊСЋ РєР°РєРѕР№ С„СѓРЅРєС†РёРё РёР· VIP РјРѕР¶РЅРѕ СѓРїСЂР°РІР»СЏС‚СЊ С„РёР»СЊС‚СЂРѕРј РІРёРґРёРјРѕСЃС‚Рё С„РѕСЂРј?', single_answer = FALSE, difficulty = 'HARD', source_question_id = 21629 WHERE idnumber = 'moodle-q21629';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21629');
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'SetSoftSubgroup', 0.2500000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21629';
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Form_SetSubgroup', 0.2500000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21629';
@@ -655,69 +655,69 @@ INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELE
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'SetFormName', -1.0000000, 6 FROM mdl_question WHERE idnumber = 'moodle-q21629';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21627', 'Раздел: Редактор отчетов FCOM, Средний.  Для чего присоединенная форма', 'Для чего предназначена присоединенная форма в FCOM-отчетности?', TRUE, 'MEDIUM', 21627 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21627');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Редактор отчетов FCOM, Средний.  Для чего присоединенная форма', questiontext = 'Для чего предназначена присоединенная форма в FCOM-отчетности?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21627 WHERE idnumber = 'moodle-q21627';
+SELECT id, 'moodle-q21627', 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎСЂРµРґРЅРёР№.  Р”Р»СЏ С‡РµРіРѕ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅР°СЏ С„РѕСЂРјР°', 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅР°СЏ С„РѕСЂРјР° РІ FCOM-РѕС‚С‡РµС‚РЅРѕСЃС‚Рё?', TRUE, 'MEDIUM', 21627 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21627');
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎСЂРµРґРЅРёР№.  Р”Р»СЏ С‡РµРіРѕ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅР°СЏ С„РѕСЂРјР°', questiontext = 'Р”Р»СЏ С‡РµРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅР°СЏ С„РѕСЂРјР° РІ FCOM-РѕС‚С‡РµС‚РЅРѕСЃС‚Рё?', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21627 WHERE idnumber = 'moodle-q21627';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21627');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'создание разнообразных форм отчетов, отвечающих требованиям наибольшей наглядности, информативности, для одного потока данных и команд их использующих', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21627';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'автоматическое заполнение полей ввода данными', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21627';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'загрузка XLA-библиотек', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21627';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'СЃРѕР·РґР°РЅРёРµ СЂР°Р·РЅРѕРѕР±СЂР°Р·РЅС‹С… С„РѕСЂРј РѕС‚С‡РµС‚РѕРІ, РѕС‚РІРµС‡Р°СЋС‰РёС… С‚СЂРµР±РѕРІР°РЅРёСЏРј РЅР°РёР±РѕР»СЊС€РµР№ РЅР°РіР»СЏРґРЅРѕСЃС‚Рё, РёРЅС„РѕСЂРјР°С‚РёРІРЅРѕСЃС‚Рё, РґР»СЏ РѕРґРЅРѕРіРѕ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С… Рё РєРѕРјР°РЅРґ РёС… РёСЃРїРѕР»СЊР·СѓСЋС‰РёС…', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21627';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РїРѕР»РµР№ РІРІРѕРґР° РґР°РЅРЅС‹РјРё', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21627';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р·Р°РіСЂСѓР·РєР° XLA-Р±РёР±Р»РёРѕС‚РµРє', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21627';
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty, source_question_id)
-SELECT id, 'moodle-q21624', 'Раздел: Редактор отчетов FCOM, Средний. Что выведет данный отчет', 'Что выведет данный отчет?
+SELECT id, 'moodle-q21624', 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎСЂРµРґРЅРёР№. Р§С‚Рѕ РІС‹РІРµРґРµС‚ РґР°РЅРЅС‹Р№ РѕС‚С‡РµС‚', 'Р§С‚Рѕ РІС‹РІРµРґРµС‚ РґР°РЅРЅС‹Р№ РѕС‚С‡РµС‚?
 
 .autoform ttt
 .create view vvv from x$files, x$fields
 where ((0 << xf$code and 3>>xf$code and xf$code==xe$filecode));
 .var
- c: integer
+В c: integer
 .endvar
 .{table ''vvv'' by vvv.x$files.xf$code;
 .begin
- c := 0;
- end.
+В c := 0;
+В end.
 .{ by vvv.x$fields.xe$filecode;
 .begin
- c++
- end.
+В c++
+В end.
 .}
 .fields
- xf$name
- c
+В xf$name
+В c
 .endfields
- В таблице ^ ^ полей
+В Р’ С‚Р°Р±Р»РёС†Рµ ^ ^ РїРѕР»РµР№
 .}
 .endform', TRUE, 'MEDIUM', 21624 FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification' AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'moodle-q21624');
-UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Раздел: Редактор отчетов FCOM, Средний. Что выведет данный отчет', questiontext = 'Что выведет данный отчет?
+UPDATE mdl_question SET category = (SELECT id FROM mdl_question_categories WHERE idnumber = 'erp-reports-certification'), name = 'Р Р°Р·РґРµР»: Р РµРґР°РєС‚РѕСЂ РѕС‚С‡РµС‚РѕРІ FCOM, РЎСЂРµРґРЅРёР№. Р§С‚Рѕ РІС‹РІРµРґРµС‚ РґР°РЅРЅС‹Р№ РѕС‚С‡РµС‚', questiontext = 'Р§С‚Рѕ РІС‹РІРµРґРµС‚ РґР°РЅРЅС‹Р№ РѕС‚С‡РµС‚?
 
 .autoform ttt
 .create view vvv from x$files, x$fields
 where ((0 << xf$code and 3>>xf$code and xf$code==xe$filecode));
 .var
- c: integer
+В c: integer
 .endvar
 .{table ''vvv'' by vvv.x$files.xf$code;
 .begin
- c := 0;
- end.
+В c := 0;
+В end.
 .{ by vvv.x$fields.xe$filecode;
 .begin
- c++
- end.
+В c++
+В end.
 .}
 .fields
- xf$name
- c
+В xf$name
+В c
 .endfields
- В таблице ^ ^ полей
+В Р’ С‚Р°Р±Р»РёС†Рµ ^ ^ РїРѕР»РµР№
 .}
 .endform', single_answer = TRUE, difficulty = 'MEDIUM', source_question_id = 21624 WHERE idnumber = 'moodle-q21624';
 DELETE FROM mdl_question_answers WHERE question = (SELECT id FROM mdl_question WHERE idnumber = 'moodle-q21624');
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'В таблице X$FIELDS 16 полей
- В таблице X$FIELDS 10 полей', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21624';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'В таблице X$FILES 16 полей
- В таблице X$FIELDS 10 полей', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21624';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'В таблице X$FIELDS 26 полей', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21624';
-INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Ничего из перечисленного', 0.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21624';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р’ С‚Р°Р±Р»РёС†Рµ X$FIELDS 16 РїРѕР»РµР№
+В Р’ С‚Р°Р±Р»РёС†Рµ X$FIELDS 10 РїРѕР»РµР№', 1.0000000, 2 FROM mdl_question WHERE idnumber = 'moodle-q21624';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р’ С‚Р°Р±Р»РёС†Рµ X$FILES 16 РїРѕР»РµР№
+В Р’ С‚Р°Р±Р»РёС†Рµ X$FIELDS 10 РїРѕР»РµР№', 0.0000000, 3 FROM mdl_question WHERE idnumber = 'moodle-q21624';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'Р’ С‚Р°Р±Р»РёС†Рµ X$FIELDS 26 РїРѕР»РµР№', 0.0000000, 4 FROM mdl_question WHERE idnumber = 'moodle-q21624';
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order) SELECT id, 'РќРёС‡РµРіРѕ РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅРѕРіРѕ', 0.0000000, 5 FROM mdl_question WHERE idnumber = 'moodle-q21624';
 
 DELETE FROM mdl_quiz_slots WHERE quizid = (SELECT id FROM mdl_quiz WHERE idnumber = 'erp-reports-certification');
 INSERT INTO mdl_quiz_slots (quizid, slot, page, questionid, maxmark) SELECT quiz.id, 1, 1, question.id, 1 FROM mdl_quiz quiz, mdl_question question WHERE quiz.idnumber = 'erp-reports-certification' AND question.idnumber = 'moodle-q0';

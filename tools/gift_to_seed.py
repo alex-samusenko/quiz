@@ -138,7 +138,11 @@ def main() -> None:
         out.append("SELECT quiz.id, %d, %d, question.id, 1 FROM mdl_quiz quiz, mdl_question question " % (slot, (slot - 1) // 20 + 1))
         out.append(f"WHERE quiz.idnumber = 'erp-reports-certification' AND question.idnumber = {sql(code)};\n")
 
-    sys.stdout.write("".join(out))
+    generated = "".join(out)
+    if len(sys.argv) > 2:
+        Path(sys.argv[2]).write_text(generated, encoding="utf-8", newline="\n")
+    else:
+        sys.stdout.write(generated)
     print(f"-- Imported questions: {len(questions)}", file=sys.stderr)
 
 
