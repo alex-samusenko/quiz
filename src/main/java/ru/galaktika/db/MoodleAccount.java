@@ -6,5 +6,6 @@ public record MoodleAccount(
         String passwordHash,
         String firstName,
         String lastName,
-        String role) {
+        String role,
+        String timezone) {
 }

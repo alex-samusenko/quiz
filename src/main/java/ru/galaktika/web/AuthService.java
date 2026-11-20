@@ -32,6 +32,16 @@ public class AuthService {
         return toView(user);
     }
 
+    public UserView loginMoodle(String username, HttpServletRequest request) {
+        if (isBlank(username)) {
+            throw unauthorized();
+        }
+        var account = users.findActive(username.trim()).orElseThrow(this::unauthorized);
+        var user = toCurrent(account);
+        request.getSession(true).setAttribute(CurrentUser.SESSION_KEY, user);
+        return toView(user);
+    }
+
     public UserView currentView() {
         return toView(currentUser.require());
     }

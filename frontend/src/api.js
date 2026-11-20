@@ -8,10 +8,21 @@ export async function api(path, options = {}) {
     return null;
   }
   const text = await response.text();
-  const body = text ? JSON.parse(text) : null;
+  let body = null;
+  if (text) {
+    try {
+      body = JSON.parse(text);
+    } catch {
+      body = { message: text };
+    }
+  }
   if (!response.ok) {
-    const error = new Error(body?.detail || "Запрос не выполнен");
+    const error = new Error(body?.detail || body?.message || body?.error
+      || `Запрос не выполнен (HTTP ${response.status})`);
     error.status = response.status;
+    if (response.status === 401 && options.notifyUnauthorized !== false) {
+      window.dispatchEvent(new CustomEvent("app:session-expired"));
+    }
     throw error;
   }
   return body;

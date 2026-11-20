@@ -8,5 +8,13 @@ public interface TestConfig {
 
     int getTimeLimitSeconds();
 
+    int getQuestionCount();
+
+    boolean isShuffleQuestions();
+
+    boolean isShuffleAnswers();
+
+    int getHeartbeatTimeoutSeconds();
+
     Locale getLocale();
 }

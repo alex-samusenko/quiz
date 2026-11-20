@@ -21,8 +21,11 @@ public class AssignmentController {
     private final AssignmentService assignmentService;
 
     @PostMapping("/api/assignments")
-    public AssignmentView create(@RequestBody AssignmentRequest request) {
-        return assignmentService.create(request.username(), request.testCode());
+    public List<AssignmentView> create(@RequestBody AssignmentRequest request) {
+        if (request.startsAt() == null) {
+            return List.of(assignmentService.create(request.username(), request.testCode()));
+        }
+        return assignmentService.create(request);
     }
 
     @GetMapping("/api/assignments")

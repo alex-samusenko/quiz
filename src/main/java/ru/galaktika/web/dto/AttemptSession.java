@@ -8,6 +8,7 @@ public record AttemptSession(
         int timeLimitSeconds,
         int remainingSeconds,
         int passingScore,
+        boolean paused,
         List<QuestionView> questions,
         List<List<Integer>> selected) {
 }

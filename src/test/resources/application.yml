@@ -1,3 +1,7 @@
+server:
+  error:
+    include-message: always
+
 spring:
   datasource:
     url: jdbc:h2:mem:attestation;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
@@ -8,4 +12,19 @@ spring:
 test:
   passing-score: 80
   time-limit-seconds: 600
+  question-count: 20
+  shuffle-questions: false
+  shuffle-answers: false
+  heartbeat-timeout-seconds: 15
   locale: ru
+
+moodle:
+  integration:
+    enabled: false
+
+auth:
+  moodle:
+    enabled: true
+    emulator-enabled: true
+    shared-secret: test-shared-secret-at-least-32-characters
+    token-ttl-seconds: 60

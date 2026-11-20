@@ -10,6 +10,14 @@ public class AppProperties implements TestConfig, TestFileNameProvider {
 
     private int timeLimitSeconds;
 
+    private int questionCount = 20;
+
+    private boolean shuffleQuestions = true;
+
+    private boolean shuffleAnswers = true;
+
+    private int heartbeatTimeoutSeconds = 15;
+
     private Locale locale;
 
     @Override
@@ -28,6 +36,42 @@ public class AppProperties implements TestConfig, TestFileNameProvider {
 
     public void setTimeLimitSeconds(int timeLimitSeconds) {
         this.timeLimitSeconds = timeLimitSeconds;
+    }
+
+    @Override
+    public int getQuestionCount() {
+        return questionCount;
+    }
+
+    public void setQuestionCount(int questionCount) {
+        this.questionCount = questionCount;
+    }
+
+    @Override
+    public boolean isShuffleQuestions() {
+        return shuffleQuestions;
+    }
+
+    public void setShuffleQuestions(boolean shuffleQuestions) {
+        this.shuffleQuestions = shuffleQuestions;
+    }
+
+    @Override
+    public boolean isShuffleAnswers() {
+        return shuffleAnswers;
+    }
+
+    public void setShuffleAnswers(boolean shuffleAnswers) {
+        this.shuffleAnswers = shuffleAnswers;
+    }
+
+    @Override
+    public int getHeartbeatTimeoutSeconds() {
+        return heartbeatTimeoutSeconds;
+    }
+
+    public void setHeartbeatTimeoutSeconds(int heartbeatTimeoutSeconds) {
+        this.heartbeatTimeoutSeconds = heartbeatTimeoutSeconds;
     }
 
     @Override

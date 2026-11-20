@@ -18,7 +18,7 @@ SELECT 'galaxy', 'Администрирование продукта', (SELECT 
 WHERE NOT EXISTS (SELECT 1 FROM mdl_quiz WHERE idnumber = 'galaxy');
 
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty)
-SELECT id, 'java-mars', 'Жизнь на Марсе', 'Есть ли жизнь на Марсе?', TRUE, 'EASY'
+SELECT id, 'java-mars', 'Поле final', 'Что гарантирует модификатор final для поля объекта?', TRUE, 'EASY'
 FROM mdl_question_categories WHERE idnumber = 'java'
 AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'java-mars');
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty)
@@ -30,11 +30,11 @@ SELECT id, 'java-exceptions', 'Обработка исключений', 'Как
 FROM mdl_question_categories WHERE idnumber = 'java'
 AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'java-exceptions');
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty)
-SELECT id, 'java-orange', 'Цвет апельсина', 'Какого цвета апельсин?', TRUE, 'EASY'
+SELECT id, 'java-orange', 'Контракт equals и hashCode', 'Какие утверждения входят в контракт equals и hashCode?', FALSE, 'MEDIUM'
 FROM mdl_question_categories WHERE idnumber = 'java'
 AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'java-orange');
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty)
-SELECT id, 'java-earth', 'Форма Земли', 'Какая форма у Земли?', TRUE, 'MEDIUM'
+SELECT id, 'java-earth', 'Выбор коллекции', 'Какая коллекция сохраняет порядок добавления и допускает дубликаты?', TRUE, 'EASY'
 FROM mdl_question_categories WHERE idnumber = 'java'
 AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'java-earth');
 INSERT INTO mdl_question (category, idnumber, name, questiontext, single_answer, difficulty)
@@ -50,14 +50,41 @@ SELECT id, 'galaxy-db', 'СУБД Moodle', 'Какая СУБД хранит и�
 FROM mdl_question_categories WHERE idnumber = 'galaxy'
 AND NOT EXISTS (SELECT 1 FROM mdl_question WHERE idnumber = 'galaxy-db');
 
+-- Обновления нужны и для уже созданного локального стенда. Технические idnumber
+-- сохранены ради совместимости с существующими ссылками и назначениями.
+UPDATE mdl_question SET name = 'Поле final',
+    questiontext = 'Что гарантирует модификатор final для поля объекта?',
+    single_answer = TRUE, difficulty = 'EASY'
+WHERE idnumber = 'java-mars';
+UPDATE mdl_question SET name = 'Ресурсы в JAR',
+    questiontext = 'Какие способы корректно читают ресурс из classpath внутри JAR?',
+    single_answer = FALSE, difficulty = 'MEDIUM'
+WHERE idnumber = 'java-resources';
+UPDATE mdl_question SET name = 'Обработка исключений',
+    questiontext = 'Какой подход к обработке исключения наиболее корректен в прикладном сервисе?',
+    single_answer = TRUE, difficulty = 'HARD'
+WHERE idnumber = 'java-exceptions';
+UPDATE mdl_question SET name = 'Контракт equals и hashCode',
+    questiontext = 'Какие утверждения входят в контракт equals и hashCode?',
+    single_answer = FALSE, difficulty = 'MEDIUM'
+WHERE idnumber = 'java-orange';
+UPDATE mdl_question SET name = 'Выбор коллекции',
+    questiontext = 'Какая коллекция сохраняет порядок добавления и допускает дубликаты?',
+    single_answer = TRUE, difficulty = 'EASY'
+WHERE idnumber = 'java-earth';
+
+DELETE FROM mdl_question_answers
+WHERE question IN (SELECT id FROM mdl_question WHERE idnumber IN
+    ('java-mars', 'java-resources', 'java-exceptions', 'java-orange', 'java-earth'));
+
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Наука этого пока не знает', 1, 1 FROM mdl_question WHERE idnumber = 'java-mars'
+SELECT id, 'Ссылку можно присвоить только один раз', 1, 1 FROM mdl_question WHERE idnumber = 'java-mars'
 AND NOT EXISTS (SELECT 1 FROM mdl_question_answers a WHERE a.question = mdl_question.id);
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Красная тарелка с Марса, а зелёная с Венеры', 0, 2 FROM mdl_question WHERE idnumber = 'java-mars'
+SELECT id, 'Объект по этой ссылке автоматически становится неизменяемым', 0, 2 FROM mdl_question WHERE idnumber = 'java-mars'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 1;
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Совершенно нет', 0, 3 FROM mdl_question WHERE idnumber = 'java-mars'
+SELECT id, 'Поле автоматически становится static', 0, 3 FROM mdl_question WHERE idnumber = 'java-mars'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 2;
 
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
@@ -74,39 +101,42 @@ SELECT id, 'Wingardium Leviosa', 0, 4 FROM mdl_question WHERE idnumber = 'java-r
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 3;
 
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, '@SneakyThrows', 0, 1 FROM mdl_question WHERE idnumber = 'java-exceptions'
+SELECT id, 'Перехватить там, где можно восстановиться, либо пробросить с сохранением причины', 1, 1 FROM mdl_question WHERE idnumber = 'java-exceptions'
 AND NOT EXISTS (SELECT 1 FROM mdl_question_answers a WHERE a.question = mdl_question.id);
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'e.printStackTrace()', 0, 2 FROM mdl_question WHERE idnumber = 'java-exceptions'
+SELECT id, 'Всегда перехватывать Exception и продолжать выполнение', 0, 2 FROM mdl_question WHERE idnumber = 'java-exceptions'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 1;
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Пробросить, обернув в бизнес-исключение (например, QuestionReadException)', 1, 3 FROM mdl_question WHERE idnumber = 'java-exceptions'
+SELECT id, 'Выводить stack trace в стандартный поток и возвращать null', 0, 3 FROM mdl_question WHERE idnumber = 'java-exceptions'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 2;
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Проигнорировать исключение', 0, 4 FROM mdl_question WHERE idnumber = 'java-exceptions'
+SELECT id, 'Заменять любое исключение новым без передачи исходной причины', 0, 4 FROM mdl_question WHERE idnumber = 'java-exceptions'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 3;
 
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Оранжевый', 1, 1 FROM mdl_question WHERE idnumber = 'java-orange'
+SELECT id, 'Равные по equals объекты должны иметь одинаковый hashCode', 0.5, 1 FROM mdl_question WHERE idnumber = 'java-orange'
 AND NOT EXISTS (SELECT 1 FROM mdl_question_answers a WHERE a.question = mdl_question.id);
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Зелёный', 0, 2 FROM mdl_question WHERE idnumber = 'java-orange'
+SELECT id, 'При переопределении equals обычно необходимо переопределить hashCode', 0.5, 2 FROM mdl_question WHERE idnumber = 'java-orange'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 1;
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Жёлтый', 0, 3 FROM mdl_question WHERE idnumber = 'java-orange'
+SELECT id, 'Одинаковый hashCode гарантирует равенство объектов по equals', 0, 3 FROM mdl_question WHERE idnumber = 'java-orange'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 2;
+INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
+SELECT id, 'Оператор == для объектов вызывает метод equals', 0, 4 FROM mdl_question WHERE idnumber = 'java-orange'
+AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 3;
 
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Идеальное полушарие', 0, 1 FROM mdl_question WHERE idnumber = 'java-earth'
+SELECT id, 'ArrayList', 1, 1 FROM mdl_question WHERE idnumber = 'java-earth'
 AND NOT EXISTS (SELECT 1 FROM mdl_question_answers a WHERE a.question = mdl_question.id);
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Идеальная сфера', 0, 2 FROM mdl_question WHERE idnumber = 'java-earth'
+SELECT id, 'HashSet', 0, 2 FROM mdl_question WHERE idnumber = 'java-earth'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 1;
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'В основном плоская', 0, 3 FROM mdl_question WHERE idnumber = 'java-earth'
+SELECT id, 'TreeSet', 0, 3 FROM mdl_question WHERE idnumber = 'java-earth'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 2;
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)
-SELECT id, 'Сплюснутый сфероид', 1, 4 FROM mdl_question WHERE idnumber = 'java-earth'
+SELECT id, 'HashMap', 0, 4 FROM mdl_question WHERE idnumber = 'java-earth'
 AND (SELECT COUNT(*) FROM mdl_question_answers a WHERE a.question = mdl_question.id) = 3;
 
 INSERT INTO mdl_question_answers (question, answer, fraction, answer_order)

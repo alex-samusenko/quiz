@@ -1,7 +1,11 @@
 server:
   port: 8080
+  error:
+    include-message: always
 
 spring:
+  config:
+    import: optional:file:.moodle-local.properties
   main:
     banner-mode: console
   datasource:
@@ -15,4 +19,21 @@ spring:
 test:
   passing-score: 80
   time-limit-seconds: 10800
+  question-count: 20
+  shuffle-questions: true
+  shuffle-answers: true
+  heartbeat-timeout-seconds: 15
   locale: ru
+
+moodle:
+  integration:
+    enabled: ${MOODLE_INTEGRATION_ENABLED:false}
+    base-url: ${MOODLE_BASE_URL:}
+    token: ${MOODLE_TOKEN:}
+
+auth:
+  moodle:
+    enabled: ${MOODLE_AUTH_ENABLED:false}
+    emulator-enabled: ${MOODLE_AUTH_EMULATOR_ENABLED:false}
+    shared-secret: ${MOODLE_AUTH_SHARED_SECRET:}
+    token-ttl-seconds: ${MOODLE_AUTH_TOKEN_TTL_SECONDS:60}

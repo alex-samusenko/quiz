@@ -1,6 +1,8 @@
 .git
 .idea
 .env
+.moodle-service.env
+.moodle-local.properties
 frontend/node_modules
 frontend/dist
 target

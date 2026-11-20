@@ -3,6 +3,9 @@
 
 # Log file
 *.log
+.moodle-api.env
+.moodle-service.env
+.moodle-local.properties
 
 # BlueJ files
 *.ctxt
@@ -27,7 +30,13 @@ target/
 node_modules/
 .m2-cache/
 .env
+.moodle-service.env
+.moodle-local.properties
 .tmp/
+.tools/
+tmp/
+docs/Техническое-задание-аттестация-v*.docx
+docs/Техническое-задание-аттестация-v*.pdf
 
 ### IntelliJ IDEA ###
 .idea

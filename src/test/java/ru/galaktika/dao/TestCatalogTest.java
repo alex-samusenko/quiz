@@ -23,5 +23,11 @@ public class TestCatalogTest {
         assertThat(catalog.questions(javaTest)).anyMatch(question -> question.choiceType() == ChoiceType.MULTIPLE);
         assertThat(catalog.find("galaxy").orElseThrow().mentor()).isEqualTo("petrov");
         assertThat(catalog.findAll()).extracting(test -> test.mentor()).contains("mentor", "petrov");
+
+        var realMoodleTopic = catalog.find("erp-autonomous-forms").orElseThrow();
+        assertThat(realMoodleTopic.title()).isEqualTo("ERP: Автономные формы");
+        assertThat(catalog.questions(realMoodleTopic)).hasSize(8)
+                .allMatch(question -> question.answers().size() == 3)
+                .allMatch(question -> question.choiceType() == ChoiceType.SINGLE);
     }
 }

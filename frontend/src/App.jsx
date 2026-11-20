@@ -12,10 +12,11 @@ const ROLE = {
 export default function App() {
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState("");
+  const [loginNotice, setLoginNotice] = useState("");
 
   useEffect(() => {
     let active = true;
-    api("/api/session")
+    api("/api/session", { notifyUnauthorized: false })
       .then((current) => {
         if (active) {
           setUser(current);
@@ -36,8 +37,44 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    function sessionExpired() {
+      setError("");
+      setLoginNotice("Сессия завершена. Войдите в систему снова.");
+      setUser(null);
+    }
+    window.addEventListener("app:session-expired", sessionExpired);
+    return () => window.removeEventListener("app:session-expired", sessionExpired);
+  }, []);
+
+  useEffect(() => {
+    if (!user) return undefined;
+    let active = true;
+    async function verifySession() {
+      try {
+        const current = await api("/api/session");
+        if (active) setUser(current);
+      } catch (cause) {
+        if (active && cause.status !== 401) setError(cause.message);
+      }
+    }
+    function checkVisibleSession() {
+      if (document.visibilityState === "visible") verifySession();
+    }
+    const timer = setInterval(verifySession, 30000);
+    document.addEventListener("visibilitychange", checkVisibleSession);
+    window.addEventListener("focus", verifySession);
+    return () => {
+      active = false;
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", checkVisibleSession);
+      window.removeEventListener("focus", verifySession);
+    };
+  }, [user?.username]);
+
   async function logout() {
     await api("/api/session", { method: "DELETE" });
+    setLoginNotice("");
     setUser(null);
   }
 
@@ -48,7 +85,10 @@ export default function App() {
     return <main className="app"><p>Загрузка…</p></main>;
   }
   if (!user) {
-    return <Login onSuccess={setUser} />;
+    return <Login notice={loginNotice} onSuccess={(current) => {
+      setLoginNotice("");
+      setUser(current);
+    }} />;
   }
   return (
     <main className="app-shell">
@@ -81,11 +121,18 @@ export default function App() {
   );
 }
 
-function Login({ onSuccess }) {
+function Login({ onSuccess, notice }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [emulatorEnabled, setEmulatorEnabled] = useState(false);
+
+  useEffect(() => {
+    api("/api/moodle/config", { notifyUnauthorized: false })
+      .then((config) => setEmulatorEnabled(config.emulatorEnabled))
+      .catch(() => setEmulatorEnabled(false));
+  }, []);
 
   async function submit(event) {
     event.preventDefault();
@@ -95,6 +142,23 @@ function Login({ onSuccess }) {
       onSuccess(await api("/api/session", {
         method: "POST",
         body: JSON.stringify({ username, password }),
+        notifyUnauthorized: false,
+      }));
+    } catch (cause) {
+      setError(cause.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function emulate(username) {
+    setBusy(true);
+    setError("");
+    try {
+      onSuccess(await api("/api/moodle/emulator/launch", {
+        method: "POST",
+        body: JSON.stringify({ username }),
+        notifyUnauthorized: false,
       }));
     } catch (cause) {
       setError(cause.message);
@@ -125,6 +189,7 @@ function Login({ onSuccess }) {
         <p className="eyebrow">Добро пожаловать</p>
         <h2>Вход в систему</h2>
         <p className="login-hint">Используйте учётную запись учебного центра.</p>
+        {notice && <p className="session-notice">{notice}</p>}
         <div className="fields">
           <label>
             Логин
@@ -149,6 +214,19 @@ function Login({ onSuccess }) {
         </div>
         {error && <p className="error">{error}</p>}
         <button className="primary login-submit" type="submit" disabled={busy}>Войти в систему</button>
+        {emulatorEnabled && (
+          <div className="moodle-emulator">
+            <strong>Эмулятор Moodle</strong>
+            <span>Проверка доверенного перехода без отдельного сервера Moodle</span>
+            <div className="emulator-actions">
+              {[["admin", "Администратор"], ["manager", "Менеджер"], ["mentor", "Преподаватель"], ["user", "Слушатель"]]
+                .map(([login, label]) => (
+                  <button className="secondary" type="button" disabled={busy} key={login}
+                    onClick={() => emulate(login)}>{label}</button>
+                ))}
+            </div>
+          </div>
+        )}
         <div className="demo-note">
           <strong>Демонстрационный доступ</strong>
           <span>Пароль: 1 · Логины: admin, manager, mentor, user</span>
@@ -208,34 +286,70 @@ function AdminCabinet() {
 }
 
 function ManagerCabinet() {
-  const [listeners, setListeners] = useState([]);
   const [tests, setTests] = useState([]);
   const [assignments, setAssignments] = useState([]);
   const [attempts, setAttempts] = useState([]);
-  const [username, setUsername] = useState("");
+  const [activeAttempts, setActiveAttempts] = useState([]);
+  const [moodleIntegration, setMoodleIntegration] = useState(null);
+  const [selectedListeners, setSelectedListeners] = useState([]);
+  const [listenerQuery, setListenerQuery] = useState("");
+  const [listenerSuggestions, setListenerSuggestions] = useState([]);
+  const [listenerSearchBusy, setListenerSearchBusy] = useState(false);
   const [testCode, setTestCode] = useState("");
+  const [level, setLevel] = useState("SPECIALIST");
+  const initialStart = toMoscowInput(new Date());
+  const initialEnd = toMoscowInput(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000));
+  const [startsAt, setStartsAt] = useState(initialStart);
+  const [endsAt, setEndsAt] = useState(initialEnd);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
   async function load() {
-    const [listenerRows, testRows, assignmentRows, attemptRows] = await Promise.all([
-      api("/api/listeners"),
+    const [testRows, assignmentRows, attemptRows, activeRows] = await Promise.all([
       api("/api/tests"),
       api("/api/manager/assignments"),
       api("/api/reports/attempts"),
+      api("/api/manager/active-attempts"),
     ]);
-    setListeners(listenerRows);
     setTests(testRows);
     setAssignments(assignmentRows);
     setAttempts(attemptRows);
-    setUsername((current) => current || listenerRows[0]?.username || "");
+    setActiveAttempts(activeRows);
     setTestCode((current) => current || testRows[0]?.code || "");
   }
 
   useEffect(() => {
     load().catch((cause) => setError(cause.message));
+    api("/api/manager/moodle-integration").then(setMoodleIntegration).catch(() => {});
+    const monitor = setInterval(() => {
+      api("/api/manager/active-attempts").then(setActiveAttempts).catch((cause) => setError(cause.message));
+    }, 5000);
+    return () => clearInterval(monitor);
   }, []);
+
+  useEffect(() => {
+    const query = listenerQuery.trim();
+    if (query.length < 2) {
+      setListenerSuggestions([]);
+      setListenerSearchBusy(false);
+      return undefined;
+    }
+    let active = true;
+    setListenerSearchBusy(true);
+    const timer = setTimeout(() => {
+      api(`/api/manager/listeners/search?q=${encodeURIComponent(query)}`)
+        .then((rows) => {
+          if (active) setListenerSuggestions(rows.filter((row) => !selectedListeners.some((item) => item.username === row.username)));
+        })
+        .catch((cause) => { if (active) setError(cause.message); })
+        .finally(() => { if (active) setListenerSearchBusy(false); });
+    }, 250);
+    return () => {
+      active = false;
+      clearTimeout(timer);
+    };
+  }, [listenerQuery, selectedListeners]);
 
   async function assign(event) {
     event.preventDefault();
@@ -243,11 +357,62 @@ function ManagerCabinet() {
     setError("");
     setMessage("");
     try {
-      await api("/api/manager/assignments", {
+      const created = await api("/api/manager/assignments", {
         method: "POST",
-        body: JSON.stringify({ username, testCode }),
+        body: JSON.stringify({
+          usernames: selectedListeners.map((listener) => listener.username),
+          testCode,
+          level,
+          startsAt: toMoscowIso(startsAt),
+          endsAt: toMoscowIso(endsAt),
+          accessFrom: toMoscowIso(startsAt),
+          accessUntil: toMoscowIso(endsAt),
+        }),
       });
-      setMessage("Тест назначен");
+      const warnings = created.map((row) => row.timezoneWarning).filter(Boolean);
+      setMessage(`Создано назначений: ${created.length}${warnings.length ? `. ${warnings.join("; ")}` : ""}`);
+      setSelectedListeners([]);
+      setListenerQuery("");
+      await load();
+    } catch (cause) {
+      setError(cause.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function addListener(listener) {
+    setSelectedListeners((current) => current.some((item) => item.username === listener.username)
+      ? current
+      : [...current, listener]);
+    setListenerQuery("");
+    setListenerSuggestions([]);
+  }
+
+  function removeListener(username) {
+    setSelectedListeners((current) => current.filter((listener) => listener.username !== username));
+  }
+
+  async function cancelAssignment(id) {
+    setBusy(true);
+    setError("");
+    try {
+      await api(`/api/manager/assignments/${id}/cancel`, { method: "POST" });
+      setMessage("Назначение отменено");
+      await load();
+    } catch (cause) {
+      setError(cause.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function resume(attemptId) {
+    setBusy(true);
+    setError("");
+    try {
+      await api(`/api/manager/attempts/${attemptId}/resume`, { method: "POST" });
+      setMessage("Попытка возобновлена");
       await load();
     } catch (cause) {
       setError(cause.message);
@@ -263,17 +428,36 @@ function ManagerCabinet() {
         <div className="panel-heading">
           <div><h2>Новое назначение</h2><p>Выберите слушателя и программу проверки знаний.</p></div>
         </div>
-        <form className="assign-form" onSubmit={assign}>
-          <label>
-            Слушатель
-            <select value={username} onChange={(event) => setUsername(event.target.value)} required>
-              {listeners.map((listener) => (
-                <option key={listener.username} value={listener.username}>
-                  {listener.lastName} {listener.firstName} ({listener.username})
-                </option>
+        <form className="assign-form assignment-window-form" onSubmit={assign}>
+          <div className="listener-selector">
+            <label htmlFor="listener-search">Слушатели</label>
+            <div className="selected-listeners" aria-live="polite">
+              {selectedListeners.length === 0 && <span className="selected-placeholder">Выбранные слушатели появятся здесь</span>}
+              {selectedListeners.map((listener) => (
+                <span className="listener-chip" key={listener.username}>
+                  <span>{listener.lastName} {listener.firstName}</span>
+                  <small>{listener.email || listener.username}</small>
+                  <button type="button" aria-label={`Удалить ${listener.lastName} ${listener.firstName}`} onClick={() => removeListener(listener.username)}>×</button>
+                </span>
               ))}
-            </select>
-          </label>
+            </div>
+            <div className="listener-search-box">
+              <input id="listener-search" type="text" value={listenerQuery} onChange={(event) => setListenerQuery(event.target.value)} placeholder="Начните вводить фамилию или имя" autoComplete="off" />
+              {listenerQuery.trim().length >= 2 && (
+                <div className="listener-suggestions">
+                  {listenerSearchBusy && <p>Поиск…</p>}
+                  {!listenerSearchBusy && listenerSuggestions.length === 0 && <p>Совпадений не найдено</p>}
+                  {!listenerSearchBusy && listenerSuggestions.map((listener) => (
+                    <button type="button" key={listener.username} onClick={() => addListener(listener)}>
+                      <strong>{listener.lastName} {listener.firstName}</strong>
+                      <span>{listener.email || listener.username}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <small className="selection-count">Выбрано: {selectedListeners.length}</small>
+          </div>
           <label>
             Тест
             <select value={testCode} onChange={(event) => setTestCode(event.target.value)} required>
@@ -284,29 +468,113 @@ function ManagerCabinet() {
               ))}
             </select>
           </label>
+          <label>
+            Уровень аттестации
+            <select value={level} onChange={(event) => setLevel(event.target.value)} required>
+              <option value="SPECIALIST">Специалист</option>
+              <option value="EXPERT">Эксперт</option>
+            </select>
+          </label>
+          <label>Доступно с<input type="datetime-local" value={startsAt} onChange={(event) => setStartsAt(event.target.value)} required /></label>
+          <label>Доступно до<input type="datetime-local" value={endsAt} onChange={(event) => setEndsAt(event.target.value)} required /></label>
           {message && <p className="ok">{message}</p>}
           {error && <p className="error">{error}</p>}
-          <button className="primary assign-button" type="submit" disabled={busy}>Назначить тест</button>
+          <button className="primary assign-button" type="submit" disabled={busy || selectedListeners.length === 0}>Назначить выбранным</button>
         </form>
       </section>
       <section className="panel stack">
         <div className="panel-heading"><div><h2>Назначения</h2><p>Текущие и завершённые аттестации</p></div></div>
-        <AssignmentTable rows={assignments} />
+        <AssignmentTable rows={assignments} busy={busy} onCancel={cancelAssignment} />
+        <div className="section-divider" />
+        <div className="panel-heading"><div><h2>Активные попытки</h2><p>Контроль связи и приостановленных экзаменов</p></div></div>
+        <ActiveAttemptTable rows={activeAttempts} busy={busy} onResume={resume} />
         <div className="section-divider" />
         <div className="panel-heading"><div><h2>Последние результаты</h2><p>История завершённых попыток</p></div></div>
         <AttemptTable rows={attempts} showListener />
       </section>
+      {moodleIntegration?.enabled && (
+        <section className="panel stack">
+          <div className="panel-heading"><div><h2>Банки Moodle</h2><p>{moodleIntegration.status} · Moodle {moodleIntegration.release}</p></div></div>
+          {moodleIntegration.banks.length === 0 && <p className="hint">Отмеченные банки аттестации не найдены.</p>}
+          {moodleIntegration.banks.map((bank) => (
+            <article className="appeal-card" key={bank.code}>
+              <strong>{bank.courseName} · {bank.name}</strong>
+              <p>Код: {bank.code}</p>
+              <p>Вопросов: {bank.questions}; автоматических: {bank.automaticQuestions}; лёгких: {bank.easy}; средних: {bank.medium}; сложных: {bank.hard}</p>
+            </article>
+          ))}
+        </section>
+      )}
     </>
   );
 }
 
+function ActiveAttemptTable({ rows, busy, onResume }) {
+  if (rows.length === 0) {
+    return <p className="hint">Активных попыток пока нет.</p>;
+  }
+  return (
+    <div className="table-wrap">
+      <table>
+        <thead><tr><th>Слушатель</th><th>Тест</th><th>Осталось</th><th>Состояние</th><th /></tr></thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.id}>
+              <td>{row.listenerName}</td>
+              <td>{row.testTitle}</td>
+              <td>{formatDuration(row.remainingSeconds)}</td>
+              <td><span className={`status ${row.paused ? "danger" : "success"}`}>{row.paused ? "Пауза" : "Выполняется"}</span></td>
+              <td>{row.paused && <button className="secondary" type="button" disabled={busy} onClick={() => onResume(row.id)}>Возобновить</button>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function formatDuration(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
 function MentorCabinet() {
   const [tests, setTests] = useState(null);
+  const [attempts, setAttempts] = useState([]);
+  const [appeals, setAppeals] = useState([]);
+  const [review, setReview] = useState(null);
+  const [reviewAttempt, setReviewAttempt] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    api("/api/mentor/tests").then(setTests).catch((cause) => setError(cause.message));
+    Promise.all([api("/api/mentor/tests"), api("/api/mentor/attempts"), api("/api/mentor/appeals")])
+      .then(([testRows, attemptRows, appealRows]) => { setTests(testRows); setAttempts(attemptRows); setAppeals(appealRows); })
+      .catch((cause) => setError(cause.message));
   }, []);
+
+  async function openReview(attempt) {
+    try { setReview(await api(`/api/attempts/${attempt.id}/mentor-review`)); setReviewAttempt(attempt); }
+    catch (cause) { setError(cause.message); }
+  }
+
+  if (review) return <AttemptReview review={review} onExit={() => setReview(null)} editable={Boolean(reviewAttempt?.appealStatus)} attemptId={reviewAttempt?.id} onChange={setReview} />;
+
+  async function resolveAppeal(appeal, decision) {
+    const explanation = window.prompt("Пояснение к решению:");
+    if (!explanation) return;
+    let score = null;
+    if (decision === "CHANGE_SCORE") {
+      const value = window.prompt("Новый балл от 0 до 100:", String(appeal.originalScore));
+      if (value == null) return;
+      score = Number(value);
+    }
+    try {
+      await api(`/api/mentor/appeals/${appeal.id}/resolve`, { method: "POST", body: JSON.stringify({ decision, score, explanation }) });
+      setAppeals(await api("/api/mentor/appeals"));
+    } catch (cause) { setError(cause.message); }
+  }
 
   return (
     <>
@@ -345,6 +613,25 @@ function MentorCabinet() {
         </div>
       )}
       </section>
+      <section className="panel">
+        <div className="panel-heading"><div><h2>Результаты слушателей</h2><p>До апелляции доступны только для просмотра</p></div></div>
+        <AttemptTable rows={attempts} showListener onReview={openReview} mentor />
+      </section>
+      <section className="panel stack">
+        <div className="panel-heading"><div><h2>Апелляции</h2><p>Обращения по неудачным попыткам</p></div></div>
+        {appeals.length === 0 && <p className="hint">Новых апелляций нет.</p>}
+        {appeals.map((appeal) => (
+          <article className="appeal-card" key={appeal.id}>
+            <strong>{appeal.listenerName} · {appeal.testTitle}</strong>
+            <p><b>Вопрос:</b> {appeal.questionReference}</p><p><b>Пример:</b> {appeal.exampleDescription}</p>
+            <p><b>Позиция:</b> {appeal.interpretation}</p>
+            {appeal.legalReference && <p><b>Нормативная ссылка:</b> {appeal.legalReference}</p>}
+            <a download={appeal.attachmentName} href={`data:${appeal.attachmentType};base64,${appeal.attachmentBase64}`}>{appeal.attachmentName}</a>
+            {appeal.status === "SUBMITTED" ? <div className="actions"><button className="secondary" onClick={() => resolveAppeal(appeal, "REJECT")}>Отклонить</button><button className="primary" onClick={() => resolveAppeal(appeal, "CHANGE_SCORE")}>Изменить балл</button></div>
+              : <p className="hint">Решение: {appeal.resolution}{appeal.changedScore != null ? ` · ${appeal.changedScore} баллов` : ""}</p>}
+          </article>
+        ))}
+      </section>
     </>
   );
 }
@@ -353,6 +640,8 @@ function ListenerCabinet() {
   const [assignments, setAssignments] = useState([]);
   const [attempts, setAttempts] = useState([]);
   const [session, setSession] = useState(null);
+  const [review, setReview] = useState(null);
+  const [appealAttempt, setAppealAttempt] = useState(null);
   const [error, setError] = useState("");
   const [busyId, setBusyId] = useState("");
 
@@ -387,6 +676,19 @@ function ListenerCabinet() {
     }
   }
 
+  async function openReview(attempt) {
+    setBusyId(attempt.id);
+    setError("");
+    try {
+      setReview(await api(`/api/attempts/${attempt.id}/review`));
+    } catch (cause) {
+      setError(cause.message);
+      load().catch(() => {});
+    } finally {
+      setBusyId("");
+    }
+  }
+
   if (session) {
     return (
       <TestRun
@@ -397,6 +699,14 @@ function ListenerCabinet() {
         }}
       />
     );
+  }
+
+
+  if (review) {
+    return <AttemptReview review={review} onExit={() => setReview(null)} />;
+  }
+  if (appealAttempt) {
+    return <AppealForm attempt={appealAttempt} onExit={() => { setAppealAttempt(null); load().catch(() => {}); }} />;
   }
 
   return (
@@ -410,11 +720,14 @@ function ListenerCabinet() {
         <ul className="assignment-list">
           {assignments.map((assignment) => (
             <li key={assignment.id}>
-              <span>{assignment.testTitle}</span>
+              <span>
+                <strong>{assignment.testTitle}</strong>
+                <small>{levelTitle(assignment.level)} · {assignment.status} · {formatDate(assignment.accessFrom)} — {formatDate(assignment.accessUntil)}</small>
+              </span>
               <button
                 className="primary"
                 type="button"
-                disabled={busyId === assignment.id}
+                disabled={busyId === assignment.id || (!assignment.available && !assignment.activeAttemptId)}
                 onClick={() => openAssignment(assignment)}
               >
                 {assignment.activeAttemptId ? "Продолжить" : "Пройти"}
@@ -425,7 +738,7 @@ function ListenerCabinet() {
       )}
       <div className="section-divider" />
       <div className="panel-heading"><div><h2>История попыток</h2><p>Ваши предыдущие результаты</p></div></div>
-      <AttemptTable rows={attempts} />
+      <AttemptTable rows={attempts} busyId={busyId} onReview={openReview} onAppeal={setAppealAttempt} />
       </section>
     </>
   );
@@ -450,7 +763,7 @@ function StatCard({ label, value, tone }) {
   );
 }
 
-function AssignmentTable({ rows }) {
+function AssignmentTable({ rows, busy, onCancel }) {
   if (rows.length === 0) {
     return <p className="hint">Назначений пока нет.</p>;
   }
@@ -461,17 +774,21 @@ function AssignmentTable({ rows }) {
           <tr>
             <th>Слушатель</th>
             <th>Тест</th>
-            <th>Дата</th>
+            <th>Окно доступности</th>
             <th>Статус</th>
+            <th />
           </tr>
         </thead>
         <tbody>
           {rows.map((row) => (
             <tr key={row.id}>
               <td>{row.listenerName}</td>
-              <td>{row.testTitle}</td>
-              <td>{formatDate(row.assignedAt)}</td>
-              <td><span className={`status ${row.finished ? "complete" : "pending"}`}>{row.finished ? "Завершено" : "Ожидает"}</span></td>
+              <td>{row.testTitle}<br /><small>{levelTitle(row.level)}</small></td>
+              <td>{formatDate(row.accessFrom)}<br />{formatDate(row.accessUntil)}</td>
+              <td><span className={`status ${statusTone(row.status)}`}>{row.status}</span></td>
+              <td>{["Запланировано", "Доступно"].includes(row.status) && (
+                <button className="secondary" type="button" disabled={busy} onClick={() => onCancel(row.id)}>Отменить</button>
+              )}</td>
             </tr>
           ))}
         </tbody>
@@ -480,7 +797,18 @@ function AssignmentTable({ rows }) {
   );
 }
 
-function AttemptTable({ rows, showListener = false }) {
+function statusTone(status) {
+  if (status === "Завершено") return "complete";
+  if (status === "Выполняется" || status === "Доступно") return "success";
+  if (status === "Отменено" || status === "Просрочено") return "danger";
+  return "pending";
+}
+
+function levelTitle(level) {
+  return level === "EXPERT" ? "Эксперт" : "Специалист";
+}
+
+function AttemptTable({ rows, showListener = false, busyId = "", onReview, onAppeal, mentor = false }) {
   if (rows.length === 0) {
     return <p className="hint">Попыток пока нет.</p>;
   }
@@ -493,6 +821,7 @@ function AttemptTable({ rows, showListener = false }) {
             <th>Тест</th>
             <th>Дата</th>
             <th>Результат</th>
+            {(!showListener || mentor) && <th />}
           </tr>
         </thead>
         <tbody>
@@ -502,12 +831,106 @@ function AttemptTable({ rows, showListener = false }) {
               <td>{row.testTitle}</td>
               <td>{formatDate(row.finishedAt)}</td>
               <td><span className={`status ${row.passed ? "success" : "danger"}`}>{resultLabel(row)}</span></td>
+              {mentor && <td>{row.reviewDataAvailable && <button className="secondary" type="button" onClick={() => onReview(row)}>Просмотреть</button>}</td>}
+              {!showListener && <td>{row.reviewDataAvailable && new Date(row.reviewUntil) > new Date() && (
+                <button className="secondary" type="button" disabled={busyId === row.id} onClick={() => onReview(row)}>Разбор</button>
+              )} {!showListener && row.scorePercent < 80 && !row.appealStatus && new Date(row.reviewUntil) > new Date() && (
+                <button className="secondary" type="button" onClick={() => onAppeal(row)}>Апелляция</button>
+              )}</td>}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
+}
+
+function AttemptReview({ review, onExit, editable = false, attemptId, onChange }) {
+  async function changeAnswer(answer, number) {
+    const question = review.questions[answer.index];
+    const selected = question.choiceType === "MULTIPLE"
+      ? (answer.selected.includes(number) ? answer.selected.filter((value) => value !== number) : [...answer.selected, number])
+      : [number];
+    onChange(await api(`/api/attempts/${attemptId}/mentor-answers`, { method: "PUT", body: JSON.stringify({ questionIndex: answer.index, selected }) }));
+  }
+  return (
+    <section className="panel test-panel">
+      <p className="eyebrow">Разбор попытки</p>
+      <h1>{review.testTitle}</h1>
+      <p className="result-score">{review.scorePercent} из 100</p>
+      <p className="hint">Правильных ответов: {review.rightAnswersCount} из {review.questionsCount}. Разбор доступен до {formatDate(review.reviewUntil)}.</p>
+      <p className="actions review-top-actions"><button className="primary" type="button" onClick={onExit}>Вернуться в кабинет</button></p>
+      {review.answers.length === 0 && (
+        <div className="empty-state review-empty">
+          <strong>Нет ответов для разбора</strong>
+          <span>В этой попытке слушатель не выбрал ни одного варианта ответа.</span>
+        </div>
+      )}
+      {review.answers.length > 0 && (
+        <ul className="mistakes">
+          {review.answers.map((answer) => {
+            const question = review.questions[answer.index];
+            return (
+              <li key={answer.index}>
+                <span className={`status ${answer.correctAnswer ? "success" : "danger"}`}>{answer.correctAnswer ? "Верно" : "Ошибка"}</span>
+                <strong>{answer.text}</strong>
+                {editable ? <fieldset className="review-options"><legend>Ответ слушателя</legend>{question.options.map((option, index) => <label key={option}><input type={question.choiceType === "MULTIPLE" ? "checkbox" : "radio"} checked={answer.selected.includes(index + 1)} onChange={() => changeAnswer(answer, index + 1)} />{option}</label>)}</fieldset>
+                  : <p>Выбрано:<AnswerLines values={answerLabels(question, answer.selected)} /></p>}
+                <p>Правильно:<AnswerLines values={answerLabels(question, answer.correct)} /></p>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      <p className="actions"><button className="primary" type="button" onClick={onExit}>Вернуться в кабинет</button></p>
+    </section>
+  );
+}
+
+function AppealForm({ attempt, onExit }) {
+  const [form, setForm] = useState({ questionIndexes: [], exampleDescription: "", interpretation: "", legalReference: "" });
+  const [review, setReview] = useState(null);
+  const [attachment, setAttachment] = useState(null);
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  useEffect(() => { api(`/api/attempts/${attempt.id}/review`).then(setReview).catch((cause) => setError(cause.message)); }, [attempt.id]);
+  function change(event) { setForm({ ...form, [event.target.name]: event.target.value }); }
+  async function submit(event) {
+    event.preventDefault(); setBusy(true); setError("");
+    try {
+      if (!attachment) throw new Error("Приложите скриншот или PDF");
+      const base64 = await fileBase64(attachment);
+      await api(`/api/my/attempts/${attempt.id}/appeal`, { method: "POST", body: JSON.stringify({ ...form, attachmentName: attachment.name, attachmentType: attachment.type, attachmentBase64: base64 }) });
+      onExit();
+    } catch (cause) { setError(cause.message); } finally { setBusy(false); }
+  }
+  return <section className="panel test-panel"><p className="eyebrow">Апелляция</p><h1>{attempt.testTitle}</h1>
+    <form className="appeal-form" onSubmit={submit}>
+      <fieldset className="appeal-questions"><legend>Выберите неверные ответы для апелляции</legend>{review?.answers.filter((answer) => !answer.correctAnswer).map((answer) => <label key={answer.index}><input type="checkbox" checked={form.questionIndexes.includes(answer.index)} onChange={() => setForm({ ...form, questionIndexes: form.questionIndexes.includes(answer.index) ? form.questionIndexes.filter((index) => index !== answer.index) : [...form.questionIndexes, answer.index] })} /><span><b>Вопрос {answer.index + 1}.</b> {answer.text}<small>Выбрано: {formatAnswerSummary(review.questions[answer.index], answer.selected)}</small></span></label>)}</fieldset>
+      <label>Описание выполненного примера<textarea name="exampleDescription" value={form.exampleDescription} onChange={change} required /></label>
+      <label>Ваша интерпретация результата<textarea name="interpretation" value={form.interpretation} onChange={change} required /></label>
+      <label>Ссылка на нормативный документ — при необходимости<input type="text" name="legalReference" value={form.legalReference} onChange={change} /></label>
+      <label>Скриншот или PDF до 10 МБ<input type="file" accept="image/png,image/jpeg,application/pdf" onChange={(event) => setAttachment(event.target.files[0])} required /></label>
+      {error && <p className="error">{error}</p>}<div className="actions"><button type="button" className="secondary" onClick={onExit}>Отмена</button><button className="primary" disabled={busy}>Отправить апелляцию</button></div>
+    </form></section>;
+}
+
+function fileBase64(file) {
+  if (file.size > 10 * 1024 * 1024) return Promise.reject(new Error("Размер файла превышает 10 МБ"));
+  return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result).split(",")[1]); reader.onerror = reject; reader.readAsDataURL(file); });
+}
+
+function answerLabels(question, numbers) {
+  return numbers.length ? numbers.map((number) => question.options[number - 1]) : "нет ответа";
+}
+
+function AnswerLines({ values }) {
+  return Array.isArray(values) ? values.map((value) => <span className="answer-line" key={value}>{value}</span>) : <span className="answer-line">{values}</span>;
+}
+
+function formatAnswerSummary(question, numbers) {
+  const values = answerLabels(question, numbers);
+  return Array.isArray(values) ? values.join("; ") : values;
 }
 
 function resultLabel(row) {
@@ -519,4 +942,18 @@ function formatDate(value) {
     dateStyle: "short",
     timeStyle: "short",
   }).format(new Date(value));
+}
+
+function toMoscowInput(date) {
+  const parts = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Europe/Moscow",
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", hour12: false,
+  }).formatToParts(date);
+  const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${value.year}-${value.month}-${value.day}T${value.hour}:${value.minute}`;
+}
+
+function toMoscowIso(value) {
+  return new Date(`${value}:00+03:00`).toISOString();
 }

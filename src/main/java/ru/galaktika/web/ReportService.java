@@ -49,9 +49,22 @@ public class ReportService {
                 .toList();
     }
 
+    public List<AttemptReportView> mentorAttempts() {
+        var mentor = currentUser.require(UserRole.MENTOR);
+        return attempts.findFinishedByMentor(mentor.username());
+    }
+
     public List<ListenerView> listeners() {
         currentUser.requireAny(UserRole.ADMIN, UserRole.MANAGER);
         return users.findListeners();
+    }
+
+    public List<ListenerView> searchListeners(String query) {
+        currentUser.require(UserRole.MANAGER);
+        if (query == null || query.trim().length() < 2) {
+            return List.of();
+        }
+        return users.searchListeners(query);
     }
 
     public List<TestOptionView> tests() {
@@ -59,6 +72,10 @@ public class ReportService {
         return catalog.findAll().stream()
                 .map(test -> new TestOptionView(test.code(), test.title(), test.mentor()))
                 .toList();
+    }
+
+    public void requireManager() {
+        currentUser.require(UserRole.MANAGER);
     }
 
     private MentorTestView toMentorView(AttestationTest test, List<AttemptStats> stats) {

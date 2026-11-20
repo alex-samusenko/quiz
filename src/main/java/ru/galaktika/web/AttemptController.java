@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.galaktika.web.dto.AttemptResultView;
+import ru.galaktika.web.dto.AttemptReviewView;
 import ru.galaktika.web.dto.AttemptSession;
+import ru.galaktika.web.dto.AttemptStateView;
 import ru.galaktika.web.dto.SaveAnswerRequest;
 import ru.galaktika.web.dto.StartAttemptRequest;
 
@@ -32,6 +34,11 @@ public class AttemptController {
         return attemptService.read(id);
     }
 
+    @PostMapping("/{id}/heartbeat")
+    public AttemptStateView heartbeat(@PathVariable("id") String id) {
+        return attemptService.heartbeat(id);
+    }
+
     @PutMapping("/{id}/answers")
     public void saveAnswer(@PathVariable("id") String id, @RequestBody SaveAnswerRequest request) {
         attemptService.saveAnswer(id, request.questionIndex(), request.selected());
@@ -40,5 +47,21 @@ public class AttemptController {
     @PostMapping("/{id}/finish")
     public AttemptResultView finish(@PathVariable("id") String id) {
         return attemptService.finish(id);
+    }
+
+    @GetMapping("/{id}/review")
+    public AttemptReviewView review(@PathVariable("id") String id) {
+        return attemptService.review(id);
+    }
+
+    @GetMapping("/{id}/mentor-review")
+    public AttemptReviewView mentorReview(@PathVariable("id") String id) {
+        return attemptService.mentorReview(id);
+    }
+
+    @PutMapping("/{id}/mentor-answers")
+    public AttemptReviewView updateByMentor(@PathVariable("id") String id,
+                                             @RequestBody SaveAnswerRequest request) {
+        return attemptService.updateByMentor(id, request.questionIndex(), request.selected());
     }
 }

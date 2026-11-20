@@ -5,6 +5,10 @@
 автоматически. Демонстрационные вопросы загружаются скриптом
 `src/main/resources/db/moodle-question-seed.sql`.
 
+Реальный проверочный пример хранится отдельно в
+`src/main/resources/db/moodle-real-topic-autonomous-forms.sql`: это вопросы уровня
+«Легкий» темы «Автономные формы» из курса Moodle 375, категории 1785.
+
 ## Прямой импорт из PostgreSQL Moodle 4.x/5.x
 
 1. Подключите реальную базу как отдельную схему `moodle_source`. Это можно

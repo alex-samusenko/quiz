@@ -33,9 +33,24 @@ CREATE TABLE IF NOT EXISTS attestation.test_assignment (
     id VARCHAR(36) PRIMARY KEY,
     listener_id BIGINT NOT NULL,
     test_code VARCHAR(64) NOT NULL,
+    attestation_level VARCHAR(20) NOT NULL DEFAULT 'SPECIALIST',
     assigned_by BIGINT NOT NULL,
-    assigned_at BIGINT NOT NULL
+    assigned_at BIGINT NOT NULL,
+    starts_at BIGINT,
+    ends_at BIGINT,
+    access_from BIGINT,
+    access_until BIGINT,
+    cancelled_at BIGINT,
+    cancelled_by BIGINT
 );
+
+ALTER TABLE attestation.test_assignment ADD COLUMN IF NOT EXISTS starts_at BIGINT;
+ALTER TABLE attestation.test_assignment ADD COLUMN IF NOT EXISTS ends_at BIGINT;
+ALTER TABLE attestation.test_assignment ADD COLUMN IF NOT EXISTS access_from BIGINT;
+ALTER TABLE attestation.test_assignment ADD COLUMN IF NOT EXISTS access_until BIGINT;
+ALTER TABLE attestation.test_assignment ADD COLUMN IF NOT EXISTS cancelled_at BIGINT;
+ALTER TABLE attestation.test_assignment ADD COLUMN IF NOT EXISTS cancelled_by BIGINT;
+ALTER TABLE attestation.test_assignment ADD COLUMN IF NOT EXISTS attestation_level VARCHAR(20) NOT NULL DEFAULT 'SPECIALIST';
 
 CREATE TABLE IF NOT EXISTS attestation.attestation_attempt (
     id VARCHAR(36) PRIMARY KEY,
@@ -55,3 +70,26 @@ CREATE TABLE IF NOT EXISTS attestation.attestation_attempt (
 
 ALTER TABLE attestation.attestation_attempt ADD COLUMN IF NOT EXISTS questions_json TEXT;
 ALTER TABLE attestation.attestation_attempt ADD COLUMN IF NOT EXISTS answers_json TEXT;
+ALTER TABLE attestation.attestation_attempt ADD COLUMN IF NOT EXISTS paused_at BIGINT;
+ALTER TABLE attestation.attestation_attempt ADD COLUMN IF NOT EXISTS paused_seconds BIGINT NOT NULL DEFAULT 0;
+ALTER TABLE attestation.attestation_attempt ADD COLUMN IF NOT EXISTS last_contact_at BIGINT;
+
+CREATE TABLE IF NOT EXISTS attestation.appeal (
+    id VARCHAR(36) PRIMARY KEY,
+    attempt_id VARCHAR(36) NOT NULL UNIQUE,
+    listener_id BIGINT NOT NULL,
+    question_reference TEXT NOT NULL,
+    example_description TEXT NOT NULL,
+    interpretation TEXT NOT NULL,
+    legal_reference TEXT,
+    attachment_name VARCHAR(255) NOT NULL,
+    attachment_type VARCHAR(100) NOT NULL,
+    attachment_base64 TEXT NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    created_at BIGINT NOT NULL,
+    resolved_at BIGINT,
+    resolved_by BIGINT,
+    resolution TEXT,
+    original_score INTEGER NOT NULL,
+    changed_score INTEGER
+);

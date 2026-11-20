@@ -60,6 +60,30 @@ public class AttemptControllerTest {
     }
 
     @Test
+    void managerCreatesAssignmentWithSelectedLevel() throws Exception {
+        mockMvc.perform(post("/api/manager/assignments").session(login("manager"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "usernames":["user"],
+                                  "testCode":"erp-reports-certification",
+                                  "level":"SPECIALIST",
+                                  "startsAt":"2026-11-19T12:00:00Z",
+                                  "endsAt":"2026-12-19T12:00:00Z",
+                                  "accessFrom":"2026-11-19T12:00:00Z",
+                                  "accessUntil":"2026-12-19T12:00:00Z"
+                                }
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].listenerUsername").value("user"))
+                .andExpect(jsonPath("$[0].level").value("SPECIALIST"));
+
+        var storedLevel = jdbc.queryForObject(
+                "SELECT attestation_level FROM attestation.test_assignment", String.class);
+        org.assertj.core.api.Assertions.assertThat(storedLevel).isEqualTo("SPECIALIST");
+    }
+
+    @Test
     void activeAttemptReturnsPreviouslySavedAnswers() throws Exception {
         var listener = login("user");
         var attemptId = startJava(listener);
@@ -95,9 +119,9 @@ public class AttemptControllerTest {
     private void answerJava(MockHttpSession listener, String attemptId) throws Exception {
         save(listener, attemptId, 0, "[1]");
         save(listener, attemptId, 1, "[1,2]");
-        save(listener, attemptId, 2, "[3]");
-        save(listener, attemptId, 3, "[1]");
-        save(listener, attemptId, 4, "[4]");
+        save(listener, attemptId, 2, "[1]");
+        save(listener, attemptId, 3, "[1,2]");
+        save(listener, attemptId, 4, "[1]");
     }
 
     private MockHttpSession login(String username) throws Exception {

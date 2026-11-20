@@ -20,6 +20,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     private boolean isPublic(HttpServletRequest request) {
         return "OPTIONS".equals(request.getMethod())
-                || ("POST".equals(request.getMethod()) && "/api/session".equals(request.getRequestURI()));
+                || ("GET".equals(request.getMethod()) && "/api/moodle/config".equals(request.getRequestURI()))
+                || ("POST".equals(request.getMethod()) && "/api/session".equals(request.getRequestURI()))
+                || ("POST".equals(request.getMethod())
+                    && ("/api/moodle/launch".equals(request.getRequestURI())
+                    || "/api/moodle/emulator/launch".equals(request.getRequestURI())));
     }
 }

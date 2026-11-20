@@ -10,7 +10,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs" / "tz.md"
-OUTPUT = ROOT / "docs" / "Техническое-задание-аттестация-v0.4.docx"
+OUTPUT = ROOT / "docs" / "Техническое-задание-аттестация-v0.7.docx"
 
 BLACK = "000000"
 MUTED = "52606D"
@@ -101,6 +101,7 @@ def build_document():
         configure_font(style, "Aptos", 10.6)
         style.paragraph_format.space_after = Pt(3)
         style.paragraph_format.line_spacing = Pt(14.5)
+        style.paragraph_format.keep_together = True
 
     doc.core_properties.title = "Техническое задание на систему аттестации"
     doc.core_properties.subject = "Согласованные требования к веб-приложению учебного центра"
@@ -118,7 +119,7 @@ def build_document():
             if first_heading:
                 subtitle = doc.add_paragraph()
                 subtitle.paragraph_format.space_after = Pt(16)
-                run = subtitle.add_run("Согласованные требования, данные регламентов и открытые вопросы • версия 0.4 • 18 ноября 2026 года")
+                run = subtitle.add_run("Согласованные требования, данные регламентов и открытые вопросы • версия 0.7 • 19 ноября 2026 года")
                 run.font.name = "Aptos"
                 run.font.size = Pt(11.5)
                 run.font.color.rgb = RGBColor.from_string(MUTED)
@@ -138,7 +139,12 @@ def build_document():
             continue
         number = re.match(r"^(\d+)\.\s+(.+)$", text)
         if number:
-            p = doc.add_paragraph(style="List Number")
+            p = doc.add_paragraph()
+            p.paragraph_format.left_indent = Inches(0.28)
+            p.paragraph_format.first_line_indent = Inches(-0.28)
+            p.paragraph_format.space_after = Pt(3)
+            p.paragraph_format.keep_together = True
+            p.add_run(f"{number.group(1)}. ")
             add_inline_markdown(p, number.group(2))
             continue
         p = doc.add_paragraph()

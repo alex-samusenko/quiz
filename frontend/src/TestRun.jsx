@@ -19,16 +19,18 @@ export default function TestRun({ session, onExit }) {
   ));
   const [result, setResult] = useState(null);
   const [remaining, setRemaining] = useState(session.remainingSeconds);
+  const [paused, setPaused] = useState(Boolean(session.paused));
+  const [connectionLost, setConnectionLost] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const finished = useRef(false);
   const stateRef = useRef({});
   const saveQueue = useRef(Promise.resolve());
-  stateRef.current = { index, selections, session, remaining };
+  stateRef.current = { index, selections, session, remaining, paused };
 
   useEffect(() => {
-    if (result) {
+    if (result || paused) {
       return undefined;
     }
     const endsAt = Date.now() + session.remainingSeconds * 1000;
@@ -42,9 +44,41 @@ export default function TestRun({ session, onExit }) {
     tick();
     const timerId = setInterval(tick, 1000);
     return () => clearInterval(timerId);
-  }, [session, result]);
+  }, [session, result, paused]);
+
+  useEffect(() => {
+    if (result) {
+      return undefined;
+    }
+    let stopped = false;
+    async function heartbeat() {
+      try {
+        const state = await api(`/api/attempts/${session.id}/heartbeat`, { method: "POST" });
+        if (!stopped) {
+          setPaused(state.paused);
+          setRemaining(state.remainingSeconds);
+          setConnectionLost(false);
+        }
+      } catch (cause) {
+        if (!stopped) {
+          setPaused(true);
+          setConnectionLost(true);
+          setError("Связь с сервером потеряна. Отсчёт времени приостановлен.");
+        }
+      }
+    }
+    heartbeat();
+    const heartbeatId = setInterval(heartbeat, 5000);
+    return () => {
+      stopped = true;
+      clearInterval(heartbeatId);
+    };
+  }, [session.id, result]);
 
   function toggle(optionNumber) {
+    if (paused) {
+      return;
+    }
     const question = session.questions[index];
     const current = stateRef.current.selections[index] ?? [];
     const nextSelected = question.choiceType === "SINGLE"
@@ -120,6 +154,8 @@ export default function TestRun({ session, onExit }) {
       error={error}
       busy={busy}
       confirming={confirming}
+      paused={paused}
+      connectionLost={connectionLost}
       onToggle={toggle}
       onBack={() => move(index - 1)}
       onNext={() => (index === session.questions.length - 1 ? requestFinish() : move(index + 1))}
@@ -136,6 +172,7 @@ export default function TestRun({ session, onExit }) {
 
 function QuestionStep({
   session, index, selected, selections, remaining, error, busy, confirming,
+  paused, connectionLost,
   onToggle, onBack, onNext, onNavigate, onRequestFinish, onCancelFinish, onConfirmFinish,
 }) {
   const question = session.questions[index];
@@ -152,7 +189,9 @@ function QuestionStep({
           <p className="eyebrow">{session.testTitle}</p>
           <span className="exam-count">Вопрос {index + 1} из {session.questions.length}</span>
         </div>
-        <span className={`timer ${remaining <= 60 ? "urgent" : ""}`}>{formatTime(remaining)}</span>
+        <span className={`timer ${paused ? "paused" : remaining <= 300 ? "urgent" : ""}`}>
+          {paused ? "Пауза" : formatTime(remaining)}
+        </span>
       </div>
       <div className="progress-track" aria-hidden="true">
         <div className="progress-bar" style={{ width: `${progress}%` }} />
@@ -195,6 +234,7 @@ function QuestionStep({
                 name={`question-${index}`}
                 checked={selected.includes(number)}
                 onChange={() => onToggle(number)}
+                disabled={paused}
               />
               <span>{option}</span>
             </label>
@@ -202,15 +242,22 @@ function QuestionStep({
         })}
       </div>
       {error && <p className="error">{error}</p>}
+      {paused && (
+        <p className="pause-notice">
+          {connectionLost
+            ? "Проверяем восстановление связи. Ответы на устройстве сохранены."
+            : "Попытка приостановлена. Продолжить её может менеджер учебного центра."}
+        </p>
+      )}
       <div className="actions">
         <div className="step-actions">
-          <button className="secondary" type="button" onClick={onBack} disabled={busy || index === 0}>Назад</button>
-          <button className="primary" type="button" onClick={onNext} disabled={busy}>
+          <button className="secondary" type="button" onClick={onBack} disabled={paused || busy || index === 0}>Назад</button>
+          <button className="primary" type="button" onClick={onNext} disabled={paused || busy}>
             {index === session.questions.length - 1 ? "Проверить и завершить" : "Далее"}
           </button>
         </div>
         {index !== session.questions.length - 1 && (
-          <button className="finish-link" type="button" onClick={onRequestFinish} disabled={busy}>Завершить тест</button>
+          <button className="finish-link" type="button" onClick={onRequestFinish} disabled={paused || busy}>Завершить тест</button>
         )}
       </div>
       {confirming && (
@@ -254,8 +301,8 @@ function Result({ session, result, onExit }) {
             return (
               <li key={mistake.index}>
                 <strong>{mistake.text}</strong>
-                <p>Ваш выбор: {labels(question, mistake.selected)}</p>
-                <p>Правильно: {labels(question, mistake.correct)}</p>
+                <p>Ваш выбор:<AnswerLines values={labels(question, mistake.selected)} /></p>
+                <p>Правильно:<AnswerLines values={labels(question, mistake.correct)} /></p>
               </li>
             );
           })}
@@ -272,7 +319,11 @@ function labels(question, numbers) {
   if (!numbers.length) {
     return "нет ответа";
   }
-  return numbers.map((number) => question.options[number - 1]).join("; ");
+  return numbers.map((number) => question.options[number - 1]);
+}
+
+function AnswerLines({ values }) {
+  return Array.isArray(values) ? values.map((value) => <span className="answer-line" key={value}>{value}</span>) : <span className="answer-line">{values}</span>;
 }
 
 function formatTime(totalSeconds) {

@@ -17,7 +17,7 @@ import java.util.Optional;
 public class MoodleUserRepository {
 
     private static final String ACTIVE_BY_USERNAME = """
-            SELECT id, username, password, firstname, lastname, role
+            SELECT id, username, password, firstname, lastname, role, timezone
             FROM public.mdl_user
             WHERE username = ? AND mnethostid = 1
               AND deleted = 0 AND suspended = 0 AND confirmed = 1
@@ -26,8 +26,20 @@ public class MoodleUserRepository {
     private static final String LISTENERS = """
             SELECT username, firstname, lastname, email, institution, department
             FROM public.mdl_user
-            WHERE role = 'user' AND deleted = 0 AND mnethostid = 1
+            WHERE role = 'user' AND deleted = 0 AND suspended = 0 AND confirmed = 1 AND mnethostid = 1
             ORDER BY lastname, firstname, username
+            """;
+
+    private static final String SEARCH_LISTENERS = """
+            SELECT username, firstname, lastname, email, institution, department
+            FROM public.mdl_user
+            WHERE role = 'user' AND deleted = 0 AND suspended = 0 AND confirmed = 1 AND mnethostid = 1
+              AND (LOWER(firstname) LIKE ? OR LOWER(lastname) LIKE ?
+                OR LOWER(username) LIKE ? OR LOWER(email) LIKE ?
+                OR LOWER(CONCAT(firstname, ' ', lastname)) LIKE ?
+                OR LOWER(CONCAT(lastname, ' ', firstname)) LIKE ?)
+            ORDER BY lastname, firstname, username
+            LIMIT 20
             """;
 
     private final JdbcTemplate jdbc;
@@ -44,9 +56,16 @@ public class MoodleUserRepository {
         return jdbc.query(LISTENERS, (rs, row) -> toListener(rs));
     }
 
+    public List<ListenerView> searchListeners(String query) {
+        var prefix = query.trim().toLowerCase() + "%";
+        return jdbc.query(SEARCH_LISTENERS, (rs, row) -> toListener(rs),
+                prefix, prefix, prefix, prefix, prefix, prefix);
+    }
+
     private MoodleAccount toAccount(ResultSet rs) throws SQLException {
         return new MoodleAccount(rs.getLong("id"), rs.getString("username"), rs.getString("password"),
-                rs.getString("firstname"), rs.getString("lastname"), rs.getString("role"));
+                rs.getString("firstname"), rs.getString("lastname"), rs.getString("role"),
+                rs.getString("timezone"));
     }
 
     private ListenerView toListener(ResultSet rs) throws SQLException {
